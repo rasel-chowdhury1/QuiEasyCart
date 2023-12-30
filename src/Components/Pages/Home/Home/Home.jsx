@@ -1,9 +1,10 @@
 import React from 'react';
+import TopRated from '../SpecialProducts/TopRated/TopRated';
 
 const Home = () => {
     return (
         <div>
-            <h3>This is home page</h3>
+            <TopRated></TopRated>
         </div>
     );
 };
