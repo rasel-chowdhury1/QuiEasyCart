@@ -6,7 +6,6 @@ import Login from "../Components/Accounts/Login";
 import Register from "../Components/Accounts/Register";
 import Home from "../Components/Pages/Home/Home/Home";
 
-
   const router = createBrowserRouter([
     {
       path: "/",
