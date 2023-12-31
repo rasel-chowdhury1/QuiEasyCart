@@ -13,18 +13,6 @@ const TopRated = () => {
     return (
         <div>
             <section className='w-screen h-min-screen px-6'>
-              <h4 className='text-center exclusive-title'>Exclusive Products</h4>
-              <h1 className="text-center text-2xl font-bold exclusive-sub-title">SPECIAL PRODUCTS </h1>
-              <article className="text-sm text-center mt-6 text-gray-400">
-              Lorem Ipsum is simply dummy text of the printing and
-               typesetting industry.<br/> Lorem Ipsum has been the industry's 
-               standard dummy text ever since the <br />1500s.
-              </article>
-
-              <div className="flex justify-center mt-9">
-                 <span className=" text-2xl font-medium">TOP RATED</span> 
-                 <span className='ml-12 text-2xl font-medium'>BEST SALE</span>
-              </div>
 
               <div className="flex px-28 ml-9 mt-12">
                 <div className='relative cart-body'>
