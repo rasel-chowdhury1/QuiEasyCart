@@ -5,7 +5,7 @@ import { faPhone, faCog, faSearch, faShoppingCart } from '@fortawesome/free-soli
 
 
 const TopNavbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     return (
         <div>
             <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40">
@@ -15,7 +15,7 @@ const TopNavbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li>
                                 <a>Shop</a>
                                 <ul className="p-2">
@@ -76,8 +76,8 @@ const TopNavbar = () => {
                                         </>
                                     ) : (
                                         <>
-                                            <li><a>Login</a></li>
-                                            <li><a>Register</a></li>
+                                            <li><a href="/login">Login</a></li>
+                                            <li><a href="/register">Register</a></li>
                                         </>
                                     )}
                                 </ul>
@@ -94,7 +94,7 @@ const TopNavbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li>
                                 <a>Shop</a>
                                 <ul className="p-2">
@@ -140,7 +140,7 @@ const TopNavbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li>
                             <details>
                                 <summary>Shop</summary>
