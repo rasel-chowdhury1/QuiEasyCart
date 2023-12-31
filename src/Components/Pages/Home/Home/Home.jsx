@@ -5,6 +5,8 @@ import TopRated from '../SpecialProducts/TopRated/TopRated';
 import BestSale from '../SpecialProducts/BestSale/BestSale';
 import SpecialProduct from '../SpecialProducts/SpecialProduct';
 import BestOffer from '../BestOffer/BestOffer';
+import Blog from '../Blog/Blog';
+import Newsletter from '../Newsletter/Newsletter';
 
 const Home = () => {
     return (
@@ -13,6 +15,8 @@ const Home = () => {
             <Brand></Brand>
             <BestOffer></BestOffer>
             <SpecialProduct ></SpecialProduct>
+            <Blog />
+            <Newsletter />
         </div>
     );
 };
