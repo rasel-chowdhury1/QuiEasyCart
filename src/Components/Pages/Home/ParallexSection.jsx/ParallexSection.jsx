@@ -3,7 +3,7 @@ import './ParallexSection.css';
 
 const ParallexSection = () => {
     return (
-        <div className="hero para bg-fixed mx-auto" >
+        <div className="para hero my-10 bg-fixed mx-auto" >
             <div className=""></div>
             <div className="hero-content ">
                 <div className="">
