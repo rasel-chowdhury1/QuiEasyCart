@@ -3,7 +3,7 @@ import React from 'react';
 const Dashboard = () => {
     return (
         <div>
-            <h3>Admin Dashboard page</h3>
+            <h1> this is dashboard page</h1>
         </div>
     );
 };
