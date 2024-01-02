@@ -1,6 +1,41 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const {login,googleSignin} = useContext(AuthContext);
+    console.log(googleSignin)
+
+    const [error,setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleLoginButton = (event) =>{
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log(email,password);
+        setError('');
+        
+        login(email,password)
+        .then(result => {
+            alert('Successfully Login');
+            form.reset();
+            navigate('/')
+        })
+        .catch(error => {
+            console.error("Firebase Authentication Error:", error.code, error.message);
+            setError(error.message);
+        })
+
+    }
+
+    const handleGoogleButton = () =>{
+        googleSignin()
+        navigate('/')
+    }
+    
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -24,31 +59,35 @@ const Login = () => {
 
 
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form className="card-body">
+                    
+                <form onSubmit={handleLoginButton} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered" required />
+                            <input type="email" name='email' placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="password" className="input input-bordered" required />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <input type="submit" value="Login" className="btn btn-primary"/>
+                            {
+                                error && <p  className='py-3 text-red-500 text-center'>Provide Valid Email or Password</p>
+                            }
                             <h2 className='text-center p-4 text text-1xl font-bold'>Sign In With</h2>
                             <div className="flex justify-center lg:justify-start space-x-4">
                                 <a href="#" className="flex items-center bg-blue-600 text-white rounded-lg px-4 py-2">
                                     <i className="fab fa-facebook-square mr-2"></i>
                                     <span>Facebook</span>
                                 </a>
-                                <a href="#" className="flex items-center bg-red-600 text-white rounded-lg px-4 py-2">
+                                <a onClick={handleGoogleButton} className="flex items-center bg-red-600 text-white rounded-lg px-4 py-2">
                                     <i className="fab fa-google mr-2"></i>
                                     <span>Google</span>
                                 </a>
@@ -58,6 +97,7 @@ const Login = () => {
                             </p>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

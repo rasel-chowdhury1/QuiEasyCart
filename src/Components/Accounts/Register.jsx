@@ -1,19 +1,84 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import { sendEmailVerification, updateProfile } from 'firebase/auth';
 
 const Register = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+  
+  const [error,setError] = useState('');
 
-    const firstName = event.target.elements.firstName.value;
-    const lastName = event.target.elements.lastName.value;
-    const email = event.target.elements.email.value;
-    const password = event.target.elements.password.value;
-    const confirmPassword = event.target.elements.confirmPassword.value;
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
+  const {createUser} = useContext(AuthContext);
+
+
+  const handleSignUpButton = (event) => {
+    event.preventDefault();
+    const form = event.target
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirm.value;
+    console.log(firstName,lastName,email,password,confirmPassword);
+    setError('');
+    
+
+    if(!/(?=.*[a-zA-Z])/.test(password)){
+        setError('must added alpha charecter in password field');
+        return;
+    }
+    else if(!/(?=.*[!@#$%&?"])/.test(password)){
+        setError('must added special charecter in password field.example: !#@%&');
+        return;
+    }
+    else if(!/(?=.*[0-9])/.test(password)){
+        setError('must added number in password field');
+        return;
+    }
+    else if(password.length > 8){
+      alert('Password is short.add maximum 8 characters')
+    }
+    else if (password !== confirmPassword) {
+      alert('Passwords do not match with confirm password');
       return;
     }
+
+    createUser(email,password)
+    .then(result =>{
+      console.log(result.user);
+      alert('Successfully create user');
+      updateUserData(result.user,firstName)
+      sendVerificationEmail(result.user);
+      form.reset()
+      navigate('/')
+    })
+    .catch(error =>{
+      setError(error.message)
+    })
   };
+
+  const sendVerificationEmail = (user) =>{
+    sendEmailVerification(user)
+    .then(result =>{
+        console.log(result.user);
+        alert("Please verify your email address")
+      })
+  }
+
+  const updateUserData = (user,name) =>{
+    updateProfile(user, {
+        displayName: name
+    })
+    .then(()=>{
+        console.log('user name updated')
+    })
+    .catch( error =>{
+       console.log(error.message)
+        setError(error.message);
+    })
+}
+
+
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -39,42 +104,45 @@ const Register = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body" onSubmit={handleSubmit}>
+          <form className="card-body" onSubmit={handleSignUpButton}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">First Name</span>
               </label>
-              <input type="text" placeholder="First Name" className="input input-bordered" required />
+              <input type="text" name="firstName" placeholder="First Name" className="input input-bordered" required />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Last Name</span>
               </label>
-              <input type="text" placeholder="Last Name" className="input input-bordered" required />
+              <input type="text" name="lastName" placeholder="Last Name" className="input input-bordered" required />
             </div>
             {/* Email field with validation */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input type="email" placeholder="Email" className="input input-bordered" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+              <input type="email" name="email" placeholder="Email" className="input input-bordered" required  />
             </div>
             {/* Password fields with validation */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input type="password" placeholder="Password" className="input input-bordered" required minLength="6" />
+              <input type="password" name="password" placeholder="Password" className="input input-bordered" required minLength="8"/>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Confirm Password</span>
               </label>
-              <input type="password" placeholder="Confirm Password" className="input input-bordered" required minLength="6" />
+              <input type="password" name='confirm' placeholder="Confirm Password" className="input input-bordered" required minLength="8" />
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">Sign Up</button>
             </div>
+            
+            <p>{error}</p>
+
           </form>
         </div>
       </div>

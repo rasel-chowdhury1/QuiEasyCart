@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faCog, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 
 const TopNavbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const {user,loading,logout} = useContext(AuthContext)
+    
+
     return (
         <div>
             <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40">
@@ -69,10 +72,11 @@ const TopNavbar = () => {
                             <details>
                                 <summary> My Account</summary>
                                 <ul className="p-2">
-                                    {isLoggedIn ? (
+                                    {user ? (
                                         <>
                                             <li><a>Account</a></li>
-                                            <li><a>Log Out</a></li>
+                                            
+                                            <li onClick={logout}><a>Log Out</a></li>
                                         </>
                                     ) : (
                                         <>
