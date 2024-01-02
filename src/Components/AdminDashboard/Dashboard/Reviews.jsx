@@ -95,7 +95,7 @@ const Reviews = () => {
     <li className="step step-neutral">23</li>
     <li className="step step-neutral">end</li>
   </ul>
-</div>
+</div> 
             </div>
         </div>
 

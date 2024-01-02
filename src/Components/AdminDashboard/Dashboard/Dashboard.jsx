@@ -13,7 +13,7 @@ const Dashboard = () => {
         { id: 8, label: 'Hot Offers', link: '/hotoffers' },
         { id: 9, label: 'Appearance', link: '/appearance' },
         { id: 10, label: 'Settings', link: '/settings' },
-        { id: 11, label: 'Help', link: '/help' },
+        { id: 11, label: 'Helps', link: '/helps' },
         // Add more menu items as needed
     ];
     return (
