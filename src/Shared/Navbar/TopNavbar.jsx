@@ -137,7 +137,7 @@ const TopNavbar = () => {
                             <li><a>Blog</a></li>
                         </ul>
                     </div>
-                    <a>
+                    <a href="/">
                         <img className="h-20 w-100" src="/src/assets/logo/QuiEasyCart2.png" alt="Logo" />
                     </a>
 
