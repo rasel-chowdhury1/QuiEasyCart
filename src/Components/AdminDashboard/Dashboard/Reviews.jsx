@@ -36,7 +36,7 @@ import React from 'react';
 // };
 
 
-const Dashboard = () => {
+const Reviews = () => {
 
     const menuItems = [
         { id: 1, label: 'Dashboard', link: '/dashboard' },
@@ -68,19 +68,34 @@ const Dashboard = () => {
 
             {/* Main content */}
             <div className="main-content  min-h-screen bg-black  text-black rounded-md">
-                <div className="hero min-h-screen bg-base-200">
-                    <div className="hero-content flex-col lg:flex-row">
-                        <div className="logo flex justify-center items-center h-full"> 
-                            <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" className="max-w-sm rounded-lg shadow-2xl" />
-                        </div>
-
-                        <div>
-                            <h1 className="text-5xl font-bold">Box Office News!</h1>
-                            <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                            <button className="btn btn-primary">Get Started</button>
-                        </div>
-                    </div>
-                </div>
+            <div className="overflow-x-auto">
+  <ul className="steps">
+    <li className="step">start</li>
+    <li className="step step-secondary">2</li>
+    <li className="step step-secondary">3</li>
+    <li className="step step-secondary">4</li>
+    <li className="step">5</li>
+    <li className="step step-accent">6</li>
+    <li className="step step-accent">7</li>
+    <li className="step">8</li>
+    <li className="step step-error">9</li>
+    <li className="step step-error">10</li>
+    <li className="step">11</li>
+    <li className="step">12</li>
+    <li className="step step-warning">13</li>
+    <li className="step step-warning">14</li>
+    <li className="step">15</li>
+    <li className="step step-neutral">16</li>
+    <li className="step step-neutral">17</li>
+    <li className="step step-neutral">18</li>
+    <li className="step step-neutral">19</li>
+    <li className="step step-neutral">20</li>
+    <li className="step step-neutral">21</li>
+    <li className="step step-neutral">22</li>
+    <li className="step step-neutral">23</li>
+    <li className="step step-neutral">end</li>
+  </ul>
+</div>
             </div>
         </div>
 
