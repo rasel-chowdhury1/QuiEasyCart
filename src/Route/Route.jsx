@@ -5,6 +5,7 @@ import Main from "../Layout/Main";
 import Login from "../Components/Accounts/Login";
 import Register from "../Components/Accounts/Register";
 import Home from "../Components/Pages/Home/Home/Home";
+import Products from "../Components/Pages/Products/Products";
 
   const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ import Home from "../Components/Pages/Home/Home/Home";
         {
           path: "/",
           element: <Home></Home>
+        },
+        {
+          path: "/products",
+          element: <Products></Products>
         },
         {
             path: "login",
