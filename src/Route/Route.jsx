@@ -14,7 +14,6 @@ import Orders from './../Components/AdminDashboard/Dashboard/Orders';
 import Payments from './../Components/AdminDashboard/Dashboard/Payments';
 import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import Settings from './../Components/AdminDashboard/Dashboard/Settings';
-import Helps from "../Components/AdminDashboard/Dashboard/Helps";
 
   const router = createBrowserRouter([
     {
@@ -72,10 +71,6 @@ import Helps from "../Components/AdminDashboard/Dashboard/Helps";
         {
             path: "settings",
             element: <Settings></Settings>
-        },
-        {
-            path: "helps",
-            element: <Helps></Helps>
         },
        
       ]
