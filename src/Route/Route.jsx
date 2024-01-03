@@ -17,6 +17,8 @@ import Payments from "../Components/AdminDashboard/Dashboard/Payments";
 import HotOffer from "../Components/AdminDashboard/Dashboard/HotOffer";
 import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
+import Help from './../Components/AdminDashboard/Dashboard/Help';
+import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 
 
   const router = createBrowserRouter([
@@ -80,8 +82,16 @@ import User from "../Components/AdminDashboard/Dashboard/User";
           element: <HotOffer></HotOffer>
         },
         {
+          path: 'admin/appearance',
+          element: <Appearance></Appearance>
+        },
+        {
           path: 'admin/settings',
           element: <Settings></Settings>
+        },
+        {
+          path: 'admin/help',
+          element: <Help></Help>
         },
       ]
     }
