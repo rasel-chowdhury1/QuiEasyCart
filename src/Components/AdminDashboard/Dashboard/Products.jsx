@@ -2,74 +2,111 @@ import React from 'react';
 
 const Products = () => {
     return (
-        <div>
-            <div className="collapse bg-base-200">
-                <input type="checkbox" className="peer" />
-                <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    Click me to show/hide content
+        <div className=' w-full '>
+            {/* <div className="stats shadow-xl w-full p-10 m-10  item-center ">
+                <div className="stat ">
+                    <div className="stat-figure text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <div className="stat-title">Total User</div>
+                    <div className="stat-value text-primary">25.6M</div>
+                    <div className="stat-desc">21% Join more than last month</div>
                 </div>
-                <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    <p>hello</p>
+
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div className="stat-title">New User</div>
+                    <div className="stat-value text-secondary">2.6M</div>
+                    <div className="stat-desc">21% more than last month</div>
                 </div>
-            </div>
-            <div className="diff aspect-[16/9]">
-                <div className="diff-item-1">
-                    <img alt="daisy" src="https://daisyui.com/images/stock/photo-1560717789-0ac7c58ac90a.jpg" />
+
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                        <div className="avatar online">
+                            <div className="w-16 rounded-full">
+                                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="stat-value">86</div>
+                    <div className="stat-title">Active User</div>
+                    <div className="stat-desc text-secondary">31 User Online</div>
                 </div>
-                <div className="diff-item-2">
-                    <img alt="daisy" src="https://daisyui.com/images/stock/photo-1560717789-0ac7c58ac90a-bw.jpg" />
+
+            </div> */}
+            <div className="stats shadow-xl w-full p-10 m-10  item-center">
+
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div className="stat-title">Total Products</div>
+                    <div className="stat-value">31K</div>
+                    <div className="stat-desc">Jan 1st - Feb 1st</div>
                 </div>
-                <div className="diff-resizer"></div>
+
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    </div>
+                    <div className="stat-title">Total Category</div>
+                    <div className="stat-value">4,200</div>
+                    <div className="stat-desc">↗︎ 400 (22%)</div>
+                </div>
+
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    </div>
+                    <div className="stat-title">Total Sales</div>
+                    <div className="stat-value">1,200</div>
+                    <div className="stat-desc">↘︎ 90 (14%)</div>
+                </div>
+
             </div>
 
-            <div className="flex justify-center gap-1 my-1 w-full">
-                <kbd className="kbd">q</kbd>
-                <kbd className="kbd">w</kbd>
-                <kbd className="kbd">e</kbd>
-                <kbd className="kbd">r</kbd>
-                <kbd className="kbd">t</kbd>
-                <kbd className="kbd">y</kbd>
-                <kbd className="kbd">u</kbd>
-                <kbd className="kbd">i</kbd>
-                <kbd className="kbd">o</kbd>
-                <kbd className="kbd">p</kbd>
-            </div>
-            <div className="flex justify-center gap-1 my-1 w-full">
-                <kbd className="kbd">a</kbd>
-                <kbd className="kbd">s</kbd>
-                <kbd className="kbd">d</kbd>
-                <kbd className="kbd">f</kbd>
-                <kbd className="kbd">g</kbd>
-                <kbd className="kbd">h</kbd>
-                <kbd className="kbd">j</kbd>
-                <kbd className="kbd">k</kbd>
-                <kbd className="kbd">l</kbd>
-            </div>
-            <div className="flex justify-center gap-1 my-1 w-full">
-                <kbd className="kbd">z</kbd>
-                <kbd className="kbd">x</kbd>
-                <kbd className="kbd">c</kbd>
-                <kbd className="kbd">v</kbd>
-                <kbd className="kbd">b</kbd>
-                <kbd className="kbd">n</kbd>
-                <kbd className="kbd">m</kbd>
-                <kbd className="kbd">/</kbd>
-            </div>
+            <h2 className='m-4 text-5xl text-center shadow-xl p-2'>Product List </h2>
 
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div className="navbar bg-base-100 shadow">
+                <div className="navbar-start">
+                    <div className="dropdown">
+                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                        </div>
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a>All Products</a></li>
+                            <li><a>Category</a></li>
+                        </ul>
+                    </div>
+                    <a className="btn btn-ghost text-xl">Products</a>
+                </div>
+                <div className="navbar-center hidden lg:flex text-2xl">
+                    <ul className="menu menu-horizontal px-1">
+                        <li><a>All Products</a></li>
+                        <li><a>Category</a></li>
+                    </ul>
+                </div>
+                <div className="navbar-end">
+                    <a className="btn">Add Product</a>
+                </div>
+            </div>
+            
+            <div className="overflow-x-auto shadow-xl rounded w-full m-4">
+                <table className="table ">
                     {/* head */}
-                    <thead>
+                    <thead className=' text-2xl'>
                         <tr>
                             <th>
                                 <label>
                                     <input type="checkbox" className="checkbox" />
                                 </label>
                             </th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th> <button className='btn-ghost'>Action</button></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,7 +121,7 @@ const Products = () => {
                                 <div className="flex items-center gap-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            <img src="https://daisyui.com//tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
@@ -98,9 +135,11 @@ const Products = () => {
                                 <br />
                                 <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
                             </td>
-                            <td>Purple</td>
+                            <td>Admin</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs">details</button>
+                                <button className="btn btn-accent  p-2 m-2">details</button>
+                                <button className="btn btn-neutral px-4  py-2">Edit</button>
+                                <button className="btn btn-secondary  p2 m-2">Delete</button>
                             </th>
                         </tr>
                         {/* row 2 */}
@@ -114,7 +153,7 @@ const Products = () => {
                                 <div className="flex items-center gap-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src="/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            <img src="https://daisyui.com//tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
@@ -128,9 +167,11 @@ const Products = () => {
                                 <br />
                                 <span className="badge badge-ghost badge-sm">Tax Accountant</span>
                             </td>
-                            <td>Red</td>
+                            <td>User</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs">details</button>
+                                <button className="btn btn-accent  p-2 m-2">details</button>
+                                <button className="btn btn-neutral px-4  py-2">Edit</button>
+                                <button className="btn btn-secondary  p2 m-2">Delete</button>
                             </th>
                         </tr>
                         {/* row 3 */}
@@ -144,7 +185,7 @@ const Products = () => {
                                 <div className="flex items-center gap-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src="/tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            <img src="https://daisyui.com//tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
@@ -158,9 +199,11 @@ const Products = () => {
                                 <br />
                                 <span className="badge badge-ghost badge-sm">Office Assistant I</span>
                             </td>
-                            <td>Crimson</td>
+                            <td>User</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs">details</button>
+                                <button className="btn btn-accent  p-2 m-2">details</button>
+                                <button className="btn btn-neutral px-4  py-2">Edit</button>
+                                <button className="btn btn-secondary  p2 m-2">Delete</button>
                             </th>
                         </tr>
                         {/* row 4 */}
@@ -174,7 +217,7 @@ const Products = () => {
                                 <div className="flex items-center gap-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            <img src="https://daisyui.com//tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
@@ -188,65 +231,40 @@ const Products = () => {
                                 <br />
                                 <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
                             </td>
-                            <td>Indigo</td>
+                            <td>Admin</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs">details</button>
+                                <button className="btn btn-accent  p-2 m-2">details</button>
+                                <button className="btn btn-neutral px-4  py-2">Edit</button>
+                                <button className="btn btn-secondary  p2 m-2">Delete</button>
                             </th>
                         </tr>
                     </tbody>
                     {/* foot */}
                     <tfoot>
-                        <tr>
+                        <tr >
                             <th></th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
+                            <th>Address</th>
+                            <th>Type</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
 
                 </table>
             </div>
-            <ul className="timeline">
-                <li>
-                    <div className="timeline-start timeline-box">First Macintosh computer</div>
-                    <div className="timeline-middle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-primary"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                    </div>
-                    <hr className="bg-primary" />
-                </li>
-                <li>
-                    <hr className="bg-primary" />
-                    <div className="timeline-middle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-primary"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                    </div>
-                    <div className="timeline-end timeline-box">iMac</div>
-                    <hr className="bg-primary" />
-                </li>
-                <li>
-                    <hr className="bg-primary" />
-                    <div className="timeline-start timeline-box">iPod</div>
-                    <div className="timeline-middle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-primary"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                    </div>
-                    <hr />
-                </li>
-                <li>
-                    <hr />
-                    <div className="timeline-middle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                    </div>
-                    <div className="timeline-end timeline-box">iPhone</div>
-                    <hr />
-                </li>
-                <li>
-                    <hr />
-                    <div className="timeline-start timeline-box">Apple Watch</div>
-                    <div className="timeline-middle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                    </div>
-                </li>
-            </ul>
+            {/* Pagination */}
+            <div className="join justify-items-center mx-10">
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="<< " />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="1" checked />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="5" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="6" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="7" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="8" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label=" >>" />
+            </div>
 
         </div>
     );

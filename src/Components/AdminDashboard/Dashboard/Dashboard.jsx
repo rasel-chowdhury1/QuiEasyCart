@@ -1,55 +1,172 @@
 import React from 'react';
 
 const Dashboard = () => {
-
-    const menuItems = [
-        { id: 1, label: 'Dashboard', link: '/dashboard' },
-        { id: 2, label: 'Stats', link: '/stats' },
-        { id: 3, label: 'User', link: '/user' },
-        { id: 4, label: 'Product', link: '/product' },
-        { id: 5, label: 'Orders', link: '/orders' },
-        { id: 6, label: 'Reviews', link: '/reviews' },
-        { id: 7, label: 'Payments', link: '/payments' },
-        { id: 8, label: 'Hot Offers', link: '/hotoffers' },
-        { id: 9, label: 'Appearance', link: '/appearance' },
-        { id: 10, label: 'Settings', link: '/settings' },
-        // Add more menu items as needed
-    ];
     return (
-        <div className="admin-dashboard flex">
-            {/* Sidebar */}
-            <div className="sidebar  text-white mx-2 bg-black opacity-80 text-8xl w-60 min-h-screen rounded-md">
-                <ul className="menu ">
-                    <a href="/"> <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" className=" w-20 h-20 rounded-lg shadow-2xl p-2" /></a>
-                    {menuItems.map((item) => (
-                        <li className='text-2xl btn btn-ghost ' key={item.id}>
-                            <a href={item.link}>{item.label}</a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+        <div>
+            <div>
+                <div className="overflow-x-auto">
+                    <table className="table bg-black">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <th>Name</th>
+                                <th>Job</th>
+                                <th>Favorite Color</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">Hart Hagerty</div>
+                                            <div className="text-sm opacity-50">United States</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    Zemlak, Daniel and Leannon
+                                    <br />
+                                    <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                                </td>
+                                <td>Purple</td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">details</button>
+                                </th>
+                            </tr>
+                            {/* row 2 */}
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src="https://daisyui.com/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">Brice Swyre</div>
+                                            <div className="text-sm opacity-50">China</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    Carroll Group
+                                    <br />
+                                    <span className="badge badge-ghost badge-sm">Tax Accountant</span>
+                                </td>
+                                <td>Red</td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">details</button>
+                                </th>
+                            </tr>
+                            {/* row 3 */}
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src="https://daisyui.com/tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">Marjy Ferencz</div>
+                                            <div className="text-sm opacity-50">Russia</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    Rowe-Schoen
+                                    <br />
+                                    <span className="badge badge-ghost badge-sm">Office Assistant I</span>
+                                </td>
+                                <td>Crimson</td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">details</button>
+                                </th>
+                            </tr>
+                            {/* row 4 */}
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src="https://daisyui.com/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">Yancy Tear</div>
+                                            <div className="text-sm opacity-50">Brazil</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    Wyman-Ledner
+                                    <br />
+                                    <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
+                                </td>
+                                <td>Indigo</td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">details</button>
+                                </th>
+                            </tr>
+                        </tbody>
+                        {/* foot */}
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Job</th>
+                                <th>Favorite Color</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
 
-            {/* Main content */}
-            <div className="main-content  min-h-screen bg-black  text-black rounded-md">
-                <div className="hero min-h-screen bg-base-200">
-                    <div className="hero-content flex-col lg:flex-row">
-                        <div className="logo flex justify-center items-center h-full"> 
-                            <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" className="max-w-sm rounded-lg shadow-2xl" />
-                        </div>
-
-                        <div>
-                            <h1 className="text-5xl font-bold">Box Office News!</h1>
-                            <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                            <button className="btn btn-primary">Get Started</button>
-                        </div>
-                    </div>
+                    </table>
                 </div>
             </div>
+
+
+
+
+            <div className='bg-green'>
+                <h2>This is dummy text</h2>
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-
-
-
-
     );
 };
 
