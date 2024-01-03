@@ -11,7 +11,7 @@ const Dashboard = () => {
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total User</h2>
                             <hr className='' />
-                            <p className=" text-5xl text-center">26000</p>
+                            <p className=" text-5xl text-center">260600</p>
                             <div className="card-actions justify-center py-4 m-2">
                                 <button className="btn btn-primary ">View Details</button>
                             </div>
@@ -22,7 +22,7 @@ const Dashboard = () => {
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Order</h2>
                             <hr className='' />
-                            <p className=" text-5xl text-center">130</p>
+                            <p className=" text-5xl text-center">3165000</p>
                             <div className="card-actions justify-center py-4 m-2">
                                 <button className="btn btn-primary ">View Details</button>
                             </div>
@@ -33,7 +33,7 @@ const Dashboard = () => {
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Payment</h2>
                             <hr className='' />
-                            <p className=" text-5xl text-center">65</p>
+                            <p className=" text-5xl text-center">$6500060</p>
                             <div className="card-actions justify-center py-4 m-2">
                                 <button className="btn btn-primary ">View Details</button>
                             </div>
@@ -44,7 +44,7 @@ const Dashboard = () => {
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Revenue</h2>
                             <hr className='' />
-                            <p className=" text-5xl text-center">65</p>
+                            <p className=" text-5xl text-center">$128M</p>
                             <div className="card-actions justify-center py-4 m-2">
                                 <button className="btn btn-primary ">View Details</button>
                             </div>
@@ -56,7 +56,7 @@ const Dashboard = () => {
             </div>
 
             <div className=''>
-                <div className="carousel w-60% m-4 ">
+                {/* <div className="carousel w-60% m-4 ">
                     <div id="slide1" className="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" className="w-full" />
                         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -85,7 +85,7 @@ const Dashboard = () => {
                             <a href="#slide1" className="btn btn-circle">❯</a>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className='flex'>
                 <div>
