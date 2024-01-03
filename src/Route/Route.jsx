@@ -6,7 +6,6 @@ import Login from "../Components/Accounts/Login";
 import Register from "../Components/Accounts/Register";
 import Home from "../Components/Pages/Home/Home/Home";
 import Products from "../Components/Pages/Products/Products";
-import AdminDashboard from './../Components/AdminDashboard/Dashboard/Dashboard';
 import Reviews from "../Components/AdminDashboard/Dashboard/Reviews";
 import Admin from "../Components/AdminDashboard/AdminLayout/Admin";
 import Dashboard from "./../Components/AdminDashboard/Dashboard/Dashboard";
@@ -19,6 +18,7 @@ import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
 import Help from './../Components/AdminDashboard/Dashboard/Help';
 import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
+import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
 
 
   const router = createBrowserRouter([
@@ -59,7 +59,7 @@ import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
         },
         {
           path: 'admin/product',
-          element: <Products></Products>
+          element: <AdminProducts></AdminProducts>
         },
         {
           path: 'admin/orders',
