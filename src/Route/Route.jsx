@@ -5,12 +5,13 @@ import Main from "../Layout/Main";
 import Login from "../Components/Accounts/Login";
 import Register from "../Components/Accounts/Register";
 import Home from "../Components/Pages/Home/Home/Home";
+import Products from "../Components/Pages/Products/Products";
 import AdminDashboard from './../Components/AdminDashboard/Dashboard/Dashboard';
 import Reviews from "../Components/AdminDashboard/Dashboard/Reviews";
 import Admin from "../Components/AdminDashboard/AdminLayout/Admin";
 import Dashboard from "./../Components/AdminDashboard/Dashboard/Dashboard";
 import Stats from "../Components/AdminDashboard/Dashboard/Stats";
-import Products from "../Components/AdminDashboard/Dashboard/Products";
+
 import Orders from "../Components/AdminDashboard/Dashboard/Orders";
 import Payments from "../Components/AdminDashboard/Dashboard/Payments";
 import HotOffer from "../Components/AdminDashboard/Dashboard/HotOffer";
@@ -18,6 +19,9 @@ import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
 import Cart from "../Components/Cart/Cart"
 import Checkout from "../Components/Cart/Checkout";
+import Help from './../Components/AdminDashboard/Dashboard/Help';
+import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
+
 
   const router = createBrowserRouter([
     {
@@ -27,6 +31,10 @@ import Checkout from "../Components/Cart/Checkout";
         {
           path: "/",
           element: <Home></Home>
+        },
+        {
+          path: "/products",
+          element: <Products></Products>
         },
         {
             path: "login",
@@ -84,8 +92,16 @@ import Checkout from "../Components/Cart/Checkout";
           element: <HotOffer></HotOffer>
         },
         {
+          path: 'admin/appearance',
+          element: <Appearance></Appearance>
+        },
+        {
           path: 'admin/settings',
           element: <Settings></Settings>
+        },
+        {
+          path: 'admin/help',
+          element: <Help></Help>
         },
       ]
     }

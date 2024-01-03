@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 const TopNavbar = () => {
     const {user,loading,logout} = useContext(AuthContext)
     
-
     return (
         <div>
             <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40">
@@ -20,6 +19,7 @@ const TopNavbar = () => {
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a href="/">Home</a></li>
+                            <li><Link to="/products">Product</Link></li>
                             <li>
                                 <a>Shop</a>
                                 <ul className="p-2">

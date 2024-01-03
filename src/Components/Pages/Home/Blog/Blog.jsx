@@ -2,7 +2,7 @@
 const Blog = () => {
   return (
     <>
-    <div class="container mx-auto mt-20">
+    <div className="container mx-auto mt-20">
       <h2 className=" text-center	text-4xl">Latest Blogs</h2>
       <p className="text-center	pb-6">Lorem ipsum dolor sit amet</p>
       <div className="flex">

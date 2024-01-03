@@ -5,7 +5,7 @@ import TopNavbar from '../../../Shared/Navbar/topNavbar';
 const Admin = () => {
 
     const menuItems = [
-        { id: 1, label: 'Dashboard', link: 'admin/dashboard' },
+        { id: 1, label: 'Dashboard', link: '' },
         { id: 2, label: 'Stats', link: 'admin/stats' },
         { id: 3, label: 'User', link: 'admin/user' },
         { id: 4, label: 'Product', link: 'admin/product' },
@@ -21,7 +21,7 @@ const Admin = () => {
     return (
         <div>
             <TopNavbar></TopNavbar>
-        <div className="admin-dashboard flex">
+        <div className="admin-dashboard flex shadow-xl">
             {/* Sidebar */}
             <div className="sidebar  text-white mx-2 bg-black opacity-80 text-8xl w-60 min-h-screen rounded-md">
                 <ul className="menu ">
