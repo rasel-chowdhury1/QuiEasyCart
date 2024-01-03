@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faCog, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../Providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 
 
@@ -207,7 +208,7 @@ const TopNavbar = () => {
                 <div className="navbar-end mx-2 px-4">
                     <FontAwesomeIcon icon={faCog} className='px-3' />
                     <FontAwesomeIcon icon={faSearch} className='px-3' />
-                    <FontAwesomeIcon icon={faShoppingCart} className='px-3' />
+                    <Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='px-3' /></Link>
                 </div>
             </div>
         </div>

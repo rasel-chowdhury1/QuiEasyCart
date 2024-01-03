@@ -16,6 +16,8 @@ import Payments from "../Components/AdminDashboard/Dashboard/Payments";
 import HotOffer from "../Components/AdminDashboard/Dashboard/HotOffer";
 import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
+import Cart from "../Components/Cart/Cart"
+import Checkout from "../Components/Cart/Checkout";
 
   const router = createBrowserRouter([
     {
@@ -34,6 +36,14 @@ import User from "../Components/AdminDashboard/Dashboard/User";
             path: "register",
             element: <Register></Register>
         },
+        {
+          path: "cart",
+          element: <Cart></Cart>
+        },
+        {
+          path: "checkout",
+          element: <Checkout></Checkout>
+        }
        
       ]
     },
