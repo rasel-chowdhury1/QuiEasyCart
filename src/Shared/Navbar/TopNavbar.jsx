@@ -156,13 +156,14 @@ const TopNavbar = () => {
                             </details>
                         </li>
                         <li>
-                            <details>
+                            {/* <details>
                                 <summary>Product</summary>
                                 <ul className="p-2">
                                     <li><a>Men Items</a></li>
                                     <li><a>Women Items</a></li>
                                 </ul>
-                            </details>
+                            </details> */}
+                            <Link to="/product"><summary>Product</summary></Link>
                         </li>
                         <li>
                             <details>
@@ -208,7 +209,7 @@ const TopNavbar = () => {
                 <div className="navbar-end mx-2 px-4">
                     <FontAwesomeIcon icon={faCog} className='px-3' />
                     <FontAwesomeIcon icon={faSearch} className='px-3' />
-                    <FontAwesomeIcon icon={faShoppingCart} className='px-3' />
+                    <Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='px-3' /></Link>
                 </div>
             </div>
         </div>

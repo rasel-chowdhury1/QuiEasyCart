@@ -7,6 +7,7 @@ import SpecialProduct from '../SpecialProducts/SpecialProduct';
 import BestOffer from '../BestOffer/BestOffer';
 import Blog from '../Blog/Blog';
 import Newsletter from '../Newsletter/Newsletter';
+import CategoryLogo from '../CategoryLogo/CategoryLogo';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Brand></Brand>
             <TopRated></TopRated>
             <ParallexSection></ParallexSection>
+            <CategoryLogo></CategoryLogo>
             <BestOffer></BestOffer>
             <SpecialProduct ></SpecialProduct>
             <Blog />

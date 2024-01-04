@@ -16,8 +16,12 @@ import Payments from "../Components/AdminDashboard/Dashboard/Payments";
 import HotOffer from "../Components/AdminDashboard/Dashboard/HotOffer";
 import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
+
 import ProductDetails from "../Components/Pages/ProductDetails/ProductDetails";
 import Profile from "../Components/Accounts/Profile";
+
+import Cart from "../Components/Cart/Cart"
+import Checkout from "../Components/Cart/Checkout";
 import Help from './../Components/AdminDashboard/Dashboard/Help';
 import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
@@ -52,6 +56,19 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
             path: "register",
             element: <Register></Register>
         },
+        {
+          path: "cart",
+          element: <Cart></Cart>
+        },
+        {
+          path: "checkout",
+          element: <Checkout></Checkout>
+        },
+        {
+          path: 'product',
+          element: <Products></Products>
+        }
+        
        
       ]
     },

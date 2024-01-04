@@ -5,8 +5,8 @@ const Dashboard = () => {
         <div>
 
             <div>
-                <div className='flex shadow-xl rounded-md'>
-                    <div className="card w-96 bg-secondary shadow-xl image-full m-4 ">
+                <div className='flex flex-row shadow-xl rounded-md'>
+                    <div className="card basis-1/4 bg-secondary shadow-xl image-full m-4 ">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total User</h2>
@@ -17,7 +17,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card w-96 bg-info shadow-xl image-full m-4">
+
+                    <div className="card basis-1/4 bg-info shadow-xl image-full m-4">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Order</h2>
@@ -28,7 +29,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card w-96 bg-primary shadow-xl image-full m-4">
+
+                    <div className="card basis-1/4 bg-primary shadow-xl image-full m-4">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Payment</h2>
@@ -39,7 +41,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card w-96 bg-neutral shadow-xl image-full m-4">
+
+                    <div className="card basis-1/4 bg-neutral shadow-xl image-full m-4">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Revenue</h2>
@@ -87,8 +90,8 @@ const Dashboard = () => {
                     </div>
                 </div> */}
             </div>
-            <div className='flex'>
-                <div>
+            <div className='flex md:flex-col'>
+                <div className=''>
                     <h2 className="overflow-x-auto m-4 shadow-xl text-3xl p-2 text-center">Recent Orders</h2>
                     <div className="overflow-x-auto m-4 shadow-xl">
                         <table className="table table-xs">
@@ -300,7 +303,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className=''>
                     <h2 className="overflow-x-auto m-4 shadow-xl text-3xl p-2 text-center">New User</h2>
                     <div className="overflow-x-auto shadow-xl rounded w-full m-4">
                         <table className="table">
