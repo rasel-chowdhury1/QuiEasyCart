@@ -10,8 +10,8 @@ const TopNavbar = () => {
     const {user,loading,logout} = useContext(AuthContext)
     
     return (
-        <div>
-            <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40">
+        <div className='shadow-xl py-2 my-2'>
+            <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40 ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

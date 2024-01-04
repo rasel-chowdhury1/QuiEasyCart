@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Products = () => {
+const AdminProducts = () => {
     return (
         <div className=' w-full '>
             {/* <div className="stats shadow-xl w-full p-10 m-10  item-center ">
@@ -89,7 +89,7 @@ const Products = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Add Product</a>
+                    <a className="btn btn-outline">Add Product</a>
                 </div>
             </div>
             
@@ -270,4 +270,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default AdminProducts;
