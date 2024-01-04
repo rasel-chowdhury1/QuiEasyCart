@@ -156,13 +156,14 @@ const TopNavbar = () => {
                             </details>
                         </li>
                         <li>
-                            <details>
+                            {/* <details>
                                 <summary>Product</summary>
                                 <ul className="p-2">
                                     <li><a>Men Items</a></li>
                                     <li><a>Women Items</a></li>
                                 </ul>
-                            </details>
+                            </details> */}
+                            <Link to="/product"><summary>Product</summary></Link>
                         </li>
                         <li>
                             <details>

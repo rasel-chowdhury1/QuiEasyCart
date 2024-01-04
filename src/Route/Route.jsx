@@ -51,7 +51,12 @@ import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
         {
           path: "checkout",
           element: <Checkout></Checkout>
+        },
+        {
+          path: 'product',
+          element: <Products></Products>
         }
+        
        
       ]
     },
