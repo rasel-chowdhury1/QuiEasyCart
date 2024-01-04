@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 
 const TopNavbar = () => {
-    const {user,loading,logout} = useContext(AuthContext)
-    
+    const { user, loading, logout } = useContext(AuthContext)
+
     return (
         <div className='shadow-xl py-2 my-2'>
             <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40 ">
@@ -67,28 +67,39 @@ const TopNavbar = () => {
                 </div>
 
                 <div className="navbar-end ">
-                    <p className='me-3'>Wishlist</p>
-                    <ul>
-                        <li>
-                            <details>
-                                <summary> My Account</summary>
-                                <ul className="p-2">
-                                    {user ? (
-                                        <>
-                                            <li><a>Account</a></li>
-                                            
-                                            <li onClick={logout}><a>Log Out</a></li>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <li><a href="/login">Login</a></li>
-                                            <li><a href="/register">Register</a></li>
-                                        </>
-                                    )}
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
+                    <a href="/" ><p className='me-3'>Wishlist</p></a>
+
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            </div>
+                        </div>
+                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+
+
+                            {user ? (
+                                <>
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li><a>Account</a></li>
+
+                                    <li onClick={logout}><a>Log Out</a></li>
+                                </>
+                            ) : (
+                                <>
+                                    <li><a href="/login">Login</a></li>
+                                    <li><a href="/register">Register</a></li>
+                                </>
+                            )}
+
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -207,9 +218,12 @@ const TopNavbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end mx-2 px-4">
-                    <FontAwesomeIcon icon={faCog} className='px-3' />
-                    <FontAwesomeIcon icon={faSearch} className='px-3' />
+
+                    <div className="form-control">
+                        <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+                    </div>
                     <Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='px-3' /></Link>
+
                 </div>
             </div>
         </div>
