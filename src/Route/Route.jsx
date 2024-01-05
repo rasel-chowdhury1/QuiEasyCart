@@ -37,15 +37,15 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
           element: <Home></Home>
         },
         {
-          path: "/products",
+          path: "products",
           element: <Products></Products>
         },
         {
-          path: "/productDetails",
+          path: "productDetails",
           element: <ProductDetails></ProductDetails>
         },
         {
-          path: "/profile",
+          path: "profile",
           element: <Profile></Profile>
         },
         {
@@ -64,10 +64,6 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
           path: "checkout",
           element: <Checkout></Checkout>
         },
-        {
-          path: 'product',
-          element: <Products></Products>
-        }
         
        
       ]
