@@ -25,6 +25,7 @@ import Checkout from "../Components/Cart/Checkout";
 import Help from './../Components/AdminDashboard/Dashboard/Help';
 import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
+import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
 
 
   const router = createBrowserRouter([
@@ -103,6 +104,10 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
         {
           path: 'admin/hotoffers',
           element: <HotOffer></HotOffer>
+        },
+        {
+          path: 'admin/blogs',
+          element: <Blogs></Blogs>
         },
         {
           path: 'admin/appearance',
