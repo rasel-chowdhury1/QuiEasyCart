@@ -14,10 +14,9 @@ const Home = () => {
         <div>
             <Slider></Slider>
             <Brand></Brand>
-            <TopRated></TopRated>
-            <ParallexSection></ParallexSection>
             <CategoryLogo></CategoryLogo>
             <BestOffer></BestOffer>
+            <ParallexSection></ParallexSection>
             <SpecialProduct ></SpecialProduct>
             <Blog />
             <Newsletter />

@@ -60,6 +60,7 @@ const handleSizeList = ()=> {
     return (
         <div className='container mx-auto'>
             <div className="flex justify-center w-screen px-16 mt-6">
+            
             <aside className="w-1/5 ...">
               <div className="category-card w-full px-6 py-9 max-w-sm bg-white border border-gray-200 rounded shadow">
                   <div className="flex justify-between">
@@ -202,6 +203,7 @@ const handleSizeList = ()=> {
                 </div>
               </div>
             </aside>
+
             <div className="w-4/5 ...">
                     <div className="product-banner px-16">
                     <img src={productBanner} className='w-' alt="" />
@@ -385,6 +387,7 @@ const handleSizeList = ()=> {
             </nav>
                     </div>
             </div>
+
             </div>
         </div>
     );
