@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { sendEmailVerification, updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -36,17 +37,22 @@ const Register = () => {
         return;
     }
     else if(password.length > 8){
-      alert('Password is short.add maximum 8 characters')
+      setError('Password is short.add maximum 8 characters')
     }
     else if (password !== confirmPassword) {
-      alert('Passwords do not match with confirm password');
+      setError('Passwords do not match with confirm password');
       return;
     }
 
     createUser(email,password)
     .then(result =>{
       console.log(result.user);
-      alert('Successfully create user');
+      Swal.fire({
+        icon: "success",
+        title: "Successfully created account",
+        showConfirmButton: false,
+        timer: 1400
+      });
       updateUserData(result.user,firstName)
       sendVerificationEmail(result.user);
       form.reset()
@@ -137,11 +143,10 @@ const Register = () => {
               </label>
               <input type="password" name='confirm' placeholder="Confirm Password" className="input input-bordered" required minLength="8" />
             </div>
+            <p className='text-center text-primary'>{error}</p>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">Sign Up</button>
             </div>
-            
-            <p>{error}</p>
 
           </form>
         </div>
