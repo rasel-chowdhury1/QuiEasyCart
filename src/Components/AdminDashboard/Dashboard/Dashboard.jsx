@@ -6,7 +6,7 @@ const Dashboard = () => {
 
             {/* Dashboard Top Card */}
             <div>
-                <div className='flex flex-col md:flex-row md:flex-wrap lg:flex-row gap-4 shadow-xl rounded-md '>
+                <div className='flex flex-col md:flex-row  lg:flex-row gap-4 shadow-xl rounded-md '>
                     <div className="card md:basis-1/4 bg-secondary shadow-xl image-full m-4 ">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
