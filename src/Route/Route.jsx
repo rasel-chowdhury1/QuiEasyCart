@@ -16,6 +16,10 @@ import Payments from "../Components/AdminDashboard/Dashboard/Payments";
 import HotOffer from "../Components/AdminDashboard/Dashboard/HotOffer";
 import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
+
+import ProductDetails from "../Components/Pages/ProductDetails/ProductDetails";
+import Profile from "../Components/Accounts/Profile";
+
 import Cart from "../Components/Cart/Cart"
 import Checkout from "../Components/Cart/Checkout";
 import Help from './../Components/AdminDashboard/Dashboard/Help';
@@ -35,6 +39,14 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
         {
           path: "/products",
           element: <Products></Products>
+        },
+        {
+          path: "/productDetails",
+          element: <ProductDetails></ProductDetails>
+        },
+        {
+          path: "/profile",
+          element: <Profile></Profile>
         },
         {
             path: "login",
