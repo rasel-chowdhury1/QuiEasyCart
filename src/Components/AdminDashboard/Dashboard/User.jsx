@@ -57,7 +57,7 @@ const User = () => {
                                     <div className="modal-box">
                                         <form method="dialog">
                                             {/* if there is a button in form, it will close the modal */}
-                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                            <button className="btn btn-sm btn-circle btn-error absolute right-2 top-2">✕</button>
                                         </form>
                                         <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
                                             <h2 className="text-2xl font-semibold mb-4">Add New User</h2>
@@ -76,7 +76,7 @@ const User = () => {
                                                 </div>
                                                 <div className="mb-4">
                                                     <label htmlFor="userType" className="block text-gray-700 font-semibold mb-2">User Type</label>
-                                                    <select id="userType" name="userType" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
+                                                    <select id="userType" name="userType" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 text-black text-1xl">
                                                         <option value="regular">Regular User</option>
                                                         <option value="admin">Admin</option>
                                                         <option value="superAdmin">Super Admin</option>
