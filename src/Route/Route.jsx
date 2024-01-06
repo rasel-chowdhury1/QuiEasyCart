@@ -42,7 +42,7 @@ import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
           element: <Products></Products>
         },
         {
-          path: "productDetails",
+          path: "products/productDetails",
           element: <ProductDetails></ProductDetails>
         },
         {
