@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const {login,googleSignin} = useContext(AuthContext);
@@ -19,7 +20,12 @@ const Login = () => {
         
         login(email,password)
         .then(result => {
-            alert('Successfully Login');
+            Swal.fire({
+                icon: "success",
+                title: "Successfully created account",
+                showConfirmButton: false,
+                timer: 1400
+              });
             form.reset();
             navigate('/')
         })

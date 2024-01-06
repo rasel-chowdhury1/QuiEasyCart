@@ -4,9 +4,10 @@ const Dashboard = () => {
     return (
         <div>
 
+            {/* Dashboard Top Card */}
             <div>
-                <div className='flex shadow-xl rounded-md'>
-                    <div className="card w-96 bg-secondary shadow-xl image-full m-4 ">
+                <div className='flex flex-col md:flex-row  lg:flex-row gap-4 shadow-xl rounded-md '>
+                    <div className="card md:basis-1/4 bg-secondary shadow-xl image-full m-4 ">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total User</h2>
@@ -17,7 +18,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card w-96 bg-info shadow-xl image-full m-4">
+
+                    <div className="card md:basis-1/4 bg-info shadow-xl image-full m-4">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Order</h2>
@@ -28,7 +30,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card w-96 bg-primary shadow-xl image-full m-4">
+
+                    <div className="card md:basis-1/4 bg-primary shadow-xl image-full m-4">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Payment</h2>
@@ -39,7 +42,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card w-96 bg-neutral shadow-xl image-full m-4">
+
+                    <div className="card md:basis-1/4 bg-neutral shadow-xl image-full m-4">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total Revenue</h2>
@@ -55,6 +59,8 @@ const Dashboard = () => {
                 </div>
             </div>
 
+
+            {/* slider section  */}
             <div className=''>
                 {/* <div className="carousel w-60% m-4 ">
                     <div id="slide1" className="carousel-item relative w-full">
@@ -87,8 +93,12 @@ const Dashboard = () => {
                     </div>
                 </div> */}
             </div>
-            <div className='flex'>
-                <div>
+
+
+            <div className='flex flex-col md:flex-row lg:flex-row gap-4'>
+
+
+                <div className='flex-grow'>
                     <h2 className="overflow-x-auto m-4 shadow-xl text-3xl p-2 text-center">Recent Orders</h2>
                     <div className="overflow-x-auto m-4 shadow-xl">
                         <table className="table table-xs">
@@ -171,7 +181,7 @@ const Dashboard = () => {
                                     <th>8</th>
                                     <td>Sammy Seston</td>
                                     <td>Accountant I</td>
-                                    <td>O'Hara, Welch and Keebler</td>
+                                    <td>OHara, Welch and Keebler</td>
                                     <td>Indonesia</td>
                                     <td>5/23/2020</td>
                                     <td>Crimson</td>
@@ -298,20 +308,17 @@ const Dashboard = () => {
                             </tfoot>
                         </table>
                     </div>
-                </div>
+                </div>   
 
-                <div>
+                
+            <div className='flex-grow'>
                     <h2 className="overflow-x-auto m-4 shadow-xl text-3xl p-2 text-center">New User</h2>
                     <div className="overflow-x-auto shadow-xl rounded w-full m-4">
                         <table className="table">
                             {/* head */}
                             <thead className='bg-black text-white text-2xl'>
                                 <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
+                                    
                                     <th>Name</th>
                                     <th>Addess</th>
                                     <th>Type</th>
@@ -321,11 +328,7 @@ const Dashboard = () => {
                             <tbody>
                                 {/* row 1 */}
                                 <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
+                                    
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -346,18 +349,14 @@ const Dashboard = () => {
                                     </td>
                                     <td>Admin</td>
                                     <th>
-                                        <button className="btn btn-accent  p-2 m-2">details</button>
+                                        <button className="btn btn-accent  p-2 m-2 ">details</button>
                                         <button className="btn btn-neutral px-4  py-2">Edit</button>
                                         <button className="btn btn-secondary  p2 m-2">Delete</button>
                                     </th>
                                 </tr>
                                 {/* row 2 */}
                                 <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
+                                    
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -378,18 +377,14 @@ const Dashboard = () => {
                                     </td>
                                     <td>User</td>
                                     <th>
-                                        <button className="btn btn-accent  p-2 m-2">details</button>
+                                        <button className="btn btn-accent  p-2 m-2 ">details</button>
                                         <button className="btn btn-neutral px-4  py-2">Edit</button>
                                         <button className="btn btn-secondary  p2 m-2">Delete</button>
                                     </th>
                                 </tr>
                                 {/* row 3 */}
                                 <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
+                                    
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -410,18 +405,14 @@ const Dashboard = () => {
                                     </td>
                                     <td>User</td>
                                     <th>
-                                        <button className="btn btn-accent  p-2 m-2">details</button>
+                                        <button className="btn btn-accent  p-2 m-2 ">details</button>
                                         <button className="btn btn-neutral px-4  py-2">Edit</button>
                                         <button className="btn btn-secondary  p2 m-2">Delete</button>
                                     </th>
                                 </tr>
                                 {/* row 4 */}
                                 <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
+                                    
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -442,17 +433,13 @@ const Dashboard = () => {
                                     </td>
                                     <td>Admin</td>
                                     <th>
-                                        <button className="btn btn-accent  p-2 m-2">details</button>
+                                        <button className="btn btn-accent  p-2 m-2 ">details</button>
                                         <button className="btn btn-neutral px-4  py-2">Edit</button>
                                         <button className="btn btn-secondary  p2 m-2">Delete</button>
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
+                                    
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -473,7 +460,7 @@ const Dashboard = () => {
                                     </td>
                                     <td>Admin</td>
                                     <th>
-                                        <button className="btn btn-accent  p-2 m-2">details</button>
+                                        <button className="btn btn-accent  p-2 m-2 ">details</button>
                                         <button className="btn btn-neutral px-4  py-2">Edit</button>
                                         <button className="btn btn-secondary  p2 m-2">Delete</button>
                                     </th>
@@ -492,7 +479,7 @@ const Dashboard = () => {
 
                         </table>
                     </div>
-                </div>
+                </div>             
 
             </div>
             <div></div>

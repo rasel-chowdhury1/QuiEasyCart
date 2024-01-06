@@ -7,14 +7,16 @@ import SpecialProduct from '../SpecialProducts/SpecialProduct';
 import BestOffer from '../BestOffer/BestOffer';
 import Blog from '../Blog/Blog';
 import Newsletter from '../Newsletter/Newsletter';
+import CategoryLogo from '../CategoryLogo/CategoryLogo';
 
 const Home = () => {
     return (
         <div>
             <Slider></Slider>
             <Brand></Brand>
-            <ParallexSection></ParallexSection>
+            <CategoryLogo></CategoryLogo>
             <BestOffer></BestOffer>
+            <ParallexSection></ParallexSection>
             <SpecialProduct ></SpecialProduct>
             <Blog />
             <Newsletter />

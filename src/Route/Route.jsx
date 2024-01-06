@@ -16,11 +16,16 @@ import Payments from "../Components/AdminDashboard/Dashboard/Payments";
 import HotOffer from "../Components/AdminDashboard/Dashboard/HotOffer";
 import Settings from "../Components/AdminDashboard/Dashboard/Settings";
 import User from "../Components/AdminDashboard/Dashboard/User";
+
 import ProductDetails from "../Components/Pages/ProductDetails/ProductDetails";
 import Profile from "../Components/Accounts/Profile";
+
+import Cart from "../Components/Cart/Cart"
+import Checkout from "../Components/Cart/Checkout";
 import Help from './../Components/AdminDashboard/Dashboard/Help';
 import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
+import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
 
 
   const router = createBrowserRouter([
@@ -33,15 +38,15 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
           element: <Home></Home>
         },
         {
-          path: "/products",
+          path: "products",
           element: <Products></Products>
         },
         {
-          path: "/productDetails",
+          path: "products/productDetails",
           element: <ProductDetails></ProductDetails>
         },
         {
-          path: "/profile",
+          path: "profile",
           element: <Profile></Profile>
         },
         {
@@ -52,6 +57,15 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
             path: "register",
             element: <Register></Register>
         },
+        {
+          path: "cart",
+          element: <Cart></Cart>
+        },
+        {
+          path: "checkout",
+          element: <Checkout></Checkout>
+        },
+        
        
       ]
     },
@@ -90,6 +104,10 @@ import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProduct
         {
           path: 'admin/hotoffers',
           element: <HotOffer></HotOffer>
+        },
+        {
+          path: 'admin/blogs',
+          element: <Blogs></Blogs>
         },
         {
           path: 'admin/appearance',

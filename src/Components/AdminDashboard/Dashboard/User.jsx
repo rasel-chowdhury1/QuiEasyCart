@@ -50,7 +50,52 @@ const User = () => {
                             <th>Name</th>
                             <th>Addess</th>
                             <th>Type</th>
-                            <th> <button className='btn-ghost'>  </button> <button className='btn btn-outline btn-accent'> Add New User</button></th>
+                            <th> <button className='btn-ghost'>  </button>
+                                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                <button className="btn btn-outline text-white" onClick={() => document.getElementById('my_modal_3').showModal()}>Add User</button>
+                                <dialog id="my_modal_3" className="modal">
+                                    <div className="modal-box">
+                                        <form method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button className="btn btn-sm btn-circle btn-error absolute right-2 top-2">✕</button>
+                                        </form>
+                                        <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
+                                            <h2 className="text-2xl font-semibold mb-4">Add New User</h2>
+                                            <form>
+                                                <div className="mb-4">
+                                                    <label htmlFor="fullName" className="block text-gray-700 font-semibold mb-2">Full Name</label>
+                                                    <input type="text" id="fullName" name="fullName" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter full name" />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">Email</label>
+                                                    <input type="email" id="email" name="email" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter email address" />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">Password</label>
+                                                    <input type="password" id="password" name="password" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter password" />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label htmlFor="userType" className="block text-gray-700 font-semibold mb-2">User Type</label>
+                                                    <select id="userType" name="userType" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 text-black text-1xl">
+                                                        <option value="regular">Regular User</option>
+                                                        <option value="admin">Admin</option>
+                                                        <option value="superAdmin">Super Admin</option>
+                                                    </select>
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label htmlFor="userImage" className="block text-gray-700 font-semibold mb-2">User Image</label>
+                                                    <input type="file" id="userImage" name="userImage" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" />
+                                                </div>
+                                                <div className="flex justify-between mb-4">
+                                                    <button type="button" className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out">Save as Draft</button>
+                                                    <button type="submit" className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Add User</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </dialog>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -198,7 +243,7 @@ const User = () => {
             </div>
 
             <div className="join justify-items-center mx-10">
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="<< "  />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="<< " />
                 <input className="join-item btn btn-square" type="radio" name="options" aria-label="1" checked />
                 <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
                 <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
