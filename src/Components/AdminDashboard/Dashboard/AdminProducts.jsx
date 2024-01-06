@@ -1,6 +1,143 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+
+const img_hosting_token = import.meta.env.VITE_Image_Upload_Token;
+// console.log(img_hosting_token);
 
 const AdminProducts = () => {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [uploadedImages,setUploadedImages] = useState([])
+    // console.log("first run uploaded image:",uploadedImages);
+
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+
+
+    const onSubmit = async (data) => {
+        console.log(data);
+
+          
+          
+          let formData = new FormData();
+
+          for (let index = 0; index < data.image.length; index++) {
+            // const image = fileList[index];
+            formData.append("image", data.image[index]);
+
+                const response = await axios.post(img_hosting_url, formData);
+                console.log(response.data);
+
+                uploadedImages.push(response.data.data.url);
+                setUploadedImages(uploadedImages);
+          
+                // Process the response and handle it accordingly
+                // if (response.data.success) {
+                //   const imageUrls = response.data.data.images.map((img) => img.display_url);
+                //   const { name, category, recipe, price } = data;
+                //   const newItem = { name, price: parseFloat(price), category, recipe, images: imageUrls };
+                //   console.log(newItem);
+                // }
+
+
+              formData = new FormData();
+             }
+
+             if(uploadedImages){
+              const {name,category,size,price,brand,quantity,details} = data;
+              const newItem = {name,category,size,price: parseFloat(price),brand,details,quantity: parseInt(quantity),images:uploadedImages}
+
+              console.log(newItem)
+              fetch("http://localhost:3000/addProduct", {
+                 method: "POST",
+                 headers: {
+                    "content-type": 'application/json'
+                 },
+                 body: JSON.stringify(newItem)
+              })
+            }
+      
+          setUploadedImages([]);
+        
+      };
+      
+
+
+
+
+    // const onSubmit = async (data) => {
+    //     console.log(data.image.length);
+    
+    //       const formData = new FormData();
+    
+    //       // Append each image to formData
+    //     //   data.image.fileList.forEach((image, index) => {
+    //     //     formData.append(`image${index}`, image[0]);
+    //     //   });
+
+    //       for (let index = 0; index < data.image.length; index++) {
+    //         // const image = fileList[index];
+    //         console.log(data.image[index])
+    //         formData.append(`image${index}`, data.image[index]);
+
+            
+    //     }
+    
+          
+    
+    //         // Process the response and handle it accordingly
+    //         if (imgResponse.success) {
+    //           const imageUrls = imgResponse.data.image.map((img) => img.display_url);
+    //           const {name,category,size,price,brand,details} = data;
+    //           const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imageUrls}
+    //           console.log(newItem)
+    //         }
+    //       } 
+    //   };
+    
+
+    // const onSubmit = data => {
+    //     console.log(data)
+    //     const formData = new FormData()
+
+    //     formData.append('image', data.image[0])
+
+    //     fetch(img_hosting_url, {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //     .then(res => res.json())
+    //     .then(imgResponse => {
+    //         if(imgResponse.success){
+    //             const imgURL = imgResponse.data.display_url;
+    //             const {name,category,size,price,brand,details,image} = data;
+    //             const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imgURL}
+    //             console.log(newItem)
+    //         }
+    //     })
+    // };
+    
+    // const onSubmit = data => {
+    //     console.log(data)
+    //     const formData = new FormData()
+    //     formData.append('image', data.image[0])
+
+    //     fetch(img_hosting_url, {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //     .then(res => res.json())
+    //     .then(imgResponse => {
+    //         if(imgResponse.success){
+    //             const imgURL = imgResponse.data.display_url;
+    //             const {name,category,recipe,price} = data;
+    //             const newItem = {name,price: parseFloat(price),category,recipe,image:imgURL}
+    //             console.log(newItem)
+    //         }
+    //     })
+    // };
+
     return (
         <div className=' w-full '>
             <div className="stats shadow-xl w-full p-10 m-10  item-center">
@@ -63,32 +200,101 @@ const AdminProducts = () => {
                         <div className="modal-box">
                             <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
                                 <h2 className="text-3xl font-semibold mb-4 text-center">Add New Product</h2>
-                                <form>
-                                    <div className="mb-4">
-                                        <label htmlFor="productName" className="block text-gray-700 font-semibold mb-2">Product Name</label>
-                                        <input type="text" id="productName" name="productName" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter product name" />
+                                
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <label className="form-control w-full my-4">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Product name*</span>
+                                        </div>
+                                        <input type="text" placeholder="Product name"
+                                        {...register("name", {required: true, maxLength: 120})}
+                                        className="input input-bordered w-full " />
+                                    </label>
+
+                                    <div className='flex my-4'>
+                                        <label className="form-control w-full mr-5 ">
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Category*</span>
+                                            </div>
+
+                                            <select defaultValue="Pick One"{...register("category", { required: true })}
+                                            className="select select-bordered">
+                                                <option disabled >Pick One</option>
+                                                <option>Grocery</option>
+                                                <option>Medicine</option>
+                                                <option>Cosmetic</option>
+                                                <option>Drinks</option>
+                                                <option>Desserts</option>
+                                            </select>
+                                        </label>
+
+                                        <label className="form-control w-full mr-5 ">
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Size*</span>
+                                            </div>
+
+                                            <select defaultValue="Pick One"{...register("size", { required: true })}
+                                            className="select select-bordered">
+                                                <option disabled >Pick One</option>
+                                                <option>S</option>
+                                                <option>M</option>
+                                                <option>L</option>
+                                                <option>XL</option>
+                                            </select>
+                                        </label>
+
                                     </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="description" className="block text-gray-700 font-semibold mb-2">Description</label>
-                                        <textarea id="description" name="description" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter product description"></textarea>
+
+                                    <div className='flex my-4'>
+                                        <label className="form-control w-full mr-5">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Quantity*</span>
+                                        </div>
+                                        <input type="num" placeholder="Quantity"
+                                        {...register("quantity", { required: true })}
+                                        className="input input-bordered w-full " />
+                                        </label>
+
+                                        <label className="form-control w-full mr-5">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Price*</span>
+                                        </div>
+                                        <input type="num" placeholder="Price"
+                                        {...register("price", { required: true })}
+                                        className="input input-bordered w-full " />
+                                        </label>
+
                                     </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="price" className="block text-gray-700 font-semibold mb-2">Price</label>
-                                        <input type="number" id="price" name="price" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter product price" />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="quantity" className="block text-gray-700 font-semibold mb-2">Quantity</label>
-                                        <input type="number" id="quantity" name="quantity" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter available quantity" />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="image" className="block text-gray-700 font-semibold mb-2">Product Image</label>
-                                        <input type="file" id="image" name="image" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" />
-                                    </div>
-                                    <div className="flex justify-between mb-4">
-                                        <button type="button" className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out">Save as Draft</button>
-                                        <button type="submit" className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Publish Product</button>
-                                    </div>
+
+                                    <label className="form-control w-full ">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Brand*</span>
+                                        </div>
+                                        <input type="num" placeholder="Brand Name"
+                                        {...register("brand", { required: true })}
+                                        className="input input-bordered w-full " />
+                                    </label>
+
+                                    <label className="form-control my-4">
+                                        <div className="label">
+                                            <span className="label-text">Product Details*</span>
+                                        </div>
+                                        <textarea {...register("details", { required: true })} className="textarea textarea-bordered h-24" placeholder="Recipe Details"></textarea>
+                                    </label>
+
+                                    <label className="form-control w-full max-w-xs my-4">
+                                        <div className="label">
+                                            <span className="label-text">Item Image</span>
+                                        </div>
+                                        <input multiple {...register('image', { required: 'At least one image is required.' })}
+                                        type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                                        {errors.image && <p>{errors.image.message}</p>}
+                                    </label>
+
+                                    <input type="submit" value="Add Item" className='btn btn-sm mt-4'/>
+                                    
                                 </form>
+
                             </div>
                             <div className="modal-action">
                                 <form method="dialog">
