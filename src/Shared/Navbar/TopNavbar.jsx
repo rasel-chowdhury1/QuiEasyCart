@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 const TopNavbar = () => {
     const { user, loading, logout } = useContext(AuthContext)
+    const isAdmin = true;
 
     return (
         <div className='shadow-xl py-2 my-2'>
@@ -50,7 +51,7 @@ const TopNavbar = () => {
                                 </ul>
                             </li>
                             <li>
-                                <a>Product</a>
+                                <Link to='/products'>Product</Link>
                                 <ul className="p-2">
                                     <li><a>Men Items</a></li>
                                     <li><a>Women Items</a></li>
@@ -106,7 +107,7 @@ const TopNavbar = () => {
                                     <li><a>Women Items</a></li>
                                 </ul>
                             </details> */}
-                            <Link to="/product"><summary>Product</summary></Link>
+                            <Link to="/products"><summary>Product</summary></Link>
                         </li>
                         <li>
                             <details>
@@ -169,13 +170,13 @@ const TopNavbar = () => {
                             {user ? (
                                 <>
                                     <li>
-                                        <a className="justify-between">
+                                        <Link to='/profile' className="justify-between">
                                             Profile
                                             <span className="badge">New</span>
-                                        </a>
+                                        </Link>
                                     </li>
-                                    <li><a>Settings</a></li>
-                                    <li><a>Account</a></li>
+                                    <li>{isAdmin ? <><Link to='/admin'>Admin</Link></>:<><Link>Setting</Link></>}</li>
+                                    <li><Link to='/cart'>Order</Link></li>
 
                                     <li onClick={logout}><a>Log Out</a></li>
                                 </>
