@@ -1,6 +1,26 @@
 import React from 'react';
 
 const AdminProducts = () => {
+
+
+    const productCategory = [
+        { id: 1, label: 'Grocery' },
+        { id: 2, label: 'Medicine' },
+        { id: 3, label: 'Mens T-Shirt'  },
+        { id: 4, label: 'Womens T-Shirt'  },
+        { id: 5, label: 'Ornament' },
+        { id: 6, label: 'Mens Wear' },
+        { id: 7, label: 'Womens Wear' },
+        { id: 8, label: 'Electronics' },
+        { id: 9, label: 'Mobiles' },
+    ];
+  
+    {productCategory.map((item) => (
+      <option className='text-2xl text-left p-2 hover:scale-110' key={item.id}>{item.label}</option>
+  ))}
+   
+
+    
     return (
         <div className=' w-full '>
             <div className="stats shadow-xl w-full p-10 m-10  item-center">
