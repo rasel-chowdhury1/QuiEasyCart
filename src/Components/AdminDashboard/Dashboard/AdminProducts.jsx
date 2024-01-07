@@ -8,8 +8,25 @@ const img_hosting_token = import.meta.env.VITE_Image_Upload_Token;
 
 const AdminProducts = () => {
 
+
+    const productCategory = [
+        { id: 1, label: 'Grocery' },
+        { id: 2, label: 'Medicine' },
+        { id: 3, label: 'Mens T-Shirt' },
+        { id: 4, label: 'Womens T-Shirt' },
+        { id: 5, label: 'Ornament' },
+        { id: 6, label: 'Mens Wear' },
+        { id: 7, label: 'Womens Wear' },
+        { id: 8, label: 'Electronics' },
+        { id: 9, label: 'Mobiles' },
+    ];
+
+
+
+
+
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [uploadedImages,setUploadedImages] = useState([])
+    const [uploadedImages, setUploadedImages] = useState([])
     // console.log("first run uploaded image:",uploadedImages);
 
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
@@ -18,59 +35,59 @@ const AdminProducts = () => {
     const onSubmit = async (data) => {
         console.log(data);
 
-          
-          
-          let formData = new FormData();
 
-          for (let index = 0; index < data.image.length; index++) {
+
+        let formData = new FormData();
+
+        for (let index = 0; index < data.image.length; index++) {
             // const image = fileList[index];
             formData.append("image", data.image[index]);
 
-                const response = await axios.post(img_hosting_url, formData);
-                console.log(response.data);
+            const response = await axios.post(img_hosting_url, formData);
+            console.log(response.data);
 
-                uploadedImages.push(response.data.data.url);
-                setUploadedImages(uploadedImages);
-          
-                // Process the response and handle it accordingly
-                // if (response.data.success) {
-                //   const imageUrls = response.data.data.images.map((img) => img.display_url);
-                //   const { name, category, recipe, price } = data;
-                //   const newItem = { name, price: parseFloat(price), category, recipe, images: imageUrls };
-                //   console.log(newItem);
-                // }
+            uploadedImages.push(response.data.data.url);
+            setUploadedImages(uploadedImages);
+
+            // Process the response and handle it accordingly
+            // if (response.data.success) {
+            //   const imageUrls = response.data.data.images.map((img) => img.display_url);
+            //   const { name, category, recipe, price } = data;
+            //   const newItem = { name, price: parseFloat(price), category, recipe, images: imageUrls };
+            //   console.log(newItem);
+            // }
 
 
-              formData = new FormData();
-             }
+            formData = new FormData();
+        }
 
-             if(uploadedImages){
-              const {name,category,size,price,brand,quantity,details} = data;
-              const newItem = {name,category,size,price: parseFloat(price),brand,details,quantity: parseInt(quantity),images:uploadedImages}
+        if (uploadedImages) {
+            const { name, category, size, price, brand, quantity, details } = data;
+            const newItem = { name, category, size, price: parseFloat(price), brand, details, quantity: parseInt(quantity), images: uploadedImages }
 
-              console.log(newItem)
-              fetch("http://localhost:3000/addProduct", {
-                 method: "POST",
-                 headers: {
+            console.log(newItem)
+            fetch("http://localhost:3000/addProduct", {
+                method: "POST",
+                headers: {
                     "content-type": 'application/json'
-                 },
-                 body: JSON.stringify(newItem)
-              })
-            }
-      
-          setUploadedImages([]);
-        
-      };
-      
+                },
+                body: JSON.stringify(newItem)
+            })
+        }
+
+        setUploadedImages([]);
+
+    };
+
 
 
 
 
     // const onSubmit = async (data) => {
     //     console.log(data.image.length);
-    
+
     //       const formData = new FormData();
-    
+
     //       // Append each image to formData
     //     //   data.image.fileList.forEach((image, index) => {
     //     //     formData.append(`image${index}`, image[0]);
@@ -81,11 +98,11 @@ const AdminProducts = () => {
     //         console.log(data.image[index])
     //         formData.append(`image${index}`, data.image[index]);
 
-            
+
     //     }
-    
-          
-    
+
+
+
     //         // Process the response and handle it accordingly
     //         if (imgResponse.success) {
     //           const imageUrls = imgResponse.data.image.map((img) => img.display_url);
@@ -95,7 +112,7 @@ const AdminProducts = () => {
     //         }
     //       } 
     //   };
-    
+
 
     // const onSubmit = data => {
     //     console.log(data)
@@ -117,7 +134,7 @@ const AdminProducts = () => {
     //         }
     //     })
     // };
-    
+
     // const onSubmit = data => {
     //     console.log(data)
     //     const formData = new FormData()
@@ -200,15 +217,15 @@ const AdminProducts = () => {
                         <div className="modal-box">
                             <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
                                 <h2 className="text-3xl font-semibold mb-4 text-center">Add New Product</h2>
-                                
+
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <label className="form-control w-full my-4">
                                         <div className="label">
                                             <span className="label-text font-semibold">Product name*</span>
                                         </div>
                                         <input type="text" placeholder="Product name"
-                                        {...register("name", {required: true, maxLength: 120})}
-                                        className="input input-bordered w-full " />
+                                            {...register("name", { required: true, maxLength: 120 })}
+                                            className="input input-bordered w-full " />
                                     </label>
 
                                     <div className='flex my-4'>
@@ -218,13 +235,16 @@ const AdminProducts = () => {
                                             </div>
 
                                             <select defaultValue="Pick One"{...register("category", { required: true })}
-                                            className="select select-bordered">
+                                                className="select select-bordered">
                                                 <option disabled >Pick One</option>
-                                                <option>Grocery</option>
+                                                {productCategory.map((item) => (
+                                                    <option className='text-xl text-left p-2 hover:scale-110' key={item.id}>{item.label}</option>
+                                                ))}
+                                                {/* <option>Grocery</option>
                                                 <option>Medicine</option>
                                                 <option>Cosmetic</option>
                                                 <option>Drinks</option>
-                                                <option>Desserts</option>
+                                                <option>Desserts</option> */}
                                             </select>
                                         </label>
 
@@ -234,7 +254,7 @@ const AdminProducts = () => {
                                             </div>
 
                                             <select defaultValue="Pick One"{...register("size", { required: true })}
-                                            className="select select-bordered">
+                                                className="select select-bordered">
                                                 <option disabled >Pick One</option>
                                                 <option>S</option>
                                                 <option>M</option>
@@ -247,21 +267,21 @@ const AdminProducts = () => {
 
                                     <div className='flex my-4'>
                                         <label className="form-control w-full mr-5">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Quantity*</span>
-                                        </div>
-                                        <input type="num" placeholder="Quantity"
-                                        {...register("quantity", { required: true })}
-                                        className="input input-bordered w-full " />
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Quantity*</span>
+                                            </div>
+                                            <input type="num" placeholder="Quantity"
+                                                {...register("quantity", { required: true })}
+                                                className="input input-bordered w-full " />
                                         </label>
 
                                         <label className="form-control w-full mr-5">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Price*</span>
-                                        </div>
-                                        <input type="num" placeholder="Price"
-                                        {...register("price", { required: true })}
-                                        className="input input-bordered w-full " />
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Price*</span>
+                                            </div>
+                                            <input type="num" placeholder="Price"
+                                                {...register("price", { required: true })}
+                                                className="input input-bordered w-full " />
                                         </label>
 
                                     </div>
@@ -271,8 +291,8 @@ const AdminProducts = () => {
                                             <span className="label-text font-semibold">Brand*</span>
                                         </div>
                                         <input type="num" placeholder="Brand Name"
-                                        {...register("brand", { required: true })}
-                                        className="input input-bordered w-full " />
+                                            {...register("brand", { required: true })}
+                                            className="input input-bordered w-full " />
                                     </label>
 
                                     <label className="form-control my-4">
@@ -287,12 +307,12 @@ const AdminProducts = () => {
                                             <span className="label-text">Item Image</span>
                                         </div>
                                         <input multiple {...register('image', { required: 'At least one image is required.' })}
-                                        type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                                            type="file" className="file-input file-input-bordered w-full max-w-xs" />
                                         {errors.image && <p>{errors.image.message}</p>}
                                     </label>
 
-                                    <input type="submit" value="Add Item" className='btn btn-sm mt-4'/>
-                                    
+                                    <input type="submit" value="Add Item" className='btn btn-sm mt-4' />
+
                                 </form>
 
                             </div>
