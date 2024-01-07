@@ -47,21 +47,8 @@ const AdminProducts = () => {
             const response = await axios.post(img_hosting_url, formData);
             console.log(response.data);
 
-<<<<<<< HEAD
                 uploadedImages.push(response.data.data.url);
                 setUploadedImages(uploadedImages);
-=======
-            uploadedImages.push(response.data.data.url);
-            setUploadedImages(uploadedImages);
-
-            // Process the response and handle it accordingly
-            // if (response.data.success) {
-            //   const imageUrls = response.data.data.images.map((img) => img.display_url);
-            //   const { name, category, recipe, price } = data;
-            //   const newItem = { name, price: parseFloat(price), category, recipe, images: imageUrls };
-            //   console.log(newItem);
-            // }
->>>>>>> 1cd55fa129373dccbe1ac8b21370aa584ec580cb
 
 
             formData = new FormData();
@@ -76,7 +63,6 @@ const AdminProducts = () => {
                 method: "POST",
                 headers: {
                     "content-type": 'application/json'
-<<<<<<< HEAD
                  },
                  body: JSON.stringify(newItem)
               })
@@ -100,93 +86,6 @@ const AdminProducts = () => {
       };
       
 
-=======
-                },
-                body: JSON.stringify(newItem)
-            })
-        }
-
-        setUploadedImages([]);
-
-    };
-
-
-
-
-
-    // const onSubmit = async (data) => {
-    //     console.log(data.image.length);
-
-    //       const formData = new FormData();
-
-    //       // Append each image to formData
-    //     //   data.image.fileList.forEach((image, index) => {
-    //     //     formData.append(`image${index}`, image[0]);
-    //     //   });
-
-    //       for (let index = 0; index < data.image.length; index++) {
-    //         // const image = fileList[index];
-    //         console.log(data.image[index])
-    //         formData.append(`image${index}`, data.image[index]);
-
-
-    //     }
-
-
-
-    //         // Process the response and handle it accordingly
-    //         if (imgResponse.success) {
-    //           const imageUrls = imgResponse.data.image.map((img) => img.display_url);
-    //           const {name,category,size,price,brand,details} = data;
-    //           const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imageUrls}
-    //           console.log(newItem)
-    //         }
-    //       } 
-    //   };
-
-
-    // const onSubmit = data => {
-    //     console.log(data)
-    //     const formData = new FormData()
-
-    //     formData.append('image', data.image[0])
-
-    //     fetch(img_hosting_url, {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(res => res.json())
-    //     .then(imgResponse => {
-    //         if(imgResponse.success){
-    //             const imgURL = imgResponse.data.display_url;
-    //             const {name,category,size,price,brand,details,image} = data;
-    //             const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imgURL}
-    //             console.log(newItem)
-    //         }
-    //     })
-    // };
-
-    // const onSubmit = data => {
-    //     console.log(data)
-    //     const formData = new FormData()
-    //     formData.append('image', data.image[0])
-
-    //     fetch(img_hosting_url, {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(res => res.json())
-    //     .then(imgResponse => {
-    //         if(imgResponse.success){
-    //             const imgURL = imgResponse.data.display_url;
-    //             const {name,category,recipe,price} = data;
-    //             const newItem = {name,price: parseFloat(price),category,recipe,image:imgURL}
-    //             console.log(newItem)
-    //         }
-    //     })
-    // };
-
->>>>>>> 1cd55fa129373dccbe1ac8b21370aa584ec580cb
     return (
         <div className=' w-full '>
             <div className="stats shadow-xl w-full p-10 m-10  item-center">
