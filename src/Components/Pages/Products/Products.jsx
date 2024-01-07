@@ -16,6 +16,7 @@ const Products = () => {
     const [showingBrandList, setShowingBrandList] = useState(true)
     const [showingSizeList, setShowingSizeList] = useState(true)
 
+  
     
     const handleCategoryList = ()=> {
           const list = document.getElementById('category-list')

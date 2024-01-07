@@ -14,7 +14,7 @@ const TopNavbar = () => {
         <div className='shadow-xl py-2 my-2'>
 
             {/* Top Navbar */}
-            <div className="navbar text-lg  bg-black bg-opacity-10 px-20 lg:px-40 ">
+            <div className="navbar text-lg  bg-black bg-opacity-10 px-10 lg:px-20 ">
                 <div className="navbar-start ">
                     <p className=''>Announce something here</p>
                     <FontAwesomeIcon icon={faPhone} className='px-3 hidden sm:inline-block' />
@@ -32,7 +32,7 @@ const TopNavbar = () => {
 
 
                 {/* Main Navbar */}
-            <div className="navbar bg-base-100 text-lg  lg:px-40 ">
+            <div className="navbar bg-base-100 text-lg  lg:px-20 ">
 
 
                 <div className="navbar-start">
