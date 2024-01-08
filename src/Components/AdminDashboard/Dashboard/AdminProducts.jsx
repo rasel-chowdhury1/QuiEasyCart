@@ -16,9 +16,9 @@ const AdminProducts = () => {
 
     // const onSubmit = async (data) => {
     //     console.log(data.image.length);
-    
+
     //       const formData = new FormData();
-    
+
     //       // Append each image to formData
     //     //   data.image.fileList.forEach((image, index) => {
     //     //     formData.append(`image${index}`, image[0]);
@@ -29,11 +29,11 @@ const AdminProducts = () => {
     //         console.log(data.image[index])
     //         formData.append(`image${index}`, data.image[index]);
 
-            
+
     //     }
-    
-          
-    
+
+
+
     //         // Process the response and handle it accordingly
     //         if (imgResponse.success) {
     //           const imageUrls = imgResponse.data.image.map((img) => img.display_url);
@@ -43,7 +43,7 @@ const AdminProducts = () => {
     //         }
     //       } 
     //   };
-    
+
 
     // const onSubmit = data => {
     //     console.log(data)
@@ -65,7 +65,7 @@ const AdminProducts = () => {
     //         }
     //     })
     // };
-    
+
     // const onSubmit = data => {
     //     console.log(data)
     //     const formData = new FormData()
