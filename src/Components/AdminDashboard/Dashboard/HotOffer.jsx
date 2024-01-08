@@ -1,6 +1,10 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import useProduct from '../../../Hook/useProduct';
 
 const HotOffer = () => {
+    const [products] = useProduct();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     return (
         <div>
             <div className='w-full text-center'>
@@ -59,12 +63,65 @@ const HotOffer = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        {/* Open the modal using document.getElementById('ID').showModal() method */}
-                        <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>Add New Offer</button>
-                        <dialog id="my_modal_2" className="modal">
-                            {/* Modal content */}
-                        </dialog>
-                    </div>
+
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                    <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Hot Offer</button>
+                    <dialog id="my_modal_1" className="modal">
+                        <div className="modal-box">
+                            <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
+                                <h2 className="text-3xl font-semibold mb-4 text-center">Add Hot Offer</h2>
+
+                                <form >
+                                    <label className="form-control w-full mr-5 ">
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Category*</span>
+                                            </div>
+
+                                            <select defaultValue="Pick One"{...register("category", { required: true })}
+                                                className="select select-bordered">
+                                                <option disabled >Pick One</option>
+                                                
+                                            </select>
+                                        </label>
+                                      <label className="form-control w-full mr-5 ">
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Products*</span>
+                                            </div>
+
+                                            <select defaultValue="Pick One"{...register("category", { required: true })}
+                                                className="select select-bordered">
+                                                <option disabled >Pick One</option>
+                                                {
+                                                    products.map(pro => <option key={pro.id}>{pro.label}</option>)
+                                                }
+                                            </select>
+                                        </label>
+
+                                    <label className="form-control w-full ">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Discount*</span>
+                                        </div>
+                                        <input type="num" placeholder="Brand Name"
+                                            {...register("brand", { required: true })}
+                                            className="input input-bordered w-full " />
+                                    </label>
+
+                                    <input type="submit" value="Add Offer" className='btn btn-sm mt-4' />
+
+                                </form>
+
+                            </div>
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn btn-outline">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
+                </div>
                 </div>
 
                 {/* Offer List */}

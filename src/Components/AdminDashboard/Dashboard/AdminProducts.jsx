@@ -23,9 +23,6 @@ const AdminProducts = () => {
     ];
 
 
-
-
-
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [uploadedImages, setUploadedImages] = useState([])
     // console.log("first run uploaded image:",uploadedImages);
@@ -84,7 +81,7 @@ const AdminProducts = () => {
           setUploadedImages([]);
         
       };
-      
+     
 
     return (
         <div className=' w-full '>
@@ -168,14 +165,9 @@ const AdminProducts = () => {
                                             <select defaultValue="Pick One"{...register("category", { required: true })}
                                                 className="select select-bordered">
                                                 <option disabled >Pick One</option>
-                                                {productCategory.map((item) => (
-                                                    <option className='text-xl text-left p-2 hover:scale-110' key={item.id}>{item.label}</option>
-                                                ))}
-                                                {/* <option>Grocery</option>
-                                                <option>Medicine</option>
-                                                <option>Cosmetic</option>
-                                                <option>Drinks</option>
-                                                <option>Desserts</option> */}
+                                                {
+                                                    productCategory.map(pro => <option key={pro.id}>{pro.label}</option>)
+                                                }
                                             </select>
                                         </label>
 
@@ -186,11 +178,14 @@ const AdminProducts = () => {
 
                                             <select defaultValue="Pick One"{...register("size", { required: true })}
                                                 className="select select-bordered">
-                                                <option disabled >Pick One</option>
-                                                <option>S</option>
-                                                <option>M</option>
-                                                <option>L</option>
-                                                <option>XL</option>
+                                                <option id="sizeSelect" disabled >Pick One</option>
+                                                  <option>1kg</option>
+                                                  <option>5kg</option>
+                                                  <option>1</option>
+                                                  <option>S</option>
+                                                  <option>M</option>
+                                                  <option>L</option>
+                                                  <option>XL</option>
                                             </select>
                                         </label>
 

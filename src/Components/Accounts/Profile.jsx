@@ -1,6 +1,7 @@
 import React from 'react';
 import profile_avatar from '../../assets/images/profile_avatar.jpg'
 const Profile = () => {
+    
     return (
         <div className='container  mb-20 mt-6'>
             <div className="flex justify-center px-3">

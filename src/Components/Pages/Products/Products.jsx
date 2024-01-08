@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillStar,AiOutlineCaretDown,AiFillHeart, AiOutlineSync, AiOutlineSearch , AiOutlineShopping, AiFillShop} from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
 import img1 from '../../../../src/assets/images/img-1.jpg'
@@ -15,7 +15,7 @@ const Products = () => {
     const [showingPriceList, setShowingPriceList] = useState(true)
     const [showingBrandList, setShowingBrandList] = useState(true)
     const [showingSizeList, setShowingSizeList] = useState(true)
-
+    const [products,setProducts] = useState([]);
   
     
     const handleCategoryList = ()=> {
@@ -61,6 +61,13 @@ const handleSizeList = ()=> {
       setShowingSizeList(true)
     }
 }
+
+    useEffect(()=>{
+      fetch("http://localhost:3000/allProducts")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+    },[])
+
     return (
         <div className='container mx-auto'>
             <div className="flex justify-center w-screen px-16 mt-6">
@@ -217,10 +224,11 @@ const handleSizeList = ()=> {
                       <h1 className='text-center text-2xl mt-4 font-semibold shadow'>Showing Products 1 - 16 Of 16 Results</h1>
 
                         <div className="flex mt-12 px-12">
-                        <Link to='productDetails' className='relative cart-body'>
+                        
+                           {products.map(product => <Link to='/productDetails' key={product._id} className='relative cart-body mx-2'>
                             <div className='img-body relative'>
                                 <p className='uppercase absolute ml-44 font-semibold mt-9'>sale</p>
-                              <img src={img2} className='w-60 ' alt="" />
+                              <img src={product.images[0]} className='w-60 ' alt="" />
                             </div>
         
                             <div className='mt-5'>
@@ -231,9 +239,9 @@ const handleSizeList = ()=> {
                                 <AiFillStar className="text-yellow-400 text-xl" />
                                 <AiFillStar className="text-gray-400 text-xl" />
                                 </div>
-                                <h4 className='text-center text-gray-400 text-lg font-semibold'>Oil-in-Serum</h4>
+                                <h4 className='text-center text-gray-400 text-lg font-semibold'>{product.name}</h4>
                                 <div className="flex justify-center">
-                                    <p className='text-2xl font-semibold leading-10'>$500.00</p>
+                                    <p className='text-2xl font-semibold leading-10'>${product.price}</p>
                                     <span className='line-through ml-2 text-gray-400 mt-3'>$700.00</span>
                                 </div>
                             </div>
@@ -252,118 +260,8 @@ const handleSizeList = ()=> {
                             <AiOutlineSearch className="text-2xl hover:text-orange-400"/>
                             </div>
                           </div>
-                        </Link>
-        
-                        <div className='relative ml-4 cart-body'>
-                            <div className='img-body relative'>
-                                <p className='uppercase absolute ml-44 font-semibold mt-9'>sale</p>
-                              <img src={img1} className='w-60 ' alt="" />
-                            </div>
-        
-                            <div className='mt-5'>
-                                <div className='flex justify-center'>
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-gray-400 text-xl" />
-                                </div>
-                                <h4 className='text-center text-gray-400 text-lg font-semibold'>Oil-in-Serum</h4>
-                                <div className="flex justify-center">
-                                    <p className='text-2xl font-semibold leading-10'>$500.00</p>
-                                    <span className='line-through ml-2 text-gray-400 mt-3'>$700.00</span>
-                                </div>
-                            </div>
-        
-                            <div className='flex overlay absolute -mt-36 left-0 w-full min-h-70 justify-center items-center bg-transparent' style={{backgroundColor:"rgba(0,0,0,.2)"}}>
-                            <div className='bg-white rounded-full p-2 '>
-                              <AiOutlineShopping className="text-2xl hover:text-orange-400"/>
-                            </div>
-                            <div className='bg-white ml-2 rounded-full p-2 '>
-                              <AiFillHeart className="text-2xl hover:text-orange-400"/>
-                            </div>
-                            <div className='bg-white rounded-full p-2 ml-2'>
-                              <AiOutlineSync className="text-2xl hover:text-orange-400"/>
-                            </div>
-                            <div className='bg-white rounded-full p-2 ml-2'>
-                            <AiOutlineSearch className="text-2xl hover:text-orange-400"/>
-                            </div>
-                          </div>
-                        </div>
-        
-                        <div className='relative ml-4 cart-body'>
-                            <div className='img-body relative'>
-                                <p className='uppercase absolute ml-44 font-semibold mt-9'>sale</p>
-                              <img src={img3} className='w-60 ' alt="" />
-                            </div>
-        
-                            <div className='mt-5'>
-                                <div className='flex justify-center'>
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-yellow-400 text-xl" />
-                                <AiFillStar className="text-gray-400 text-xl" />
-                                </div>
-                                <h4 className='text-center text-gray-400 text-lg font-semibold'>Oil-in-Serum</h4>
-                                <div className="flex justify-center">
-                                    <p className='text-2xl font-semibold leading-10'>$500.00</p>
-                                    <span className='line-through ml-2 text-gray-400 mt-3'>$700.00</span>
-                                </div>
-                            </div>
-        
-                            <div className='flex overlay absolute -mt-36 left-0 w-full min-h-70 justify-center items-center bg-transparent' style={{backgroundColor:"rgba(0,0,0,.2)"}}>
-                            <div className='bg-white rounded-full p-2 '>
-                              <AiOutlineShopping className="text-2xl hover:text-orange-400"/>
-                            </div>
-                            <div className='bg-white ml-2 rounded-full p-2 '>
-                              <AiFillHeart className="text-2xl hover:text-orange-400"/>
-                            </div>
-                            <div className='bg-white rounded-full p-2 ml-2'>
-                              <AiOutlineSync className="text-2xl hover:text-orange-400"/>
-                            </div>
-                            <div className='bg-white rounded-full p-2 ml-2'>
-                            <AiOutlineSearch className="text-2xl hover:text-orange-400"/>
-                            </div>
-                          </div>
-                        </div>
-        
-                        <div className='relative ml-4 cart-body'>
-                        <div className='img-body relative'>
-                          <p className='uppercase absolute ml-44 font-semibold mt-9'>sale</p>
-                          <img src={img4} className='w-60 ' alt="" />
-                        </div>
-
-                      <div className='mt-5'>
-                          <div className='flex justify-center'>
-                          <AiFillStar className="text-yellow-400 text-xl" />
-                          <AiFillStar className="text-yellow-400 text-xl" />
-                          <AiFillStar className="text-yellow-400 text-xl" />
-                          <AiFillStar className="text-yellow-400 text-xl" />
-                          <AiFillStar className="text-gray-400 text-xl" />
-                          </div>
-                          <h4 className='text-center text-gray-400 text-lg font-semibold'>Oil-in-Serum</h4>
-                          <div className="flex justify-center">
-                              <p className='text-2xl font-semibold leading-10'>$500.00</p>
-                              <span className='line-through ml-2 text-gray-400 mt-3'>$700.00</span>
-                          </div>
-                      </div>
-
-                      <div className='flex overlay absolute -mt-36 left-0 w-full min-h-70 justify-center items-center bg-transparent' style={{backgroundColor:"rgba(0,0,0,.2)"}}>
-                      <div className='bg-white rounded-full p-2 '>
-                        <AiOutlineShopping className="text-2xl hover:text-orange-400"/>
-                      </div>
-                      <div className='bg-white ml-2 rounded-full p-2 '>
-                        <AiFillHeart className="text-2xl hover:text-orange-400"/>
-                      </div>
-                      <div className='bg-white rounded-full p-2 ml-2'>
-                          <AiOutlineSync className="text-2xl hover:text-orange-400"/>
-                      </div>
-                      <div className='bg-white rounded-full p-2 ml-2'>
-                        <AiOutlineSearch className="text-2xl hover:text-orange-400"/>
-                      </div>
-                    </div>
-                  </div>
+                        </Link>)}
+                        
                         </div>
 
                         <nav aria-label="Page  navigation example">
