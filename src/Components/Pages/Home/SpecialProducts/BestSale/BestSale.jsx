@@ -12,11 +12,11 @@ import { AiFillStar,AiFillHeart, AiOutlineSync, AiOutlineSearch , AiOutlineShopp
 const BestSale = () => {
     
     return (
-        <div>
-            <section className='w-screen h-min-screen px-6'>
+        <div className='container mx-auto'>
+            <section className='h-min-screen px-6'>
 
-            <div className="flex px-28 ml-9 mt-12">
-                <div className='relative cart-body'>
+            <div className="flex flex-wrap md:flex-nowrap flex-row justify-center px-9 sm:px-28 md:px-28  mt-12"> 
+                <div className='relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                        <img src={img5} className='w-60 ' alt="" />
@@ -53,7 +53,7 @@ const BestSale = () => {
                   </div>
                 </div>
 
-                <div className='ml-6 relative cart-body'>
+                <div className='ml-6 relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                        <img src={img6} className='w-60 ' alt="" />
@@ -90,7 +90,7 @@ const BestSale = () => {
                   </div>
                 </div>
 
-                <div className='ml-6 relative cart-body'>
+                <div className='ml-6 relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <button className='uppercase bg-rose-600 absolute ml-3 rounded-r-lg text-white p-1 font-bold mt-3'>sale</button>
                        <img src={img7} className='w-60 ' alt="" />
@@ -127,7 +127,7 @@ const BestSale = () => {
                   </div>
                 </div>
 
-                <div className='ml-6 relative cart-body'>
+                <div className='ml-6 relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                        <img src={img8} className='w-60 ' alt="" />
@@ -164,8 +164,8 @@ const BestSale = () => {
                 </div>
               </div>
 
-              <div className="flex px-28 ml-9 mt-12">
-                <div className='relative cart-body'>
+              <div className="flex flex-wrap md:flex-nowrap flex-row justify-center px-9 sm:px-28 md:px-28 mt-12">
+                <div className='relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                        <img src={img2} className='w-60 ' alt="" />
@@ -202,7 +202,7 @@ const BestSale = () => {
                   </div>
                 </div>
 
-                <div className='ml-6 relative cart-body'>
+                <div className='ml-6 relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                        <img src={img1} className='w-60 ' alt="" />
@@ -239,7 +239,7 @@ const BestSale = () => {
                   </div>
                 </div>
 
-                <div className='ml-6 relative cart-body'>
+                <div className='ml-6 relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <button className='uppercase bg-rose-600 absolute ml-3 rounded-r-lg text-white p-1 font-bold mt-3'>sale</button>
                        <img src={img3} className='w-60 ' alt="" />
@@ -276,7 +276,7 @@ const BestSale = () => {
                   </div>
                 </div>
 
-                <div className='ml-6 relative cart-body'>
+                <div className='ml-6 relative sm:basis-1/4  md:basis-1/4 cart-body'>
                      <div className='img-body relative'>
                         <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                        <img src={img4} className='w-60 ' alt="" />
