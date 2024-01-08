@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_Token;
+
 // console.log(img_hosting_token);
 
 const AdminProducts = () => {

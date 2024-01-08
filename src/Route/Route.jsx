@@ -26,6 +26,7 @@ import Help from './../Components/AdminDashboard/Dashboard/Help';
 import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
 import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
+import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
 
 
   const router = createBrowserRouter([
@@ -84,6 +85,10 @@ import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
         {
           path: 'admin/product',
           element: <AdminProducts></AdminProducts>
+        },
+        {
+          path: 'admin/product/admin/addProduct',
+          element: <AddProduct></AddProduct>
         },
         {
           path: 'admin/orders',
