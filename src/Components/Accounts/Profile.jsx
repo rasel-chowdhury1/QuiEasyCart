@@ -2,9 +2,11 @@ import React, { useEffect,useState } from 'react';
 import profile_avatar from '../../assets/images/profile_avatar.jpg'
 import { useForm } from 'react-hook-form';
 const Profile = () => {
+    // console.log(profile_avatar)
     const { register,reset, handleSubmit, formState: { errors } } = useForm();
     const [userProfile, setUserProfile] = useState({})
     const [updatedImage, setUpdatedImage] = useState('')
+    console.log(userProfile)
     const {firstName,lastName,phone,email,birthDate,image,gender,address,_id} = userProfile;
     const userId = localStorage.getItem('userId')
     const getUser = () =>{

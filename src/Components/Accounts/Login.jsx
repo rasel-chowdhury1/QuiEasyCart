@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 const Login = () => {
     const {login,googleSignin} = useContext(AuthContext);
     console.log(googleSignin)
-
     const [error,setError] = useState('');
     const navigate = useNavigate();
 
@@ -37,8 +36,61 @@ const Login = () => {
 
     }
 
+    const handleUserProfile = (id) =>{
+        const userProfile = {
+          userId: id,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: null,
+          gender: null,
+          birthDate: null,
+          image: null,
+          address: null
+        }
+        fetch("http://localhost:3000/addUser", {
+                   method: "POST",
+                   headers: {
+                      "content-type": 'application/json'
+                   },
+                   body: JSON.stringify(userProfile)
+                })
+        }
+
     const handleGoogleButton = () =>{
         googleSignin()
+        .then(result =>{
+            console.log(result.user.uid)
+            console.log(result.user.email)
+            console.log(result.user.displayName)
+            const userId = localStorage.getItem('userId')
+            console.log("result:-- ",result.user.uid)
+            console.log("localStorage--",userId)
+            if(userId !== result.user.uid){
+                const userProfile = {
+                    userId: result.user.uid,
+                    firstName: result.user.displayName,
+                    lastName: null,
+                    email: result.user.email,
+                    phone: null,
+                    gender: null,
+                    birthDate: null,
+                    image: null,
+                    address: null
+                  }
+                  fetch("http://localhost:3000/addUser", {
+                    method: "POST",
+                    headers: {
+                       "content-type": 'application/json'
+                    },
+                    body: JSON.stringify(userProfile)
+                 })
+                 .then(()=>{
+                    localStorage.setItem('userId',result.user.uid)
+                 })
+            }
+            
+        })
         navigate('/')
     }
     
