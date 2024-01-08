@@ -1,67 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_Token;
+
 // console.log(img_hosting_token);
 
 const AdminProducts = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [uploadedImages,setUploadedImages] = useState([])
-    // console.log("first run uploaded image:",uploadedImages);
-
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
-
-
-    const onSubmit = async (data) => {
-        console.log(data);
-
-          
-          
-          let formData = new FormData();
-
-          for (let index = 0; index < data.image.length; index++) {
-            // const image = fileList[index];
-            formData.append("image", data.image[index]);
-
-                const response = await axios.post(img_hosting_url, formData);
-                console.log(response.data);
-
-                uploadedImages.push(response.data.data.url);
-                setUploadedImages(uploadedImages);
-          
-                // Process the response and handle it accordingly
-                // if (response.data.success) {
-                //   const imageUrls = response.data.data.images.map((img) => img.display_url);
-                //   const { name, category, recipe, price } = data;
-                //   const newItem = { name, price: parseFloat(price), category, recipe, images: imageUrls };
-                //   console.log(newItem);
-                // }
-
-
-              formData = new FormData();
-             }
-
-             if(uploadedImages){
-              const {name,category,size,price,brand,quantity,details} = data;
-              const newItem = {name,category,size,price: parseFloat(price),brand,details,quantity: parseInt(quantity),images:uploadedImages}
-
-              console.log(newItem)
-              fetch("http://localhost:3000/addProduct", {
-                 method: "POST",
-                 headers: {
-                    "content-type": 'application/json'
-                 },
-                 body: JSON.stringify(newItem)
-              })
-            }
-      
-          setUploadedImages([]);
-        
-      };
-      
+    
 
 
 
@@ -195,117 +143,8 @@ const AdminProducts = () => {
                 <div className="navbar-end">
 
                     {/* Open the modal using document.getElementById('ID').showModal() method */}
-                    <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>Add New Product</button>
-                    <dialog id="my_modal_1" className="modal">
-                        <div className="modal-box">
-                            <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
-                                <h2 className="text-3xl font-semibold mb-4 text-center">Add New Product</h2>
-                                
-                                <form onSubmit={handleSubmit(onSubmit)}>
-                                    <label className="form-control w-full my-4">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Product name*</span>
-                                        </div>
-                                        <input type="text" placeholder="Product name"
-                                        {...register("name", {required: true, maxLength: 120})}
-                                        className="input input-bordered w-full " />
-                                    </label>
-
-                                    <div className='flex my-4'>
-                                        <label className="form-control w-full mr-5 ">
-                                            <div className="label">
-                                                <span className="label-text font-semibold">Category*</span>
-                                            </div>
-
-                                            <select defaultValue="Pick One"{...register("category", { required: true })}
-                                            className="select select-bordered">
-                                                <option disabled >Pick One</option>
-                                                <option>Grocery</option>
-                                                <option>Medicine</option>
-                                                <option>Cosmetic</option>
-                                                <option>Drinks</option>
-                                                <option>Desserts</option>
-                                            </select>
-                                        </label>
-
-                                        <label className="form-control w-full mr-5 ">
-                                            <div className="label">
-                                                <span className="label-text font-semibold">Size*</span>
-                                            </div>
-
-                                            <select defaultValue="Pick One"{...register("size", { required: true })}
-                                            className="select select-bordered">
-                                                <option disabled >Pick One</option>
-                                                <option>S</option>
-                                                <option>M</option>
-                                                <option>L</option>
-                                                <option>XL</option>
-                                            </select>
-                                        </label>
-
-                                    </div>
-
-                                    <div className='flex my-4'>
-                                        <label className="form-control w-full mr-5">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Quantity*</span>
-                                        </div>
-                                        <input type="num" placeholder="Quantity"
-                                        {...register("quantity", { required: true })}
-                                        className="input input-bordered w-full " />
-                                        </label>
-
-                                        <label className="form-control w-full mr-5">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Price*</span>
-                                        </div>
-                                        <input type="num" placeholder="Price"
-                                        {...register("price", { required: true })}
-                                        className="input input-bordered w-full " />
-                                        </label>
-
-                                    </div>
-
-                                    <label className="form-control w-full ">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Brand*</span>
-                                        </div>
-                                        <input type="num" placeholder="Brand Name"
-                                        {...register("brand", { required: true })}
-                                        className="input input-bordered w-full " />
-                                    </label>
-
-                                    <label className="form-control my-4">
-                                        <div className="label">
-                                            <span className="label-text">Product Details*</span>
-                                        </div>
-                                        <textarea {...register("details", { required: true })} className="textarea textarea-bordered h-24" placeholder="Recipe Details"></textarea>
-                                    </label>
-
-                                    <label className="form-control w-full max-w-xs my-4">
-                                        <div className="label">
-                                            <span className="label-text">Item Image</span>
-                                        </div>
-                                        <input multiple {...register('image', { required: 'At least one image is required.' })}
-                                        type="file" className="file-input file-input-bordered w-full max-w-xs" />
-                                        {errors.image && <p>{errors.image.message}</p>}
-                                    </label>
-
-                                    <input type="submit" value="Add Item" className='btn btn-sm mt-4'/>
-                                    
-                                </form>
-
-                            </div>
-                            <div className="modal-action">
-                                <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn btn-outline">Close</button>
-                                </form>
-                            </div>
-                        </div>
-                    </dialog>
-
-
+                    <Link to='admin/addProduct' className="btn" >Add New Product</Link>
+                
                 </div>
             </div>
 

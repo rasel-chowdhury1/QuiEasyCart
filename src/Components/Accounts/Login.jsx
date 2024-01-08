@@ -22,11 +22,12 @@ const Login = () => {
         .then(result => {
             Swal.fire({
                 icon: "success",
-                title: "Successfully created account",
+                title: "Successfully LoggedIn account",
                 showConfirmButton: false,
                 timer: 1400
               });
             form.reset();
+            localStorage.setItem('userId',result.user.uid)
             navigate('/')
         })
         .catch(error => {

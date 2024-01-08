@@ -1,25 +1,191 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import profile_avatar from '../../assets/images/profile_avatar.jpg'
+import { useForm } from 'react-hook-form';
 const Profile = () => {
+    const { register,reset, handleSubmit, formState: { errors } } = useForm();
+    const [userProfile, setUserProfile] = useState({})
+    const [updatedImage, setUpdatedImage] = useState('')
+    const {firstName,lastName,phone,email,birthDate,image,gender,address,_id} = userProfile;
+    const userId = localStorage.getItem('userId')
+    const getUser = () =>{
+        fetch(`http://localhost:3000/user/${userId}`)
+        .then(res => res.json())
+        .then(result => setUserProfile(result))
+    }
+    useEffect(()=>{
+        getUser()
+    },[])
+    
+    const handleImage = () =>{
+        const fileInput = document.querySelector('.file-input')
+        fileInput.click()
+        fileInput.onchange = ({target}) => {
+        const file = target.files[0]
+        const formData = new FormData();
+        formData.append("image", file);
+
+        fetch(
+          "https://api.imgbb.com/1/upload?key=212e3038d6bf0bd9d01b3aa24708a377",
+          {
+            method: "POST",
+            body: formData,
+          }
+        )
+        .then(res=> res.json())
+        .then(result => {
+            console.log(result)
+            setUpdatedImage(result.data.url)
+        })
+    }
+}
+    const onSubmit = (data) => {
+        console.log('hello')
+        const userProfile = {
+            userId: userId,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            phone: data.phone,
+            gender: data.gender,
+            birthDate: data.birthDate,
+            image: updatedImage ? updatedImage : image,
+            address: data.address
+          }
+          console.log(userProfile)
+          fetch(`http://localhost:3000/updateProfile/${_id}`, {
+                     method: "PATCH",
+                     headers: {
+                        "content-type": 'application/json'
+                     },
+                     body: JSON.stringify(userProfile)
+            })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                getUser()
+            })
+      };
     return (
         <div className='container  mb-20 mt-6'>
             <div className="flex justify-center px-3">
               <div className="pl-20 w-1/3 justify-center drop-shadow-lg bg-white">
                 <section className='ml-16'>
                     <div>
-                    <img src={profile_avatar} className='rounded-full w-32' alt="" />
+                    <img src={image !== null ? image : profile_avatar} className='rounded-full w-32' alt="" />
                     </div>
                 </section>
                 <section className=''>
                       <div className='mt-2 ml-3'>
-                        <h4 className='font-bold text-2xl'><span>Name:</span>  Nazrul Islam</h4>
-                        <p><span className='font-semibold'> Email:</span> nazrulislam@gmail.com</p>
-                        <p><span className='font-semibold'>Phone: </span> 01816249784</p>
-                        <p><span className='font-semibold'> Gender:</span> Male</p>
-                        <p><span className='font-semibold'>BirthDate: </span> 10-10-1998</p>
-                        <p><span className='font-semibold'>Address: </span> Chattogram, Bangladesh</p>
+                        <h4 className='font-bold uppercase text-2xl'><span>Name:</span>{firstName} {lastName}</h4>
+                        <p><span className='font-semibold'> Email:</span> {email}</p>
+                        <p><span className='font-semibold'>Phone: </span> {phone ? phone: '---'}</p>
+                        <p><span className='font-semibold'> Gender:</span> {gender ? gender : '---'}</p>
+                        <p><span className='font-semibold'>BirthDate: </span> {birthDate ? birthDate :'---'}</p>
+                        <p><span className='font-semibold'>Address: </span> {address ? address :'---'}</p>
 
-                        <button type="button" className="text-white mt-12 ml-16  bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Update Profile</button>
+                        <button onClick={() => document.getElementById('profileModal').showModal()} type="button" className="text-white mt-12 ml-16  bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Update Profile</button>
+                        <dialog id="profileModal" className="modal">
+                        <div className="modal-box">
+                            <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
+                            <div className='flex justify-center cursor-pointer'>
+                            <img onClick={handleImage} src={updatedImage !== '' ? updatedImage : image ? image : profile_avatar} className='rounded-full w-40' alt="" />
+                            </div>
+                                
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <label className="form-control w-full my-4">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">First Name*</span>
+                                        </div>
+                                        <input type="text" placeholder="First name" defaultValue={firstName}
+                                        {...register("firstName", {required: true, maxLength: 120})}
+                                        className="input input-bordered w-full " />
+                                    </label>
+
+                                    <label className="form-control w-full my-4">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Last Name*</span>
+                                        </div>
+                                        <input type="text" placeholder="Last name" defaultValue={lastName}
+                                        {...register("lastName", {required: true, maxLength: 120})}
+                                        className="input input-bordered w-full " />
+                                    </label>
+
+                                    <label className="form-control w-full my-4">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Email</span>
+                                        </div>
+                                        <input type="email" placeholder="Email" defaultValue={email}
+                                        {...register("email", {required: true, maxLength: 120})}
+                                        className="input input-bordered w-full " />
+                                    </label>
+
+                                    <label className="form-control w-full my-4">
+                                        <div className="label">
+                                            <span className="label-text font-semibold">Phone*</span>
+                                        </div>
+                                        <input type="text" placeholder="phone" defaultValue={phone}
+                                        {...register("phone", {required: true, maxLength: 120})}
+                                        className="input input-bordered w-full " />
+                                    </label>
+
+                                    <div className='flex my-4'>
+                                        <label className="form-control w-full mr-5 ">
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Gender*</span>
+                                            </div>
+
+                                            <select defaultValue="Pick One"{...register("gender", { required: true })}
+                                            className="select select-bordered">
+                                                <option disabled >Pick One</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                        </label>
+
+                                        <label className="form-control w-full mr-5 ">
+                                            <div className="label">
+                                                <span className="label-text font-semibold">Birth Date*</span>
+                                            </div>
+
+                                            <input type="date" placeholder="Birth Date" defaultValue={birthDate}
+                                            {...register("birthDate", {required: true, maxLength: 120})}
+                                            className="input input-bordered w-full " />
+                                        </label>
+
+                                    </div>
+
+
+                                    <label className="form-control my-4">
+                                        <div className="label">
+                                            <span className="label-text">Address*</span>
+                                        </div>
+                                        <input type="text" placeholder="Address" defaultValue={address}
+                                            {...register("address", {required: true, maxLength: 120})}
+                                            className="input input-bordered w-full " />
+                                    </label>
+
+                                    <label className="form-control hidden w-full max-w-xs my-4">
+                                        <div className="label">
+                                            <span className="label-text">Item Image</span>
+                                        </div>
+                                        <input {...register('image', { required: 'At least one image is required.' })}
+                                        type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                                        {errors.image && <p>{errors.image.message}</p>}
+                                    </label>
+
+                                    <input type="submit" value="Update Profile" className='btn btn-sm mt-4'/>
+                                    
+                                </form>
+
+                            </div>
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn btn-outline">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
                       </div>
                 </section>
 
