@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 
 
 
-// console.log(img_hosting_token);
+
 
 const AdminProducts = () => {
 
-
+    const img_hosting_token = "622e0d92c5c1dfc5ba8cf9cab3a6e860";
     const productCategory = [
         { id: 1, label: 'Grocery' },
         { id: 2, label: 'Medicine' },
