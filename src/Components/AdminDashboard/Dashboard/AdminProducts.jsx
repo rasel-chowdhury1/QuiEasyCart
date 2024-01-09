@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 
@@ -10,79 +9,82 @@ import { Link } from 'react-router-dom';
 
 const AdminProducts = () => {
 
-
-    const productCategory = [
-        { id: 1, label: 'Grocery' },
-        { id: 2, label: 'Medicine' },
-        { id: 3, label: 'Mens T-Shirt' },
-        { id: 4, label: 'Womens T-Shirt' },
-        { id: 5, label: 'Ornament' },
-        { id: 6, label: 'Mens Wear' },
-        { id: 7, label: 'Womens Wear' },
-        { id: 8, label: 'Electronics' },
-        { id: 9, label: 'Mobiles' },
-    ];
-
-
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [uploadedImages, setUploadedImages] = useState([])
-    // console.log("first run uploaded image:",uploadedImages);
     
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
-
-
-    const onSubmit = async (data) => {
-        console.log(data);
 
 
 
-        let formData = new FormData();
 
-        for (let index = 0; index < data.image.length; index++) {
-            // const image = fileList[index];
-            formData.append("image", data.image[index]);
+    // const onSubmit = async (data) => {
+    //     console.log(data.image.length);
 
-            const response = await axios.post(img_hosting_url, formData);
-            console.log(response.data);
+    //       const formData = new FormData();
 
-                uploadedImages.push(response.data.data.url);
-                setUploadedImages(uploadedImages);
+    //       // Append each image to formData
+    //     //   data.image.fileList.forEach((image, index) => {
+    //     //     formData.append(`image${index}`, image[0]);
+    //     //   });
+
+    //       for (let index = 0; index < data.image.length; index++) {
+    //         // const image = fileList[index];
+    //         console.log(data.image[index])
+    //         formData.append(`image${index}`, data.image[index]);
 
 
-            formData = new FormData();
-        }
+    //     }
 
-        if (uploadedImages) {
-            const { name, category, size, price, brand, quantity, details } = data;
-            const newItem = { name, category, size, price: parseFloat(price), brand, details, quantity: parseInt(quantity), images: uploadedImages }
 
-            console.log(newItem)
-            fetch("http://localhost:3000/addProduct", {
-                method: "POST",
-                headers: {
-                    "content-type": 'application/json'
-                 },
-                 body: JSON.stringify(newItem)
-              })
-              .then(res => res.json())
-              .then(data => {
-                console.log(data)
-                if(data.insertedId){
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Successfully added product",
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                }
-              })
-            }
-      
-          setUploadedImages([]);
-        
-      };
-     
+
+    //         // Process the response and handle it accordingly
+    //         if (imgResponse.success) {
+    //           const imageUrls = imgResponse.data.image.map((img) => img.display_url);
+    //           const {name,category,size,price,brand,details} = data;
+    //           const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imageUrls}
+    //           console.log(newItem)
+    //         }
+    //       } 
+    //   };
+
+
+    // const onSubmit = data => {
+    //     console.log(data)
+    //     const formData = new FormData()
+
+    //     formData.append('image', data.image[0])
+
+    //     fetch(img_hosting_url, {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //     .then(res => res.json())
+    //     .then(imgResponse => {
+    //         if(imgResponse.success){
+    //             const imgURL = imgResponse.data.display_url;
+    //             const {name,category,size,price,brand,details,image} = data;
+    //             const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imgURL}
+    //             console.log(newItem)
+    //         }
+    //     })
+    // };
+
+    // const onSubmit = data => {
+    //     console.log(data)
+    //     const formData = new FormData()
+    //     formData.append('image', data.image[0])
+
+    //     fetch(img_hosting_url, {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //     .then(res => res.json())
+    //     .then(imgResponse => {
+    //         if(imgResponse.success){
+    //             const imgURL = imgResponse.data.display_url;
+    //             const {name,category,recipe,price} = data;
+    //             const newItem = {name,price: parseFloat(price),category,recipe,image:imgURL}
+    //             console.log(newItem)
+    //         }
+    //     })
+    // };
 
     return (
         <div className=' w-full '>
@@ -141,118 +143,8 @@ const AdminProducts = () => {
                 <div className="navbar-end">
 
                     {/* Open the modal using document.getElementById('ID').showModal() method */}
-                    <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>Add New Product</button>
-                    <dialog id="my_modal_1" className="modal">
-                        <div className="modal-box">
-                            <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-md">
-                                <h2 className="text-3xl font-semibold mb-4 text-center">Add New Product</h2>
-
-                                <form onSubmit={handleSubmit(onSubmit)}>
-                                    <label className="form-control w-full my-4">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Product name*</span>
-                                        </div>
-                                        <input type="text" placeholder="Product name"
-                                            {...register("name", { required: true, maxLength: 120 })}
-                                            className="input input-bordered w-full " />
-                                    </label>
-
-                                    <div className='flex my-4'>
-                                        <label className="form-control w-full mr-5 ">
-                                            <div className="label">
-                                                <span className="label-text font-semibold">Category*</span>
-                                            </div>
-
-                                            <select defaultValue="Pick One"{...register("category", { required: true })}
-                                                className="select select-bordered">
-                                                <option disabled >Pick One</option>
-                                                {
-                                                    productCategory.map(pro => <option key={pro.id}>{pro.label}</option>)
-                                                }
-                                            </select>
-                                        </label>
-
-                                        <label className="form-control w-full mr-5 ">
-                                            <div className="label">
-                                                <span className="label-text font-semibold">Size*</span>
-                                            </div>
-
-                                            <select defaultValue="Pick One"{...register("size", { required: true })}
-                                                className="select select-bordered">
-                                                <option id="sizeSelect" disabled >Pick One</option>
-                                                  <option>1kg</option>
-                                                  <option>5kg</option>
-                                                  <option>1</option>
-                                                  <option>S</option>
-                                                  <option>M</option>
-                                                  <option>L</option>
-                                                  <option>XL</option>
-                                            </select>
-                                        </label>
-
-                                    </div>
-
-                                    <div className='flex my-4'>
-                                        <label className="form-control w-full mr-5">
-                                            <div className="label">
-                                                <span className="label-text font-semibold">Quantity*</span>
-                                            </div>
-                                            <input type="num" placeholder="Quantity"
-                                                {...register("quantity", { required: true })}
-                                                className="input input-bordered w-full " />
-                                        </label>
-
-                                        <label className="form-control w-full mr-5">
-                                            <div className="label">
-                                                <span className="label-text font-semibold">Price*</span>
-                                            </div>
-                                            <input type="num" placeholder="Price"
-                                                {...register("price", { required: true })}
-                                                className="input input-bordered w-full " />
-                                        </label>
-
-                                    </div>
-
-                                    <label className="form-control w-full ">
-                                        <div className="label">
-                                            <span className="label-text font-semibold">Brand*</span>
-                                        </div>
-                                        <input type="num" placeholder="Brand Name"
-                                            {...register("brand", { required: true })}
-                                            className="input input-bordered w-full " />
-                                    </label>
-
-                                    <label className="form-control my-4">
-                                        <div className="label">
-                                            <span className="label-text">Product Details*</span>
-                                        </div>
-                                        <textarea {...register("details", { required: true })} className="textarea textarea-bordered h-24" placeholder="Recipe Details"></textarea>
-                                    </label>
-
-                                    <label className="form-control w-full max-w-xs my-4">
-                                        <div className="label">
-                                            <span className="label-text">Item Image</span>
-                                        </div>
-                                        <input multiple {...register('image', { required: 'At least one image is required.' })}
-                                            type="file" className="file-input file-input-bordered w-full max-w-xs" />
-                                        {errors.image && <p>{errors.image.message}</p>}
-                                    </label>
-
-                                    <input type="submit" value="Add Item" className='btn btn-sm mt-4' />
-
-                                </form>
-
-                            </div>
-                            <div className="modal-action">
-                                <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn btn-outline">Close</button>
-                                </form>
-                            </div>
-                        </div>
-                    </dialog>
-
-
+                    <Link to='admin/addProduct' className="btn" >Add New Product</Link>
+                
                 </div>
             </div>
 
