@@ -72,8 +72,8 @@ const AddProduct = () => {
              }
 
              if(uploadedImages){
-              const {name,category,size,price,brand,quantity,details} = data;
-              const newItem = {name,category,size,price: parseFloat(price),brand,details,quantity: parseInt(quantity),images:uploadedImages}
+              const {name,category,size,price,brand,quantity,details, subCategory} = data;
+              const newItem = {name,category,subCategory,size,price: parseFloat(price),brand,details,quantity: parseInt(quantity),images:uploadedImages}
 
               console.log(newItem)
               fetch("http://localhost:3000/addProduct", {
@@ -127,48 +127,71 @@ const AddProduct = () => {
 
                 <label className="form-control w-full mr-5 ">
                     <div className="label">
-                        <span className="label-text font-semibold">Size*</span>
+                        <span className="label-text font-semibold">Sub Category*</span>
                     </div>
 
-                    <select {...register("size", { required: true })}
+                    <select {...register("subCategory", { required: true })}
                     className="select select-bordered">
                     {
-                        findData.map(data => <option key={data._id} value={data.size}>{data.size}</option>)
-                      }
+                        findData.map(data => <option key={data._id} value={data.subCategory}>{data.subCategory}</option>)
+                    }
                     </select>
-                </label>
+               </label>
+
+               
 
             </div>
 
             <div className='flex my-4'>
-                <label className="form-control w-full mr-5">
-                <div className="label">
-                    <span className="label-text font-semibold">Quantity*</span>
-                </div>
-                <input type="num" placeholder="Quantity"
-                {...register("quantity", { required: true })}
-                className="input input-bordered w-full " />
-                </label>
 
-                <label className="form-control w-full mr-5">
-                <div className="label">
-                    <span className="label-text font-semibold">Price*</span>
-                </div>
-                <input type="num" placeholder="Price"
-                {...register("price", { required: true })}
-                className="input input-bordered w-full " />
-                </label>
-
-            </div>
-
-            <label className="form-control w-full ">
+            <label className="form-control w-full mr-5">
                 <div className="label">
                     <span className="label-text font-semibold">Brand*</span>
                 </div>
-                <input type="num" placeholder="Brand Name"
-                {...register("brand", { required: true })}
-                className="input input-bordered w-full " />
-            </label>
+               
+                <select {...register("brand", { required: true })}
+                className="select select-bordered">
+                {
+                    findData.map(data => <option key={data._id} value={data.brand}>{data.brand}</option>)
+                }
+                </select>
+             </label>
+
+            <label className="form-control w-full mr-5 ">
+            <div className="label">
+                <span className="label-text font-semibold">Size*</span>
+            </div>
+
+            <select {...register("size", { required: true })}
+            className="select select-bordered">
+            {
+                findData.map(data => <option key={data._id} value={data.size}>{data.size}</option>)
+              }
+            </select>
+        </label>
+            </div>
+
+         <div className="flex my-4">
+            <label className="form-control w-full mr-5">
+            <div className="label">
+                <span className="label-text font-semibold">Price*</span>
+            </div>
+            <input type="num" placeholder="Price"
+            {...register("price", { required: true })}
+            className="input input-bordered w-full " />
+        </label>
+
+
+        <label className="form-control w-full mr-5">
+        <div className="label">
+            <span className="label-text font-semibold">Quantity*</span>
+        </div>
+        <input type="num" placeholder="Quantity"
+        {...register("quantity", { required: true })}
+        className="input input-bordered w-full " />
+        </label>
+
+         </div>
 
             <label className="form-control my-4">
                 <div className="label">

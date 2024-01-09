@@ -10,7 +10,7 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(500px, 100px)',
+    transform: 'translate(430px, 100px)',
   },
 };
 const AddRequirements = ({getRequirement,handleRequirement,setIsOpen,modalIsOpen,getCategories,categories}) => {
@@ -28,6 +28,8 @@ const AddRequirements = ({getRequirement,handleRequirement,setIsOpen,modalIsOpen
 
       const requirementData = {
           category:data.category,
+          subCategory: data.subCategory,
+          brand: data.brand,
           size:data.size,
         }
 
@@ -97,15 +99,21 @@ const AddRequirements = ({getRequirement,handleRequirement,setIsOpen,modalIsOpen
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal"
-      className="requirementModal w-1/3 h-44 p-3 bg-blue-400 requirementModal-1 requirement-form"
+      className="requirementModal w-1/3 h-52 p-3 bg-blue-400 requirementModal-1 requirement-form"
     >
     
         <form onSubmit={handleSubmit(onSubmit)} className="">
         {/* register your input into the hook by invoking the "register" function */}
         <input className="requirement-field mt-3 ml-3 p-2" placeholder='Category'  {...register("category")} />
+
+        {/* register your input into the hook by invoking the "register" function */}
+        <input className="requirement-field mt-3 ml-3 p-2" placeholder='Sub Category'  {...register("subCategory")} /> <br />
+
+        {/* register your input into the hook by invoking the "register" function */}
+        <input className="requirement-field mt-3 ml-3 p-2" placeholder='Brand'  {...register("brand")} />
        
         {/* include validation with required or other standard HTML validation rules */}
-        <input className="requirement-field ml-6 p-2" placeholder='Size' {...register("size", { required: true })} />
+        <input className="requirement-field ml-3 p-2" placeholder='Size' {...register("size", { required: true })} />
         {/* errors will return when field validation fails  */}
         {errors.exampleRequired && <span>This field is required</span>}
        
