@@ -22,7 +22,29 @@ const Register = () => {
     const confirmPassword = form.confirm.value;
     console.log(firstName,lastName,email,password,confirmPassword);
     setError('');
+
+   
     
+    const handleUserProfile = (id) =>{
+      const userProfile = {
+        userId: id,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: null,
+        gender: null,
+        birthDate: null,
+        image: null,
+        address: null
+      }
+      fetch("http://localhost:3000/addUser", {
+                 method: "POST",
+                 headers: {
+                    "content-type": 'application/json'
+                 },
+                 body: JSON.stringify(userProfile)
+              })
+      }
 
     if(!/(?=.*[a-zA-Z])/.test(password)){
         setError('must added alpha charecter in password field');
@@ -53,8 +75,10 @@ const Register = () => {
         showConfirmButton: false,
         timer: 1400
       });
-      updateUserData(result.user,firstName)
+      updateUserData(result.user,firstName);
       sendVerificationEmail(result.user);
+      handleUserProfile(result.user.uid);
+      localStorage.setItem('userId',result.user.uid)
       form.reset()
       navigate('/')
     })
