@@ -20,7 +20,7 @@ const AddProduct = () => {
     const [uploadedImages,setUploadedImages] = useState([])
     // console.log("first run uploaded image:",uploadedImages);
     console.log('categories',categories)
-    // console.log('requirements',requirements)
+    console.log('requirements',requirements)
     // console.log('FindData',findData)
     console.log('subCategories',subCategories)
     console.log('brand',brands)
