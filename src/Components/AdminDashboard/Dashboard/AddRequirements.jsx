@@ -13,35 +13,35 @@ const customStyles = {
     transform: 'translate(430px, 100px)',
   },
 };
-const AddRequirements = ({getRequirement,handleRequirement,setIsOpen,modalIsOpen,getCategories,categories}) => {
+const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
+                        getBrands,getSizes,setIsOpen,modalIsOpen,getCategories}) => {
     const { register, handleSubmit,reset, watch, formState: { errors } } = useForm();
-//     const [departments,setDepartments] = useState([])
 
-//     useEffect(()=>{
-//       fetch(`http://localhost:5000/getDepartment`)
-//       .then((data)=>data.json())
-//       .then(data => setDepartments(data))
-// },[])
 
  
     const onSubmit = data => {
 
-      const requirementData = {
-          category:data.category,
-          subCategory: data.subCategory,
-          brand: data.brand,
-          size:data.size,
-        }
-
+  
       const category={
         category:data.category,
       }
 
-      const findCategory = categories.find((category)=> category.category === data.category)
+      const subCategory={
+        category:data.category,
+        subCategory:data.subCategory,
+      }
+      const brand={
+        subCategory: data.subCategory,
+        brand: data.brand,
+      }
+      const size={
+        size:data.size,
+        brand: data.brand,
+      }
 
-
+  
       const handleCategory = () =>{
-        fetch("http://localhost:3000/addCategory", {
+        fetch(`http://localhost:3000/addCategory/${data.category}`, {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
@@ -51,39 +51,83 @@ const AddRequirements = ({getRequirement,handleRequirement,setIsOpen,modalIsOpen
         .then((response) => response.json())
         .then((requirementResult) => {
           getCategories();
-          getRequirement();
-          console.log("Requirement Added");
-          reset();
-          handleRequirement(false);
+          getSubCategories();
+          getBrands();
+          getSizes();
         })
         .catch((error) => {
           console.error("Error:", error);
         });
       }
-      
-        fetch("http://localhost:3000/addRequirement", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requirementData),
-    })
-      .then((response) => response.json())
-      .then((requirementResult) => {
-        
-        if(findCategory){
-        console.log("Requirement Added");
-        getCategories();
-        getRequirement();
-        reset();
-        handleRequirement(false);
-        }else{
-          handleCategory();
-        }
+
+      const handleSubCategory = () =>{
+        fetch(`http://localhost:3000/addSubCategory/${data.subCategory}`, {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(subCategory),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });  
+        .then((response) => response.json())
+        .then((requirementResult) => {
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      }
+
+      const handleBrand = () =>{
+        fetch(`http://localhost:3000/addBrand/${data.brand}`, {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(brand),
+      })
+        .then((response) => response.json())
+        .then((requirementResult) => {
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      }
+
+      const handleSize = () =>{
+        fetch(`http://localhost:3000/addSize/${data.size}`, {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(size),
+      })
+        .then((response) => response.json())
+        .then((requirementResult) => {
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      }
+        handleCategory();
+        handleSubCategory();
+        handleBrand();
+        handleSize();
+        handleRequirement(false);
+        getCategories();
+        getSubCategories();
+        getBrands();
+        getSizes();
     };
 
     function closeModal() {
