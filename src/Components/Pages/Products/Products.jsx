@@ -9,15 +9,27 @@ import img5 from '../../../../src/assets/images/img-5.jpg'
 import img6 from '../../../../src/assets/images/img-6.jpg'
 import img7 from '../../../../src/assets/images/img-7.jpg'
 import img8 from '../../../../src/assets/images/img-8.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 const Products = () => {
     const [showingCategoryList, setShowingCategoryList] = useState(true)
     const [showingPriceList, setShowingPriceList] = useState(true)
     const [showingBrandList, setShowingBrandList] = useState(true)
     const [showingSizeList, setShowingSizeList] = useState(true)
     const [products,setProducts] = useState([]);
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemPerPage] = useState(8);
+    const {totalProducts} = useLoaderData()
+
+    //const itemsPerPage = 10; //TODO: make it dynamic
+    const totalPages = Math.ceil(totalProducts/itemsPerPage)
   
     
+    const pageNumbers = [];
+    for(let i=1; i<=totalPages; i++){
+        pageNumbers.push(i);
+    }
+
     const handleCategoryList = ()=> {
           const list = document.getElementById('category-list')
           if(showingCategoryList === true){
@@ -62,11 +74,21 @@ const handleSizeList = ()=> {
     }
 }
 
-    useEffect(()=>{
-      fetch("http://localhost:3000/allProducts")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-    },[])
+    // useEffect(()=>{
+    //   fetch("http://localhost:3000/allProducts")
+    //   .then(res => res.json())
+    //   .then(data => setProducts(data))
+    // },[])
+
+    useEffect( ()=>{
+      async function fetchData() {
+          const response = await fetch(`http://localhost:3000/products?page=${currentPage}&limit=${itemsPerPage}`)
+
+          const data = await response.json();
+          setProducts(data);
+      }
+      fetchData();
+  },[currentPage,itemsPerPage])
 
     return (
         <div className='container mx-auto'>
@@ -223,9 +245,9 @@ const handleSizeList = ()=> {
                     <div className="all-product mt-9">
                       <h1 className='text-center text-2xl mt-4 font-semibold shadow'>Showing Products 1 - 16 Of 16 Results</h1>
 
-                        <div className="flex mt-12 px-12">
+                        <div className="flex flex-wrap mt-12 px-12">
                         
-                           {products.map(product => <Link to='/productDetails' key={product._id} className='relative cart-body mx-2'>
+                           {products.map(product => <Link to='products/productDetails' key={product._id} className='relative cart-body mx-2'>
                             <div className='img-body relative'>
                                 <p className='uppercase absolute ml-44 font-semibold mt-9'>sale</p>
                               <img src={product.images[0]} className='w-60 ' alt="" />
@@ -260,33 +282,23 @@ const handleSizeList = ()=> {
                             <AiOutlineSearch className="text-2xl hover:text-orange-400"/>
                             </div>
                           </div>
-                        </Link>)}
+                            </Link>)}
                         
                         </div>
 
                         <nav aria-label="Page  navigation example">
                         <ul className="inline-flex mt-6 ml-9 -space-x-px text-sm">
-                          <li>
-                            <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-                          </li>
-                          <li>
-                            <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                          </li>
-                          <li>
-                            <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                          </li>
-                          <li>
-                            <a href="#" aria-current="page" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                          </li>
-                          <li>
-                            <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                          </li>
-                          <li>
-                            <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                          </li>
-                          <li>
-                            <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-                          </li>
+                            <li>
+                              <p className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</p>
+                            </li>
+                              {
+                                pageNumbers.map(page => <li key={page} className='mx-2'>
+                                  <p onClick={() => setCurrentPage(page-1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{page}</p>
+                                 </li>)
+                              }
+                            <li>
+                              <p className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</p>
+                            </li>
                         </ul>
                         </nav>
                     </div>

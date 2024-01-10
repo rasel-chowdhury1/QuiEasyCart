@@ -40,7 +40,8 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
         },
         {
           path: "products",
-          element: <Products></Products>
+          element: <Products></Products>,
+          loader: () => fetch("http://localhost:3000/totalProducts")
         },
         {
           path: "products/productDetails",
