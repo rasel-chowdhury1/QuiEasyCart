@@ -44,7 +44,8 @@ import Helppage from './../Components/Pages/Help_frontEnd/Helppage';
         },
         {
           path: "products",
-          element: <Products></Products>
+          element: <Products></Products>,
+          loader: () => fetch("http://localhost:3000/totalProducts")
         },
         {
           path: "products/productDetails",

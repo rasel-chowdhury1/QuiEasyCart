@@ -17,16 +17,14 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
                         getBrands,getSizes,setIsOpen,modalIsOpen,getCategories}) => {
     const { register, handleSubmit,reset, watch, formState: { errors } } = useForm();
 
-
-    useEffect(()=>{
-          getCategories();
-          getSubCategories();
-          getBrands();
-          getSizes();
+    useEffect(() =>{
+      getCategories();
+      getSubCategories();
+      getBrands();
+      getSizes();
     },[])
+ 
     const onSubmit = data => {
-
-  
       const category={
         category:data.category,
       }
@@ -133,8 +131,8 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
         getSubCategories();
         getBrands();
         getSizes();
-        reset();
-        
+
+        reset()
     };
 
     function closeModal() {

@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineCaretDown, AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
-import { Link } from 'react-router-dom';
+import img1 from '../../../../src/assets/images/img-1.jpg'
+import img2 from '../../../../src/assets/images/img-2.jpg'
+import img3 from '../../../../src/assets/images/img-3.jpg'
+import img4 from '../../../../src/assets/images/img-4.jpg'
+import img5 from '../../../../src/assets/images/img-5.jpg'
+import img6 from '../../../../src/assets/images/img-6.jpg'
+import img7 from '../../../../src/assets/images/img-7.jpg'
+import img8 from '../../../../src/assets/images/img-8.jpg'
+import { Link, useLoaderData } from 'react-router-dom';
 
 
 const Products = () => {
@@ -10,6 +18,19 @@ const Products = () => {
   const [showingBrandList, setShowingBrandList] = useState(true)
   const [showingSizeList, setShowingSizeList] = useState(true)
   const [products, setProducts] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemPerPage] = useState(8);
+    const {totalProducts} = useLoaderData()
+
+    //const itemsPerPage = 10; //TODO: make it dynamic
+    const totalPages = Math.ceil(totalProducts/itemsPerPage)
+  
+    
+    const pageNumbers = [];
+    for(let i=1; i<=totalPages; i++){
+        pageNumbers.push(i);
+    }
 
 
   const handleCategoryList = () => {
@@ -56,11 +77,21 @@ const Products = () => {
     }
   }
 
-  useEffect(() => {
-    fetch("http://localhost:3000/allProducts")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, [])
+    // useEffect(()=>{
+    //   fetch("http://localhost:3000/allProducts")
+    //   .then(res => res.json())
+    //   .then(data => setProducts(data))
+    // },[])
+
+    useEffect( ()=>{
+      async function fetchData() {
+          const response = await fetch(`http://localhost:3000/products?page=${currentPage}&limit=${itemsPerPage}`)
+
+          const data = await response.json();
+          setProducts(data);
+      }
+      fetchData();
+  },[currentPage,itemsPerPage])
 
   return (
     <div className='container mx-auto'>
@@ -276,23 +307,13 @@ const Products = () => {
             <nav aria-label="Page  navigation example">
               <ul className="inline-flex mt-6 ml-9 -space-x-px text-sm">
                 <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                  <Link className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
                 </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                </li>
-                <li>
-                  <a href="#" aria-current="page" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                </li>
-                <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                </li>
+                  {
+                    pageNumbers.map(page => <li key={page}>
+                      <Link onClick={() => setCurrentPage(page-1)} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{page}</Link>
+                    </li>)
+                  }
                 <li>
                   <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
                 </li>
