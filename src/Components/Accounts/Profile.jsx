@@ -53,7 +53,7 @@ const Profile = () => {
             image: updatedImage ? updatedImage : image,
             address: data.address
           }
-          console.log(userProfile)
+          console.log('from frontend',userProfile)
           fetch(`http://localhost:3000/updateProfile/${_id}`, {
                      method: "PATCH",
                      headers: {

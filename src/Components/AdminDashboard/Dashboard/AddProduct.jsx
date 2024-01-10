@@ -7,7 +7,12 @@ import Swal from 'sweetalert2';
 const img_hosting_token = "622e0d92c5c1dfc5ba8cf9cab3a6e860";
 // console.log(img_hosting_token);
 const AddProduct = () => {
-    const [findData,setFindData] = useState([]);
+    const [findSubCatagories,setFindSubCatagories] = useState([]);
+    const [findBrands,setFindBrands] = useState([]);
+    const [findSizes,setFindSizes] = useState([]);
+    const [subCategories,setSubCategories] = useState([]);
+    const [brands,setBrands] = useState([]);
+    const [sizes,setSizes] = useState([]);
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [categories,setCategories] = useState([])
     const [requirements,setRequirements] = useState([])
@@ -15,8 +20,11 @@ const AddProduct = () => {
     const [uploadedImages,setUploadedImages] = useState([])
     // console.log("first run uploaded image:",uploadedImages);
     console.log('categories',categories)
-    console.log('requirements',requirements)
-    console.log('FindData',findData)
+    // console.log('requirements',requirements)
+    // console.log('FindData',findData)
+    console.log('subCategories',subCategories)
+    console.log('brand',brands)
+    console.log('size',sizes)
 
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
@@ -26,23 +34,59 @@ const AddProduct = () => {
         .then(data => setRequirements(data))
       }
 
-      //getDepartment
+      //getCategories
       const getCategories = () =>{
         fetch(`http://localhost:3000/allCategories`)
         .then((data)=>data.json())
         .then(data => setCategories(data))
       }
 
+       //getSubCategories
+       const getSubCategories = () =>{
+        fetch(`http://localhost:3000/allSubCategories`)
+        .then((data)=>data.json())
+        .then(data => setSubCategories(data))
+      }
+
+       //getBrand
+       const getBrands = () =>{
+        fetch(`http://localhost:3000/allBrands`)
+        .then((data)=>data.json())
+        .then(data => setBrands(data))
+      }
+
+       //getSizes
+       const getSizes = () =>{
+        fetch(`http://localhost:3000/allSizes`)
+        .then((data)=>data.json())
+        .then(data => setSizes(data))
+      }
+
       useEffect(()=>{
         getCategories();
         getRequirement();
+        getSubCategories();
+        getBrands();
+        getSizes();
       },[])
       
-      const handleSelection = (category) =>{
+      const handleSelectionSubCategory = (category) =>{
            console.log('passed category')
-           const findCatagories = requirements.filter(requirement => requirement.category === category);
-           setFindData(findCatagories)
+           const findSubCatagories = subCategories.filter(subCategory => subCategory.category === category);
+           setFindSubCatagories(findSubCatagories)
       }
+
+
+
+    const handleBrand = (subCategory) => {
+        const findBrands = brands.filter((data) => data.subCategory === subCategory)
+        setFindBrands(findBrands)
+  }
+
+  const handleSizes = (brand) => {
+    const findSizes = sizes.filter((data) => data.brand === brand)
+    setFindSizes(findSizes)
+}
 
 
     const onSubmit = async (data) => {
@@ -99,6 +143,7 @@ const AddProduct = () => {
               
             }
           setUploadedImages([]);
+          reset();
       };
 
       const handleRequirements=(decision) => {
@@ -127,7 +172,7 @@ const AddProduct = () => {
                     </div>
 
                     <div className="flex">
-                    <select onClick={(e) => handleSelection(e.target.value)} {...register("category", { required: true })}
+                    <select onClick={(e) => handleSelectionSubCategory(e.target.value)} {...register("category", { required: true })}
                     className="select w-2/3 select-bordered rounded-l-lg">
                     {
                         categories.map(category => <option className='mt-2' key={category._id} value={category.category}>{category.category}</option>)
@@ -143,10 +188,10 @@ const AddProduct = () => {
                         <span className="label-text font-semibold">Sub Category*</span>
                     </div>
 
-                    <select {...register("subCategory", { required: true })}
+                    <select onClick={(e) => handleBrand(e.target.value)}  {...register("subCategory", { required: true })}
                     className="select select-bordered">
                     {
-                        findData.map(data => <option key={data._id} value={data.subCategory}>{data.subCategory}</option>)
+                        findSubCatagories.map(data => <option key={data._id} value={data.subCategory}>{data.subCategory}</option>)
                     }
                     </select>
                </label>
@@ -162,10 +207,10 @@ const AddProduct = () => {
                     <span className="label-text font-semibold">Brand*</span>
                 </div>
                
-                <select {...register("brand", { required: true })}
+                <select onClick={(e) => handleSizes(e.target.value)}  {...register("brand", { required: true })}
                 className="select select-bordered">
                 {
-                    findData.map(data => <option key={data._id} value={data.brand}>{data.brand}</option>)
+                    findBrands.map(data => <option key={data._id} value={data.brand}>{data.brand}</option>)
                 }
                 </select>
              </label>
@@ -178,7 +223,7 @@ const AddProduct = () => {
             <select {...register("size", { required: true })}
             className="select select-bordered">
             {
-                findData.map(data => <option key={data._id} value={data.size}>{data.size}</option>)
+                findSizes.map(data => <option key={data._id} value={data.size}>{data.size}</option>)
               }
             </select>
         </label>
@@ -227,7 +272,11 @@ const AddProduct = () => {
         </form>
 
     </div>
-       <AddRequirements getRequirement={getRequirement} categories={categories} getCategories={getCategories} handleRequirement={handleRequirements} setIsOpen={setIsOpen} modalIsOpen={modalIsOpen}></AddRequirements>
+       <AddRequirements
+        getRequirement={getRequirement} categories={categories} getCategories={getCategories}
+        getSubCategories={getSubCategories} getBrands={getBrands} getSizes={getSizes} subCategories={subCategories} 
+        handleRequirement={handleRequirements} setIsOpen={setIsOpen} brands={brands} sizes={sizes}
+        modalIsOpen={modalIsOpen}></AddRequirements>
         </div>
     );
 };

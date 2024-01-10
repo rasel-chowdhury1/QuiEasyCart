@@ -229,7 +229,7 @@ const Products = () => {
 
               {products.map(product => <div key={product._id} className='relative cart-body mx-2 shadow-xl gap-4 m-2 rounded-xl p-2'>
                 <Link to='/products/productDetails' className='img-body relative'>
-                  <p className='uppercase absolute ml-44 font-semibold mt-9'>sale</p>
+                  <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
                   <img  src={product.images[0]} className='w-60 h-60' alt="" />
                 </Link>
 
