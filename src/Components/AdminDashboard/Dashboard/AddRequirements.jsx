@@ -50,7 +50,10 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       })
         .then((response) => response.json())
         .then((requirementResult) => {
-         
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -67,7 +70,10 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       })
         .then((response) => response.json())
         .then((requirementResult) => {
-         
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -84,7 +90,10 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       })
         .then((response) => response.json())
         .then((requirementResult) => {
-         
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -101,7 +110,10 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       })
         .then((response) => response.json())
         .then((requirementResult) => {
-         
+          getCategories();
+          getSubCategories();
+          getBrands();
+          getSizes();
         })
         .catch((error) => {
           console.error("Error:", error);

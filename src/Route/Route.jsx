@@ -43,7 +43,7 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
           element: <Products></Products>
         },
         {
-          path: "/productDetails",
+          path: "products/productDetails",
           element: <ProductDetails></ProductDetails>
         },
         {

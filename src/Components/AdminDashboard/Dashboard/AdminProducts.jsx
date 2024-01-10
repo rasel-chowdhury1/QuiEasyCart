@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 
-// console.log(img_hosting_token);
+
 
 const AdminProducts = () => {
 

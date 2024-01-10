@@ -2,6 +2,7 @@ import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import AddRequirements from './AddRequirements';
+import Swal from 'sweetalert2';
 
 const img_hosting_token = "622e0d92c5c1dfc5ba8cf9cab3a6e860";
 // console.log(img_hosting_token);
@@ -15,7 +16,7 @@ const AddProduct = () => {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [categories,setCategories] = useState([])
     const [requirements,setRequirements] = useState([])
-    const { register,reset, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
     const [uploadedImages,setUploadedImages] = useState([])
     // console.log("first run uploaded image:",uploadedImages);
     console.log('categories',categories)
@@ -126,6 +127,18 @@ const AddProduct = () => {
                     "content-type": 'application/json'
                  },
                  body: JSON.stringify(newItem)
+              })
+              .then(res => res.json())
+              .then(data => {
+                if(data.insertedId){
+                    reset();
+                    Swal.fire({
+                        title: "Successful",
+                        text: "Product Successfully added!",
+                        icon: "success"
+                      });
+                    
+                }
               })
               
             }
