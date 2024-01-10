@@ -242,9 +242,172 @@ const Helppage = () => {
         <div>
             <div className='p-40 back bg-blue-300'>
                 <h2 className='text-center text-5xl m-4 p-4'>Help Center</h2>
-                <div className="form-control">
-                    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+
+                <form action="#">
+                    <div className="form-group bg-white rounded-lg mb-0 px-2 py-2 shadow-2xl">
+                        <div className="flex flex-row">
+                            <div className="flex-1">
+                                <div className="flex items-center border border-gray-300 rounded-full">
+                                    <input type="text" name="q" className="w-full py-3 px-4 outline-none rounded-l-full" value="" placeholder="Search..." />
+                                </div>
+                            </div>
+                            <div className="ml-2">
+                                <button type="submit" className="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div className='flex flex-wrap mx-40'>
+
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
                 </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl m-4 p-2">
+                    <div className="card-body">
+                        <h2 className="card-title text-3xl">Help Category</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <p><b>Total 7 article </b> </p>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">See All</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
