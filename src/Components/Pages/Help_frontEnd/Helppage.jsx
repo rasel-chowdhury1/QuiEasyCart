@@ -271,7 +271,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -283,7 +283,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -295,7 +295,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -307,7 +307,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -319,7 +319,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -331,7 +331,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -343,7 +343,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -355,7 +355,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -367,7 +367,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -379,7 +379,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -391,7 +391,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
@@ -403,7 +403,7 @@ const Helppage = () => {
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <p><b>Total 7 article </b> </p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">See All</button>
+                            <button className="btn btn-primary"><a href="/helpdetails">See All</a></button>
                         </div>
                     </div>
                 </div>
