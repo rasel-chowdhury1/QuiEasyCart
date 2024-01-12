@@ -267,7 +267,7 @@ const AddProduct = () => {
                 {errors.image && <p>{errors.image.message}</p>}
             </label>
 
-            <input type="submit" value="Add Item" className='btn btn-sm mt-4'/>
+            <input type="submit" value="Add Item" className='btn btn-warning mt-4'/>
             
         </form>
 

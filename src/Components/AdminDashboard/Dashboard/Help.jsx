@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 
 
@@ -30,6 +31,11 @@ import { useForm } from 'react-hook-form';
                     if (result.insertedId) {
                         reset();
                         // Show success message or perform other actions
+                        Swal.fire({
+                            title: "Thank you!",
+                            text: "Help added successfully!",
+                            icon: "success"
+                          });
                         console.log('Help Article Added Successfully!');
                     }
                 });
@@ -78,6 +84,16 @@ import { useForm } from 'react-hook-form';
                                 </select>
                                 {errors.helpCategory && <span className="text-red-400">Category is required</span>}
                             </div>
+                            <div className='mb-4'>
+                            <label className="form-control">
+                            <div className="label">
+                                <span className="label-text">Description*</span>
+                            </div>
+                            <textarea {...register('details', { required: true })} className="textarea textarea-bordered h-24" placeholder="type details here"></textarea>
+                            
+                            </label>
+                            </div>
+                            
 
                             {/* Add dynamic file input for image */}
                             <div className="mb-4">
