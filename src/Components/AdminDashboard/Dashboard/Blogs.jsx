@@ -1,6 +1,65 @@
 import React from 'react';
+import { useForm } from "react-hook-form"
+import { json } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+
+
+const img_hosting_token = "622e0d92c5c1dfc5ba8cf9cab3a6e860";
 
 const Blogs = () => {
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+      } = useForm()
+
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+
+
+    const onSubmit = (data) => { 
+        console.log(data)
+        const formData = new FormData()
+        // console.log(data.image[0])
+        formData.append('image', data.image[0] )
+        fetch(img_hosting_url, {
+            method : 'POST', 
+            body : formData
+        })
+        .then(res => res.json())
+        .then(image => {
+            if (image.success){
+                console.log(data)
+                const blogImageUrl = image.data.url
+                const { title, content, keyword} = data
+                const newBlog = {title, content, image:blogImageUrl, keyword}
+                console.log(newBlog)
+                fetch('http://localhost:3000/addBlog', {
+                    method : 'POST',
+                    headers : { 
+                        'Content-Type': 'application/json'
+                    },
+                    body : JSON.stringify(newBlog)                    
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.insertedId){
+                        reset()
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Blog Added Successfully!",
+                            icon: "success"
+                          });
+
+                    }
+                })
+            }
+
+        })
+    }
+
     return (
         <div className='w-full'>
             <div>
@@ -454,27 +513,32 @@ const Blogs = () => {
                     <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
                         <div className="max-w-lg mx-auto bg-white p-8 rounded-md shadow-xl">
                             <h2 className="text-2xl font-semibold mb-4">Create New Article</h2>
-                            <form>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="mb-4">
                                     <label htmlFor="title" className="block text-gray-700 font-semibold mb-2">Title</label>
-                                    <input type="text" id="title" name="title" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article title" />
+                                    <input type="text" {...register("title", { required: true })}  className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article title" />
+                                    {errors.title && <span className='text-red-400'>Title is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="content" className="block text-gray-700 font-semibold mb-2">Content</label>
-                                    <textarea id="content" name="content" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article content"></textarea>
+                                    <textarea  {...register("content", { required: true })}  className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article content"></textarea>
+                                    {errors.content && <span className='text-red-400'>Write your content here. Its cant be blank</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="image" className="block text-gray-700 font-semibold mb-2">Upload Image</label>
-                                    <input type="file" id="image" name="image" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" />
+                                    <input type="file" {...register("image", { required: true })}  className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" />
+                                    {errors.image && <span className='text-red-400'>Image is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="keywords" className="block text-gray-700 font-semibold mb-2">Keywords</label>
-                                    <input type="text" id="keywords" name="keywords" className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter keywords (separated by commas)" />
+                                    <input type="text" {...register("keyword", )}    className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter keywords (separated by commas)" />
+                                    {errors.keyword && <span className='text-red-400'>Keyword is required</span>}
                                 </div>
                                 <div className="flex justify-between mb-4">
                                     <button type="button" className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out">Draft</button>
-                                    <button type="submit" className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Publish</button>
+                                    <input  type="submit" value="Publish" className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out" />                                
                                 </div>
+                               
                             </form>
                         </div>
 
