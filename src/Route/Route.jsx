@@ -27,6 +27,7 @@ import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
 import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
 import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
+import ErrrorPage from "../Components/Pages/ErrorPage/ErrroPage";
 
 
   const router = createBrowserRouter([
@@ -41,7 +42,6 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
         {
           path: "products",
           element: <Products></Products>,
-          loader: () => fetch("http://localhost:3000/totalProducts")
         },
         {
           path: "products/productDetails",
@@ -128,6 +128,10 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
           element: <Help></Help>
         },
       ]
+    },
+    {
+      path: '*',
+      element: <ErrrorPage></ErrrorPage>
     }
     
   ]);

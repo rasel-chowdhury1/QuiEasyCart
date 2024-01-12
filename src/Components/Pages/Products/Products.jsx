@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineCaretDown, AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
-import img1 from '../../../../src/assets/images/img-1.jpg'
-import img2 from '../../../../src/assets/images/img-2.jpg'
-import img3 from '../../../../src/assets/images/img-3.jpg'
-import img4 from '../../../../src/assets/images/img-4.jpg'
-import img5 from '../../../../src/assets/images/img-5.jpg'
-import img6 from '../../../../src/assets/images/img-6.jpg'
-import img7 from '../../../../src/assets/images/img-7.jpg'
-import img8 from '../../../../src/assets/images/img-8.jpg'
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import useTotalProuduct from '../../../CustomHook/useTotalProuduct';
 
 
 const Products = () => {
@@ -21,12 +14,13 @@ const Products = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemPerPage] = useState(8);
-    const {totalProducts} = useLoaderData()
-
+    const [totalProducts,loading] = useTotalProuduct();
+  
     //const itemsPerPage = 10; //TODO: make it dynamic
     const totalPages = Math.ceil(totalProducts/itemsPerPage)
-  
     
+    console.log(currentPage)
+    console.log(totalPages)
     const pageNumbers = [];
     for(let i=1; i<=totalPages; i++){
         pageNumbers.push(i);
@@ -76,12 +70,6 @@ const Products = () => {
       setShowingSizeList(true)
     }
   }
-
-    // useEffect(()=>{
-    //   fetch("http://localhost:3000/allProducts")
-    //   .then(res => res.json())
-    //   .then(data => setProducts(data))
-    // },[])
 
     useEffect( ()=>{
       async function fetchData() {
@@ -252,7 +240,7 @@ const Products = () => {
           </div>
 
           <div className="all-product mt-9">
-            <h1 className='text-center text-3xl p-2 m-2 mt-4 font-semibold shadow'>Showing Products 1 to 12 from {products.length} Results</h1>
+            <h1 className='text-center text-3xl p-2 m-2 mt-4 font-semibold shadow'>Showing Products {(currentPage*itemsPerPage)+1} to {(currentPage*itemsPerPage) + itemsPerPage} from {totalProducts} Results</h1>
 
 
 
@@ -307,7 +295,12 @@ const Products = () => {
             <nav aria-label="Page  navigation example">
               <ul className="inline-flex mt-6 ml-9 -space-x-px text-sm">
                 <li>
-                  <Link className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
+                  {
+                    currentPage === 0 
+                    ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
+                    : <Link onClick={() => setCurrentPage(currentPage-1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
+                  }
+                  
                 </li>
                   {
                     pageNumbers.map(page => <li key={page}>
@@ -315,7 +308,11 @@ const Products = () => {
                     </li>)
                   }
                 <li>
-                  <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                {
+                    currentPage+1 === totalPages 
+                    ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+                    : <Link onClick={() => setCurrentPage(currentPage+1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+                  }
                 </li>
               </ul>
             </nav>
