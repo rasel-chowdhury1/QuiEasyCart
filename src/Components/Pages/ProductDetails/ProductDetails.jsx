@@ -11,7 +11,10 @@ import img6 from '../../../assets/images/img-6.jpg'
 import img7 from '../../../assets/images/img-7.jpg'
 import img8 from '../../../assets/images/img-8.jpg'
 import { AiFillStar, AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
-const ProductDetails = () => {
+
+
+const ProductDetails = ({id}) => {
+  console.log("id is ",id)
   const [showingReviewForm, setShowingReviewForm] = useState(false)
 
   const handleShowingReviewForm = () => {

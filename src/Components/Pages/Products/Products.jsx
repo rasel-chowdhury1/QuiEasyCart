@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { AiFillStar, AiOutlineCaretDown, AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
+import {AiOutlineCaretDown } from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
 import { Link} from 'react-router-dom';
-import useTotalProuduct from '../../../CustomHook/useTotalProuduct';
-
+import './Products.css'
+import SingleProduct from '../SingleProduct/SingleProduct';
 
 const Products = () => {
   const [showingCategoryList, setShowingCategoryList] = useState(true)
@@ -13,9 +13,13 @@ const Products = () => {
   const [products, setProducts] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage, setItemPerPage] = useState(8);
-    const [totalProducts,loading] = useTotalProuduct();
-  
+  const [itemsPerPage, setItemPerPage] = useState(8);
+  // const [totalProducts,loading] = useTotalProuduct();
+  const [totalProducts,setTotalProducts] = useState(0)
+  const [search,setSearch] = useState('')
+  const [category, setCategory] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
     //const itemsPerPage = 10; //TODO: make it dynamic
     const totalPages = Math.ceil(totalProducts/itemsPerPage)
     
@@ -73,16 +77,22 @@ const Products = () => {
 
     useEffect( ()=>{
       async function fetchData() {
-          const response = await fetch(`http://localhost:3000/products?page=${currentPage}&limit=${itemsPerPage}`)
+          const response = await fetch(`http://localhost:3000/products?&category=${category}&page=${currentPage}&limit=${itemsPerPage}`)
 
           const data = await response.json();
-          setProducts(data);
+          console.log("loaded data",data)
+          console.log('loaded data length is ', data.len)
+          console.log('loaded data result is ', data.result)
+          setTotalProducts(data.len)
+          setProducts(data.result);
       }
       fetchData();
-  },[currentPage,itemsPerPage])
+  },[category,currentPage,itemsPerPage])
+
+
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto pro'>
       <div className="flex justify-center w-screen px-16 mt-6">
 
         <aside className="w-1/5 ...">
@@ -96,7 +106,8 @@ const Products = () => {
               <ul>
                 <li className='mt-2'>Best Products</li>
                 <li className='mt-2'>Cosmetics</li>
-                <li className='mt-2'>Beauty World</li>
+                <li onClick={() => setCategory('Clothes')} className='mt-2'>clothes</li>
+                <li onClick={() => setCategory('Electronics')} className='mt-2 '>Electronics Collection</li>
                 <li className='mt-2'>Offer Collection</li>
                 <li className='mt-2'>Mega Collection</li>
               </ul>
@@ -115,19 +126,19 @@ const Products = () => {
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>Below $50</p>
+                      <p  className='ml-3'>Below $500</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>$51 - $100</p>
+                      <p className='ml-3'>$500 - $2000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>$101 - $200</p>
+                      <p className='ml-3'>$2001 - $5000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
@@ -246,43 +257,7 @@ const Products = () => {
 
             <div className="flex flex-wrap mt-12 px-12 ">
 
-              {products.map(product => <div key={product._id} className='relative cart-body mx-2 shadow-xl gap-4 m-2 rounded-xl p-2'>
-                <Link to='/products/productDetails' className='img-body relative'>
-                  <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
-                  <img  src={product.images[0]} className='w-60 h-60' alt="" />
-                </Link>
-
-                <div className='mt-5'>
-                  <div className='flex justify-center'>
-                    <AiFillStar className="text-yellow-400 text-xl" />
-                    <AiFillStar className="text-yellow-400 text-xl" />
-                    <AiFillStar className="text-yellow-400 text-xl" />
-                    <AiFillStar className="text-yellow-400 text-xl" />
-                    <AiFillStar className="text-gray-400 text-xl" />
-                  </div>
-
-                  <h4 className='text-center text-gray-400 text-lg w-60 font-semibold'>{product.name}</h4>
-                  <div className="flex justify-center">
-                    <p className='text-2xl font-semibold text-yellow-400 leading-10'>${product.price}</p>
-                    <span className='line-through ml-2 text-red-700 text-gray-400 mt-3'>${product.price + 499}</span>
-                  </div>
-                </div>
-
-                <div className='flex overlay absolute -mt-36 left-0 w-full min-h-70 justify-center items-center bg-transparent' style={{ backgroundColor: "rgba(0,0,0,.2)" }}>
-                  <div className='bg-white rounded-full p-2 '>
-                    <AiOutlineShopping className="text-2xl hover:text-orange-400" />
-                  </div>
-                  <div className='bg-white ml-2 rounded-full p-2 '>
-                    <AiFillHeart className="text-2xl hover:text-orange-400" />
-                  </div>
-                  <div className='bg-white rounded-full p-2 ml-2'>
-                    <AiOutlineSync className="text-2xl hover:text-orange-400" />
-                  </div>
-                  <div className='bg-white rounded-full p-2 ml-2'>
-                    <AiOutlineSearch className="text-2xl hover:text-orange-400" />
-                  </div>
-                </div>
-              </div>)}
+              {products.map(pro=> <SingleProduct key={pro._id} product={pro}></SingleProduct>)}
 
             </div>
 
