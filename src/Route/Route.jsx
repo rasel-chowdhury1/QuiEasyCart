@@ -27,6 +27,12 @@ import Appearance from './../Components/AdminDashboard/Dashboard/Appearance';
 import AdminProducts from './../Components/AdminDashboard/Dashboard/AdminProducts';
 import Blogs from "../Components/AdminDashboard/Dashboard/Blogs";
 import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
+import ErrrorPage from "../Components/Pages/ErrorPage/ErrroPage";
+import Blogpage from './../Components/Pages/Blog_FrontEnd/Blogpage';
+import Blog_details from './../Components/Pages/Blog_FrontEnd/Blog_details';
+import Help_details from './../Components/Pages/Help_frontEnd/Help_details';
+import Helppage from './../Components/Pages/Help_frontEnd/Helppage';
+
 
 
   const router = createBrowserRouter([
@@ -40,7 +46,7 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
         },
         {
           path: "products",
-          element: <Products></Products>
+          element: <Products></Products>,
         },
         {
           path: "products/productDetails",
@@ -65,6 +71,22 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
         {
           path: "checkout",
           element: <Checkout></Checkout>
+        },
+        {
+          path: "blog",
+          element: <Blogpage></Blogpage>
+        },
+        {
+          path: "blogdetails",
+          element: <Blog_details></Blog_details>
+        },
+        {
+          path: "help",
+          element: <Helppage></Helppage>
+        },
+        {
+          path: "helpdetails",
+          element: <Help_details></Help_details>
         },
         
        
@@ -127,6 +149,10 @@ import AddProduct from "../Components/AdminDashboard/Dashboard/AddProduct";
           element: <Help></Help>
         },
       ]
+    },
+    {
+      path: '*',
+      element: <ErrrorPage></ErrrorPage>
     }
     
   ]);

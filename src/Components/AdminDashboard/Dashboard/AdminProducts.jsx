@@ -1,6 +1,5 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -8,83 +7,35 @@ import { Link } from 'react-router-dom';
 
 
 const AdminProducts = () => {
-
     
+    const [products, setProducts] = useState([]);
 
+    const [currentPage, setCurrentPage] = useState(0);
+      const [itemsPerPage, setItemPerPage] = useState(8);
+      const [totalProducts] = useTotalProuduct()
 
+  
+      //const itemsPerPage = 10; //TODO: make it dynamic
+      const totalPages = Math.ceil(totalProducts/itemsPerPage)
+    
+      
+      const pageNumbers = [];
+      for(let i=1; i<=totalPages; i++){
+          pageNumbers.push(i);
+      }
 
+      useEffect( ()=>{
+        async function fetchData() {
+            const response = await fetch(`http://localhost:3000/products?page=${currentPage}&limit=${itemsPerPage}`)
+  
+            const data = await response.json();
+            setProducts(data);
+        }
+        fetchData();
+    },[currentPage,totalPages])
 
-    // const onSubmit = async (data) => {
-    //     console.log(data.image.length);
-
-    //       const formData = new FormData();
-
-    //       // Append each image to formData
-    //     //   data.image.fileList.forEach((image, index) => {
-    //     //     formData.append(`image${index}`, image[0]);
-    //     //   });
-
-    //       for (let index = 0; index < data.image.length; index++) {
-    //         // const image = fileList[index];
-    //         console.log(data.image[index])
-    //         formData.append(`image${index}`, data.image[index]);
-
-
-    //     }
-
-
-
-    //         // Process the response and handle it accordingly
-    //         if (imgResponse.success) {
-    //           const imageUrls = imgResponse.data.image.map((img) => img.display_url);
-    //           const {name,category,size,price,brand,details} = data;
-    //           const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imageUrls}
-    //           console.log(newItem)
-    //         }
-    //       } 
-    //   };
-
-
-    // const onSubmit = data => {
-    //     console.log(data)
-    //     const formData = new FormData()
-
-    //     formData.append('image', data.image[0])
-
-    //     fetch(img_hosting_url, {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(res => res.json())
-    //     .then(imgResponse => {
-    //         if(imgResponse.success){
-    //             const imgURL = imgResponse.data.display_url;
-    //             const {name,category,size,price,brand,details,image} = data;
-    //             const newItem = {name,category,size,price: parseFloat(price),brand,details,image:imgURL}
-    //             console.log(newItem)
-    //         }
-    //     })
-    // };
-
-    // const onSubmit = data => {
-    //     console.log(data)
-    //     const formData = new FormData()
-    //     formData.append('image', data.image[0])
-
-    //     fetch(img_hosting_url, {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //     .then(res => res.json())
-    //     .then(imgResponse => {
-    //         if(imgResponse.success){
-    //             const imgURL = imgResponse.data.display_url;
-    //             const {name,category,recipe,price} = data;
-    //             const newItem = {name,price: parseFloat(price),category,recipe,image:imgURL}
-    //             console.log(newItem)
-    //         }
-    //     })
-    // };
+    console.log("current page - ",currentPage);
+    console.log("total page - ",totalPages);
 
     return (
         <div className=' w-full '>
@@ -164,146 +115,42 @@ const AdminProducts = () => {
                             <th> <button className='btn-ghost'>Action</button></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='mb-4'>
                         {/* row 1 */}
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src="https://daisyui.com//tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                        {
+                            products.map(product => <tr key={product._id}>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src={product.images[0]} alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">{product.name}</div>
+                                            <div className="text-sm opacity-50">{product.brand}</div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div className="font-bold">Hart Hagerty</div>
-                                        <div className="text-sm opacity-50">United States</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                Zemlak, Daniel and Leannon
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                            </td>
-                            <td>Admin</td>
-                            <th>
-                                <button className="btn btn-accent  p-2 m-2">details</button>
-                                <button className="btn btn-neutral px-4  py-2">Edit</button>
-                                <button className="btn btn-secondary  p2 m-2">Delete</button>
-                            </th>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src="https://daisyui.com//tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Brice Swyre</div>
-                                        <div className="text-sm opacity-50">China</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                Carroll Group
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-                            </td>
-                            <td>User</td>
-                            <th>
-                                <button className="btn btn-accent  p-2 m-2">details</button>
-                                <button className="btn btn-neutral px-4  py-2">Edit</button>
-                                <button className="btn btn-secondary  p2 m-2">Delete</button>
-                            </th>
-                        </tr>
-                        {/* row 3 */}
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src="https://daisyui.com//tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Marjy Ferencz</div>
-                                        <div className="text-sm opacity-50">Russia</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                Rowe-Schoen
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-                            </td>
-                            <td>User</td>
-                            <th>
-                                <button className="btn btn-accent  p-2 m-2">details</button>
-                                <button className="btn btn-neutral px-4  py-2">Edit</button>
-                                <button className="btn btn-secondary  p2 m-2">Delete</button>
-                            </th>
-                        </tr>
-                        {/* row 4 */}
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src="https://daisyui.com//tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Yancy Tear</div>
-                                        <div className="text-sm opacity-50">Brazil</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                Wyman-Ledner
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-                            </td>
-                            <td>Admin</td>
-                            <th>
-                                <button className="btn btn-accent  p-2 m-2">details</button>
-                                <button className="btn btn-neutral px-4  py-2">Edit</button>
-                                <button className="btn btn-secondary  p2 m-2">Delete</button>
-                            </th>
-                        </tr>
+                                </td>
+                                <td className="font-bold">
+                                    {product.category}
+                                </td>
+                                <td>{product.price}</td>
+                                <th>
+                                    <button className="btn btn-accent  p-2 m-2">details</button>
+                                    <button className="btn btn-neutral px-4  py-2">Edit</button>
+                                    <button className="btn btn-secondary  p2 m-2">Delete</button>
+                                </th>
+                            </tr>)
+                        }
                     </tbody>
                     {/* foot */}
-                    <tfoot>
-                        <tr >
-                            <th></th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
+                    
 
                 </table>
             </div>
@@ -312,16 +159,15 @@ const AdminProducts = () => {
 
             {/* Pagination */}
             <div className="join justify-items-center mx-10">
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="<< " />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="1" checked />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="5" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="6" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="7" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="8" />
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label=" >>" />
+                {currentPage === 0 ? <input className="join-item btn btn-square" type="radio" name="options" aria-label="<< "/>
+                : <input onClick={() => setCurrentPage(currentPage-1)} className="join-item btn btn-square" type="radio" name="options" aria-label="<< " /> }
+                {
+                 pageNumbers.map(page => <input onClick={() => setCurrentPage(page-1)} key={page} className="join-item btn btn-square" type="radio" name="options" aria-label={page} />)
+                }
+                {currentPage+1 == totalPages 
+                ? <input className="join-item btn btn-square" type="radio" name="options" aria-label=" >>" />
+                : <input onClick={() => setCurrentPage(currentPage+1)}className="join-item btn btn-square" type="radio" name="options" aria-label=" >>" />}
+                
             </div>
 
 

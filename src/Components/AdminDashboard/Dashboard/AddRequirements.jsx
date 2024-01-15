@@ -25,9 +25,14 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
     },[])
 
 
+    useEffect(() =>{
+      getCategories();
+      getSubCategories();
+      getBrands();
+      getSizes();
+    },[])
+ 
     const onSubmit = data => {
-
-  
       const category={
         category:data.category,
       }

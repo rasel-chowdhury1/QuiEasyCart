@@ -78,7 +78,7 @@ const TopNavbar = () => {
                                     <li><a>LookBook</a></li>
                                 </ul>
                             </li>
-                            <li><a>Blog</a></li>
+                            <li ><a href="/blog" >Blog</a></li>
                         </ul>
                     </div>
 
@@ -147,7 +147,7 @@ const TopNavbar = () => {
                                 </ul>
                             </details>
                         </li>
-                        <li><a>BLOG</a></li>
+                        <li><a href="/blog">BLOG</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end mx-2 px-4">
