@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {AiOutlineCaretDown } from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
 import { Link} from 'react-router-dom';
-import './Products.css'
+import './Products.css';
 import SingleProduct from '../SingleProduct/SingleProduct';
 
 const Products = () => {
@@ -15,7 +15,7 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemPerPage] = useState(8);
   // const [totalProducts,loading] = useTotalProuduct();
-  const [totalProducts,setTotalProducts] = useState(0)
+  const [totalProducts,setTotalProducts] = useState(0);
   const [search,setSearch] = useState('')
   const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');

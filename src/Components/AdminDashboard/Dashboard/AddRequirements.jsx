@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React,{useEffect} from 'react';
 import { useForm } from "react-hook-form";
 import Modal from 'react-modal';
 
@@ -15,7 +15,15 @@ const customStyles = {
 };
 const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
                         getBrands,getSizes,setIsOpen,modalIsOpen,getCategories}) => {
-    const { register, handleSubmit,reset, watch, formState: { errors } } = useForm();
+    const { register,reset, handleSubmit,watch, formState: { errors } } = useForm();
+
+    useEffect(()=>{
+      getCategories();
+      getSubCategories();
+      getBrands();
+      getSizes();
+    },[])
+
 
     useEffect(() =>{
       getCategories();
@@ -131,8 +139,7 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
         getSubCategories();
         getBrands();
         getSizes();
-
-        reset()
+        reset();
     };
 
     function closeModal() {
