@@ -3,12 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faCog, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 
 
 const TopNavbar = () => {
     const { user, loading, logout } = useContext(AuthContext)
     const isAdmin = true;
+
+    
+
+    
+    
 
     return (
         <div className='shadow-xl py-2 my-2'>
@@ -154,9 +160,7 @@ const TopNavbar = () => {
                 </div>
                 <div className="navbar-end mx-2 px-4">
 
-                    <div className="form-control">
-                        <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-                    </div>
+                
                     <Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='px-3' /></Link>
 
                     {/* Profile section on main navbar */}

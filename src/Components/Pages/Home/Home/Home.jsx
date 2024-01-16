@@ -8,6 +8,7 @@ import BestOffer from '../BestOffer/BestOffer';
 import Blog from '../Blog/Blog';
 import Newsletter from '../Newsletter/Newsletter';
 import CategoryLogo from '../CategoryLogo/CategoryLogo';
+import UserReview from '../UserReview/UserReview';
 
 const Home = () => {
     return (
@@ -18,6 +19,7 @@ const Home = () => {
             <BestOffer></BestOffer>
             <ParallexSection></ParallexSection>
             <SpecialProduct ></SpecialProduct>
+            <UserReview></UserReview>
             <Blog />
             <Newsletter />
         </div>

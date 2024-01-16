@@ -13,6 +13,7 @@ const AdminProducts = () => {
 
     const [currentPage, setCurrentPage] = useState(0);
       const [itemsPerPage, setItemPerPage] = useState(8);
+      const [totalProducts, setTotalProducts] = useState(0)
     //   const [totalProducts] = useTotalProuduct()
 
         const [totalProuduct, setTotalProduct] = useState(0)
@@ -22,18 +23,18 @@ const AdminProducts = () => {
     
       
       const pageNumbers = [];
-      for(let i=1; i<=totalPages; i++){
+      for(let i=1; i<=totalPages; i++){git 
           pageNumbers.push(i);
       }
 
       useEffect( ()=>{
         async function fetchData() {
             const response = await fetch(`http://localhost:3000/products?category=${''}&page=${currentPage}&limit=${itemsPerPage}`)
-            
+  
             const data = await response.json();
-            console.log("useeffect", data)
+            console.log(data)
             setProducts(data.result);
-            setTotalProduct(data.len)
+            setTotalProducts(data.len)
         }
         fetchData();
     },[currentPage,totalPages])
