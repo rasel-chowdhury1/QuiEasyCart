@@ -1,6 +1,4 @@
-import {
-    createBrowserRouter,
-  } from "react-router-dom";
+import {createBrowserRouter, } from "react-router-dom";
 import Main from "../Layout/Main";
 import Login from "../Components/Accounts/Login";
 import Register from "../Components/Accounts/Register";
@@ -32,6 +30,12 @@ import Blogpage from './../Components/Pages/Blog_FrontEnd/Blogpage';
 import Blog_details from './../Components/Pages/Blog_FrontEnd/Blog_details';
 import Help_details from './../Components/Pages/Help_frontEnd/Help_details';
 import Helppage from './../Components/Pages/Help_frontEnd/Helppage';
+import EditBlog from "../Components/AdminDashboard/Dashboard/EditBlog";
+import AdminCategoryList from "../Components/AdminDashboard/Dashboard/AdminCategoryList";
+import About_US from "../Components/Pages/About/About_US";
+import Contact_US from "../Components/Pages/Contact/Contact_US";
+import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
+
 
 
 
@@ -77,8 +81,14 @@ import Helppage from './../Components/Pages/Help_frontEnd/Helppage';
           element: <Blogpage></Blogpage>
         },
         {
-          path: "blogdetails",
-          element: <Blog_details></Blog_details>
+          path: "blogdetails/:id",
+          element: <Blog_details></Blog_details>, 
+          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+        },
+        {
+          path: "updateblog/:id",
+          element: <EditBlog></EditBlog>, 
+          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
         },
         {
           path: "help",
@@ -87,6 +97,21 @@ import Helppage from './../Components/Pages/Help_frontEnd/Helppage';
         {
           path: "helpdetails",
           element: <Help_details></Help_details>
+        },
+        
+        {
+          path: "about",
+          element: <About_US></About_US>
+        },
+        
+        {
+          path: "contact",
+          element: <Contact_US></Contact_US>
+        },
+        
+        {
+          path: "faq",
+          element: <Faq></Faq>
         },
         
        
@@ -111,6 +136,10 @@ import Helppage from './../Components/Pages/Help_frontEnd/Helppage';
         {
           path: 'admin/product/admin/addProduct',
           element: <AddProduct></AddProduct>
+        },
+        {
+          path: 'admin/product/admin/categorylist',
+          element: <AdminCategoryList></AdminCategoryList>
         },
         {
           path: 'admin/orders',
