@@ -23,7 +23,7 @@ const AdminProducts = () => {
     
       
       const pageNumbers = [];
-      for(let i=1; i<=totalPages; i++){
+      for(let i=1; i<=totalPages; i++){git 
           pageNumbers.push(i);
       }
 

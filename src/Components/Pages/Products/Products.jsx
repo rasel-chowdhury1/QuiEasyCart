@@ -16,16 +16,10 @@ const Products = () => {
   const [itemsPerPage, setItemPerPage] = useState(8);
   const [categoryList, setCategoryList] = useState([])
   // const [totalProducts,loading] = useTotalProuduct();
-<<<<<<< HEAD
   const [searchInput, setSearchInput] = useState('');
     const [results, setResults] = useState([]);
     const [error, setError] = useState(null);
-
-  const [totalProducts,setTotalProducts] = useState(0)
-=======
   const [totalProducts,setTotalProducts] = useState(0);
-  const [search,setSearch] = useState('')
->>>>>>> e0bc062da029e2405ec3ed07cecbb2dc04d0e409
   const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
