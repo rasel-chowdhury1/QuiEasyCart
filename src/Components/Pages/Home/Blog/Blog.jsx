@@ -21,18 +21,18 @@ const Blog = () => {
           {
             blogs.map(blog => 
               < div key={blog._id} className="card w-100 bg-base-100 shadow-xl mr-8">
-          <figure><img className="w-full h-md" src={blog.image} alt="Shoes" /></figure>
+          <figure><img className="w-full max-h-80 shadow-lg bg-blue-600" src={blog.image} alt="Shoes" /></figure>
           <div className="card-body">
             <h2 className="card-title">
              {blog.title}
               <div className="badge badge-secondary">NEW</div>
             </h2>
             <p>{blog.content}</p>
-            <Link to={`/blogdetails/${blog._id}`} className="btn btn-accent  p-2 m-2" >View Blog</Link>
             <div className="card-actions justify-end">
               <div className="badge badge-outline">Fashion</div>
               <div className="badge badge-outline">Products</div>
             </div>
+            <Link to={`/blogdetails/${blog._id}`} className="btn btn-accent  p-2 m-2" >View Blog</Link>
           </div>
         </div>
 
