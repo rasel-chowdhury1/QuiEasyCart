@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useTotalProuduct from './../../../CustomHook/useTotalProducts';
 
 
 
@@ -12,11 +13,12 @@ const AdminProducts = () => {
 
     const [currentPage, setCurrentPage] = useState(0);
       const [itemsPerPage, setItemPerPage] = useState(8);
-      const [totalProducts] = useTotalProuduct()
+    //   const [totalProducts] = useTotalProuduct()
 
+        const [totalProuduct, setTotalProduct] = useState(0)
   
       //const itemsPerPage = 10; //TODO: make it dynamic
-      const totalPages = Math.ceil(totalProducts/itemsPerPage)
+      const totalPages = Math.ceil(totalProuduct/itemsPerPage)
     
       
       const pageNumbers = [];
@@ -26,14 +28,16 @@ const AdminProducts = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`http://localhost:3000/products?page=${currentPage}&limit=${itemsPerPage}`)
-  
+            const response = await fetch(`http://localhost:3000/products?category=${''}&page=${currentPage}&limit=${itemsPerPage}`)
+            
             const data = await response.json();
-            setProducts(data);
+            console.log("useeffect", data)
+            setProducts(data.result);
+            setTotalProduct(data.len)
         }
         fetchData();
     },[currentPage,totalPages])
-
+    console.log(products)
     console.log("current page - ",currentPage);
     console.log("total page - ",totalPages);
 
@@ -79,16 +83,16 @@ const AdminProducts = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>All Products</a></li>
-                            <li><a>Category</a></li>
+                        <li><Link to='admin/admin/product'>All Products</Link></li>
+                        <li><Link to='admin/admin/product/admin/categorylist'>Category</Link></li>
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">Products</a>
                 </div>
                 <div className="navbar-center hidden lg:flex text-2xl">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>All Products</a></li>
-                        <li><a>Category</a></li>
+                        <li><Link to='admin/admin/product'>All Products</Link></li>
+                        <li><Link to='admin/admin/product/admin/categorylist'>Category</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
