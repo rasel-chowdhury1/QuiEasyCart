@@ -35,6 +35,7 @@ import AdminCategoryList from "../Components/AdminDashboard/Dashboard/AdminCateg
 import About_US from "../Components/Pages/About/About_US";
 import Contact_US from "../Components/Pages/Contact/Contact_US";
 import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
+import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
 
 
 
@@ -176,6 +177,14 @@ import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
         {
           path: 'admin/help',
           element: <Help></Help>
+        },
+        {
+          path: 'admin/faq',
+          element: <Help></Help>
+        },
+        {
+          path: 'admin/contact',
+          element: <AdminContact></AdminContact>
         },
       ]
     },
