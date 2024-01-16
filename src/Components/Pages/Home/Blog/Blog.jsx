@@ -16,7 +16,7 @@ const Blog = () => {
     <>
       <div className="container mx-auto mt-20">
         <h2 className=" text-center	text-4xl">Latest Blogs</h2>
-        <p className="text-center	pb-6">Lorem ipsum dolor sit amet</p>
+        <p className="text-center	pb-6">Check our latest blog here.....</p>
         <div className="flex">
           {
             blogs.map(blog => 
