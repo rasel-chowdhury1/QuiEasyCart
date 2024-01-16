@@ -14,12 +14,16 @@ const Products = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemPerPage] = useState(8);
+  const [categoryList, setCategoryList] = useState([])
   // const [totalProducts,loading] = useTotalProuduct();
+  const [searchInput, setSearchInput] = useState('');
+    const [results, setResults] = useState([]);
+    const [error, setError] = useState(null);
+
   const [totalProducts,setTotalProducts] = useState(0)
-  const [search,setSearch] = useState('')
   const [category, setCategory] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(Infinity);
     //const itemsPerPage = 10; //TODO: make it dynamic
     const totalPages = Math.ceil(totalProducts/itemsPerPage)
     
@@ -77,7 +81,7 @@ const Products = () => {
 
     useEffect( ()=>{
       async function fetchData() {
-          const response = await fetch(`http://localhost:3000/products?&category=${category}&page=${currentPage}&limit=${itemsPerPage}`)
+          const response = await fetch(`http://localhost:3000/products?&category=${category}&min=${minPrice}&max=${maxPrice}&page=${currentPage}&limit=${itemsPerPage}`)
 
           const data = await response.json();
           console.log("loaded data",data)
@@ -87,7 +91,30 @@ const Products = () => {
           setProducts(data.result);
       }
       fetchData();
-  },[category,currentPage,itemsPerPage])
+  },[category,minPrice,maxPrice,currentPage,itemsPerPage])
+
+  useEffect(() =>{
+    fetch('http://localhost:3000/allCategories')
+    .then(res => res.json())
+    .then(data => setCategoryList(data))
+  },[])
+
+  console.log('category list is - ',categoryList)
+
+  const search = async () => {
+    try {
+      setProducts([])
+      const response = await fetch(`http://localhost:3000/api/search?query=${encodeURIComponent(searchInput)}`);
+      const data = await response.json();
+
+      setProducts(data);
+      setError(null);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setResults([]);
+      setError('Error fetching data.');
+    }
+  };
 
 
 
@@ -96,6 +123,7 @@ const Products = () => {
       <div className="flex justify-center w-screen px-16 mt-6">
 
         <aside className="w-1/5 ...">
+          
           <div className="category-card w-full px-6 py-9 max-w-sm bg-white border border-gray-200 rounded shadow">
             <div className="flex justify-between">
               <h1 className='font-semibold'>CATEGORY</h1>
@@ -103,13 +131,12 @@ const Products = () => {
             </div>
 
             <div className="mt-6" id="category-list">
+              
               <ul>
-                <li className='mt-2'>Best Products</li>
-                <li className='mt-2'>Cosmetics</li>
-                <li onClick={() => setCategory('Clothes')} className='mt-2'>clothes</li>
-                <li onClick={() => setCategory('Electronics')} className='mt-2 '>Electronics Collection</li>
-                <li className='mt-2'>Offer Collection</li>
-                <li className='mt-2'>Mega Collection</li>
+                <li onClick={() => {setCategory('');setMinPrice(0);setMaxPrice(Infinity);}} className='mt-2'>All Products</li>
+                {
+                  categoryList.map(cat => <li onClick={() => setCategory(cat.category)} className='mt-2'>{cat.category}</li>)
+                }
               </ul>
             </div>
           </div>
@@ -126,31 +153,31 @@ const Products = () => {
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p  className='ml-3'>Below $500</p>
+                      <p onClick={() => {setMinPrice(0);setMaxPrice(500)}} className='ml-3'>Below $500</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>$500 - $2000</p>
+                      <p onClick={() => {setMinPrice(500);setMaxPrice(2000)}} className='ml-3'>$500 - $2000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>$2001 - $5000</p>
+                      <p onClick={() => {setMinPrice(2001);setMaxPrice(5000)}} className='ml-3'>$2001 - $5000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>$201 - $300</p>
+                      <p onClick={() => {setMinPrice(5001);setMaxPrice(10000)}} className='ml-3'>$5001 - $10000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>Above $400</p>
+                      <p onClick={() => {setMinPrice(10001);setMaxPrice(Infinity)}}className='ml-3'>Above $10001</p>
                     </div>
                   </li>
                 </ul>
@@ -242,9 +269,23 @@ const Products = () => {
 
 
 
-
+        
         {/* Main product section  */}
         <div className="w-4/5 ...">
+          {/** searchbar section */}
+          <div className="flex w-3/4 my-4 mx-auto">
+                      <div>
+                          <div>
+                          <input type='text' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} className="input input-bordered  w-[600px]" placeholder="Search product "/>
+          
+                          </div>
+                      </div>
+                      <div>
+                          <button onClick={search} className="btn w-[200px] ">Search</button>
+                      </div>
+          </div>
+          
+          
           {/* Product banner section  */}
           <div className="product-banner px-16 ">
             <img src={productBanner} className='w-' alt="" />
@@ -256,7 +297,7 @@ const Products = () => {
 
 
             <div className="flex flex-wrap mt-12 px-12 ">
-
+              
               {products.map(pro=> <SingleProduct key={pro._id} product={pro}></SingleProduct>)}
 
             </div>

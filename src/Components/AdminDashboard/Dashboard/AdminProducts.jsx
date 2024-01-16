@@ -12,7 +12,7 @@ const AdminProducts = () => {
 
     const [currentPage, setCurrentPage] = useState(0);
       const [itemsPerPage, setItemPerPage] = useState(8);
-      const [totalProducts] = useTotalProuduct()
+      const [totalProducts, setTotalProducts] = useState(0)
 
   
       //const itemsPerPage = 10; //TODO: make it dynamic
@@ -26,10 +26,12 @@ const AdminProducts = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`http://localhost:3000/products?page=${currentPage}&limit=${itemsPerPage}`)
+            const response = await fetch(`http://localhost:3000/products?category=${''}&page=${currentPage}&limit=${itemsPerPage}`)
   
             const data = await response.json();
-            setProducts(data);
+            console.log(data)
+            setProducts(data.result);
+            setTotalProducts(data.len)
         }
         fetchData();
     },[currentPage,totalPages])
