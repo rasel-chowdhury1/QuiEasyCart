@@ -12,7 +12,7 @@ const AdminProducts = () => {
 
     const [currentPage, setCurrentPage] = useState(0);
       const [itemsPerPage, setItemPerPage] = useState(8);
-      const [totalProducts] = useTotalProuduct()
+    //   const [totalProducts] = useTotalProuduct()
 
   
       //const itemsPerPage = 10; //TODO: make it dynamic

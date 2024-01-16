@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {AiOutlineCaretDown } from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
 import { Link} from 'react-router-dom';
-import './Products.css'
+import './Products.css';
 import SingleProduct from '../SingleProduct/SingleProduct';
 
 const Products = () => {
