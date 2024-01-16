@@ -10,6 +10,7 @@ import img5 from '../../../assets/images/img-5.jpg'
 import img6 from '../../../assets/images/img-6.jpg'
 import img7 from '../../../assets/images/img-7.jpg'
 import img8 from '../../../assets/images/img-8.jpg'
+import { useLoaderData } from 'react-router-dom';
 
 
 const settings = {
@@ -33,6 +34,8 @@ const relatedSettings = {
 
 
 const Blog_details = () => {
+    const blogdetailsdata = useLoaderData()
+    console.log(blogdetailsdata)
     return (
         <div className="blog-page mx-20 flex p-2 gap-4">
 
@@ -192,65 +195,17 @@ const Blog_details = () => {
                     {/* Display each blog post */}
 
 
-                    <div className="hero h-30vh rounded" style={{ backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)' }}>
+                    <div className="hero h-30vh rounded" style={{ backgroundImage: `url(${blogdetailsdata.image})` }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-center text-neutral-content">
-                            <div className="max-w-md">
-                                <h1 className="mb-5 p-20 text-5xl font-bold">Hello there</h1>
+                            <div className="max-w-full">
+                                <h1 className="mb-5 p-20 text-5xl font-bold">{blogdetailsdata.title}</h1>
 
                             </div>
                         </div>
                     </div>
                     <div>
-                        <h1>10 Healthy Snacks for Busy Developers</h1>
-                        <p>
-                            In the fast-paced world of coding, it's essential to stay energized and focused.
-                            Here are 10 delicious and nutritious snacks that are perfect for busy developers.
-                        </p>
-                        <p>
-                            <strong>1. Mixed Nuts</strong><br />
-                            A handful of mixed nuts provides protein, healthy fats, and essential nutrients.
-                        </p>
-                        <p>
-                            <strong>2. Greek Yogurt with Berries</strong><br />
-                            Greek yogurt topped with fresh berries is a refreshing and protein-packed snack.
-                        </p>
-                        <p>
-                            <strong>3. Hummus and Veggies</strong><br />
-                            Dip assorted veggies like carrots, cucumbers, and bell peppers in hummus for a tasty treat.
-                        </p>
-                        <p>
-                            <strong>4. Avocado Toast</strong><br />
-                            Whole-grain toast with creamy avocado slices makes a satisfying snack loaded with healthy fats.
-                        </p>
-                        <p>
-                            <strong>5. Apple Slices with Almond Butter</strong><br />
-                            Apples paired with almond butter create a delicious blend of sweetness and protein.
-                        </p>
-                        <p>
-                            <strong>6. Rice Cakes with Peanut Butter</strong><br />
-                            Spread peanut butter over rice cakes for a quick and energizing snack.
-                        </p>
-                        <p>
-                            <strong>7. Trail Mix</strong><br />
-                            A homemade trail mix with nuts, dried fruits, and dark chocolate chips is a convenient on-the-go snack.
-                        </p>
-                        <p>
-                            <strong>8. Cottage Cheese with Pineapple</strong><br />
-                            Enjoy a serving of cottage cheese topped with pineapple chunks for a protein-rich snack.
-                        </p>
-                        <p>
-                            <strong>9. Popcorn</strong><br />
-                            Air-popped popcorn is a low-calorie snack that's perfect for satisfying cravings.
-                        </p>
-                        <p>
-                            <strong>10. Granola Bars</strong><br />
-                            Choose granola bars made with whole grains, nuts, and seeds for a healthy snack option.
-                        </p>
-                        <p>
-                            Incorporating these nutritious snacks into your routine can help keep your energy levels up
-                            and enhance focus during long coding sessions.
-                        </p>
+                        <p>{blogdetailsdata.content}</p>
                     </div>
 
 

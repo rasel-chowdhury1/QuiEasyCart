@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form"
-import { json } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
@@ -14,57 +14,92 @@ const Blogs = () => {
         handleSubmit,
         reset,
         formState: { errors },
-      } = useForm()
+    } = useForm()
 
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
 
-    const onSubmit = (data) => { 
+    const onSubmit = (data) => {
         console.log(data)
         const formData = new FormData()
         // console.log(data.image[0])
-        formData.append('image', data.image[0] )
+        formData.append('image', data.image[0])
         fetch(img_hosting_url, {
-            method : 'POST', 
-            body : formData
+            method: 'POST',
+            body: formData
         })
-        .then(res => res.json())
-        .then(image => {
-            if (image.success){
-                console.log(data)
-                const blogImageUrl = image.data.url
-                const { title, content, keyword} = data
-                const newBlog = {title, content, image:blogImageUrl, keyword}
-                console.log(newBlog)
-                fetch('http://localhost:3000/addBlog', {
-                    method : 'POST',
-                    headers : { 
-                        'Content-Type': 'application/json'
-                    },
-                    body : JSON.stringify(newBlog)                    
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.insertedId){
-                        reset()
-                        Swal.fire({
-                            title: "Good job!",
-                            text: "Blog Added Successfully!",
-                            icon: "success"
-                          });
+            .then(res => res.json())
+            .then(image => {
+                if (image.success) {
+                    console.log(data)
+                    const blogImageUrl = image.data.url
+                    const { title, content, keyword } = data
+                    const newBlog = { title, content, image: blogImageUrl, keyword }
+                    console.log(newBlog)
+                    fetch('http://localhost:3000/addBlog', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newBlog)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                reset()
+                                Swal.fire({
+                                    title: "Good job!",
+                                    text: "Blog Added Successfully!",
+                                    icon: "success"
+                                });
 
-                    }
-                })
-            }
+                            }
+                        })
+                }
 
-        })
+            })
     }
-    
-    useEffect( () =>{
+    const handleBlogDelete = (id) => {
+        console.log(id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Your blog will be deleted",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/deleteBlog/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount == 1){
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Blog has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                
+            }
+        });
+
+
+    }
+
+
+    useEffect(() => {
         fetch("http://localhost:3000/allBlogs")
-        .then(res => res.json())
-        .then(data => setAllblog(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setAllblog(data))
+    }, [])
+
+
+
 
     return (
         <div className='w-full'>
@@ -147,9 +182,9 @@ const Blogs = () => {
                                             </td>
                                             <td>Admin</td>
                                             <th>
-                                                <button className="btn btn-accent  p-2 m-2">View Blog</button>
-                                                <button className="btn btn-neutral px-4  py-2">Edit</button>
-                                                <button className="btn btn-secondary  p2 m-2">Delete</button>
+                                                <Link to={`/blogdetails/${blog._id}`} className="btn btn-accent  p-2 m-2" >View Blog</Link>
+                                                <Link to={`/updateblog/${blog._id}`} className="btn btn-neutral px-4  py-2" >Edit</Link>
+                                                <button onClick={() => handleBlogDelete(blog._id)} className="btn btn-secondary  p2 m-2">Delete</button>
                                             </th>
                                         </tr>)
                                     }
@@ -427,29 +462,29 @@ const Blogs = () => {
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="mb-4">
                                     <label htmlFor="title" className="block text-gray-700 font-semibold mb-2">Title</label>
-                                    <input type="text" {...register("title", { required: true })}  className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article title" />
+                                    <input type="text" {...register("title", { required: true })} className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article title" />
                                     {errors.title && <span className='text-red-400'>Title is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="content" className="block text-gray-700 font-semibold mb-2">Content</label>
-                                    <textarea  {...register("content", { required: true })}  className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article content"></textarea>
+                                    <textarea  {...register("content", { required: true })} className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter article content"></textarea>
                                     {errors.content && <span className='text-red-400'>Write your content here. Its cant be blank</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="image" className="block text-gray-700 font-semibold mb-2">Upload Image</label>
-                                    <input type="file" {...register("image", { required: true })}  className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" />
+                                    <input type="file" {...register("image", { required: true })} className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" />
                                     {errors.image && <span className='text-red-400'>Image is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="keywords" className="block text-gray-700 font-semibold mb-2">Keywords</label>
-                                    <input type="text" {...register("keyword", )}    className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter keywords (separated by commas)" />
+                                    <input type="text" {...register("keyword",)} className="w-full border-2 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" placeholder="Enter keywords (separated by commas)" />
                                     {errors.keyword && <span className='text-red-400'>Keyword is required</span>}
                                 </div>
                                 <div className="flex justify-between mb-4">
                                     <button type="button" className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out">Draft</button>
-                                    <input  type="submit" value="Publish" className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out" />                                
+                                    <input type="submit" value="Publish" className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out" />
                                 </div>
-                               
+
                             </form>
                         </div>
 
