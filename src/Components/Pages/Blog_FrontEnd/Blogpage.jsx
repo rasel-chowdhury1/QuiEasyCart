@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Assuming you have Axios for making API requests
+import { Link } from 'react-router-dom';
 
 
 const Blogpage = () => {
@@ -18,16 +19,20 @@ const Blogpage = () => {
     };
 
     useEffect(() => {
-        fetchBlogs(); // Fetch blogs when the component mounts
+        fetch("http://localhost:3000/allBlogs") 
+            .then(res => res.json())
+            .then(data => setBlogs(data))
+           
     }, []);
 
-    // Pagination logic
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
 
-    // Function to change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // // Pagination logic
+    // const indexOfLastPost = currentPage * postsPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    // const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
+
+    // // Function to change page
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className="blog-page mx-20 flex p-2 gap-4">
@@ -186,80 +191,22 @@ const Blogpage = () => {
                 <h1 className='text-3xl p-2'>Blog Page</h1>
                 <div className="blog-posts ">
                     {/* Display each blog post */}
-
-                    <div className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
+                    {
+                        blogs.map(blog => 
+                        <div key={blog._id} className="card card-side bg-base-100 shadow-xl m-4 p-4">
+                        <figure ><img className='rounded-xl' src={blog.image} alt="Movie" /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">New movie is released!</h2>
-                            <p>Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.CClick the button to watch on Jetflix app.Click the button to watch on Jetflix app.</p>
+                            <h2 className="card-title">{blog.title}</h2>
+                            <p>{blog.content}</p>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary"><a href="/blogdetails">Read More</a></button>
+                            <Link to={`/blogdetails/${blog._id}`} className="btn btn-accent  p-2 m-2" >View Blog</Link>
                             </div>
                         </div>
                     </div>
+                    )
+                    }
 
-                    <div className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">New movie is released!</h2>
-                            <p>Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.CClick the button to watch on Jetflix app.Click the button to watch on Jetflix app.</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary"><a href="/blogdetails">Read More</a></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">New movie is released!</h2>
-                            <p>Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.CClick the button to watch on Jetflix app.Click the button to watch on Jetflix app.</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary"><a href="/blogdetails">Read More</a></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">New movie is released!</h2>
-                            <p>Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.CClick the button to watch on Jetflix app.Click the button to watch on Jetflix app.</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary"><a href="/blogdetails">Read More</a></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">New movie is released!</h2>
-                            <p>Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.CClick the button to watch on Jetflix app.Click the button to watch on Jetflix app.</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary"><a href="/blogdetails">Read More</a></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">New movie is released!</h2>
-                            <p>Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.Click the button to watch on Jetflix app.CClick the button to watch on Jetflix app.Click the button to watch on Jetflix app.</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary"><a href="/blogdetails">Read More</a></button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
+                    
                 </div>
 
 

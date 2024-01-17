@@ -17,6 +17,8 @@ const Admin = () => {
         { id: 10, label: '🏗️ Appearance', link: 'admin/appearance' },
         { id: 11, label: '⚙️ Settings', link: 'admin/settings' },
         { id: 12, label: '🎓 Help', link: 'admin/help' },
+        { id: 13, label: '🛍️ FAQ', link: 'admin/faq' },
+        { id: 14, label: '🚹 Contact', link: 'admin/contact' },
         // Add more menu items as needed
     ];
     return (

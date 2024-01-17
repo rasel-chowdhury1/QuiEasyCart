@@ -29,12 +29,12 @@ const AdminProducts = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`http://localhost:3000/products?category=${''}&page=${currentPage}&limit=${itemsPerPage}`)
+            const response = await fetch(`http://localhost:3000/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
   
             const data = await response.json();
             console.log(data)
             setProducts(data.result);
-            setTotalProducts(data.len)
+            setTotalProducts(data.productlen)
         }
         fetchData();
     },[currentPage,totalPages])
