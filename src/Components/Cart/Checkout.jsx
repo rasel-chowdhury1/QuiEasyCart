@@ -1,7 +1,13 @@
 import React from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { useLocation } from 'react-router-dom';
 
 const Checkout = () => {
+    
+  const data = useLocation()
+    console.log(data)
+    console.log('this data of checkout ',data.state.cart)
+    console.log('this totalPrice of checkout ',data.state.total)
     return (
         <div>
              <div className="max-w-3xl mx-auto mt-8 p-4 flex">
@@ -124,134 +130,37 @@ const Checkout = () => {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  <tr>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src="https://placekitten.com/100/100" alt="Avatar Tailwind CSS Component" />
+                  
+                  {
+                    data.state.cart.map(dt => <tr>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle w-12 h-12">
+                              <img src={dt.images[0]} alt="Avatar Tailwind CSS Component" />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-bold">{dt.name}</div>
+                            <div className="text-sm opacity-50">{dt.category}</div>
                           </div>
                         </div>
-                        <div>
-                          <div className="font-bold">Hart Hagerty</div>
-                          <div className="text-sm opacity-50">United States</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      $100
-                    </td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">$469.99</button>
-                    </th>
-                  </tr>
-
-                  {/* row 2 */}
-                  <tr>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src="https://placekitten.com/100/100" alt="Avatar Tailwind CSS Component" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">Hart Hagerty</div>
-                          <div className="text-sm opacity-50">United States</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      $100
-                    </td>
-                    
-                    <th>
-                      <button className="btn btn-ghost btn-xs">$469.99</button>
-                    </th>
-                  </tr>
-
-                  {/* row 3 */}
-                  <tr>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src="https://placekitten.com/100/100" alt="Avatar Tailwind CSS Component" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">Hart Hagerty</div>
-                          <div className="text-sm opacity-50">United States</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      $100
-                    </td>
-                    
-                    <th>
-                      <button className="btn btn-ghost btn-xs">$469.99</button>
-                    </th>
-                  </tr>
-
-                  {/* row 4 */}
-                  <tr>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src="https://placekitten.com/100/100" alt="Avatar Tailwind CSS Component" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">Hart Hagerty</div>
-                          <div className="text-sm opacity-50">United States</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      $100
-                    </td>
-                    
-                    <th>
-                      <button className="btn btn-ghost btn-xs">$469.99</button>
-                    </th>
-                  </tr>
-
-                  {/* row 5 */}
-                  <tr>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src="https://placekitten.com/100/100" alt="Avatar Tailwind CSS Component" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">Hart Hagerty</div>
-                          <div className="text-sm opacity-50">United States</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      $100
-                    </td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">$469.99</button>
-                    </th>
-                  </tr>
+                      </td>
+                      <td>
+                        ${dt.price}
+                      </td>
+                      <th>
+                        <button className="btn btn-ghost btn-xs">{dt.quantity}</button>
+                      </th>
+                    </tr>)
+                  }
                 </tbody>
-                {/* foot */}
-                <tfoot>
-                <tr>
-                    <th>Product Details</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
-                
               </table>
+              <div>
+              <div className="divider divider-accent w-[400px]"></div>
+              <h4 className='py-3 text-xl font-bold'>Grand Total: ${data.state.total.toFixed(2)}</h4>
+              </div>
+              
             </div>
             </div>
             </div>
