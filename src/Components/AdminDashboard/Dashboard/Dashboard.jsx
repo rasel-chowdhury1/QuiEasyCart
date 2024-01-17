@@ -37,6 +37,20 @@ const Dashboard = () => {
     // console.log("current page - ",currentPage);
     // console.log("total page - ",totalPages);
 
+    const [users, setUsers] = useState([])
+    const getUser = () => {
+        fetch("http://localhost:3000/allUsers")
+            .then(res => res.json())
+            .then(data => setUsers(data))
+    }
+    console.log(users)
+
+
+
+useEffect(() => {
+    getUser()
+}, []);
+
     return (
         <div>
 
@@ -49,9 +63,9 @@ const Dashboard = () => {
                         <div className="card-body">
                             <h2 className=" text-3xl text-center">Total User</h2>
                             <hr className='' />
-                            <p className=" text-5xl text-center">260600</p>
+                            <p className=" text-5xl text-center">{users.length + 2543}</p>
                             <div className="card-actions justify-center py-4 m-2">
-                                <button className="btn btn-primary ">View Details</button>
+                                <Link to="/admin/admin/user" className="btn btn-primary ">View Details</Link>
                             </div>
                         </div>
                     </div>
