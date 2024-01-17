@@ -36,6 +36,7 @@ import About_US from "../Components/Pages/About/About_US";
 import Contact_US from "../Components/Pages/Contact/Contact_US";
 import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
 import WishList from "../Components/Pages/WishList/WishList";
+import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
 
 
 
@@ -181,6 +182,14 @@ import WishList from "../Components/Pages/WishList/WishList";
         {
           path: 'admin/help',
           element: <Help></Help>
+        },
+        {
+          path: 'admin/faq',
+          element: <Help></Help>
+        },
+        {
+          path: 'admin/contact',
+          element: <AdminContact></AdminContact>
         },
       ]
     },

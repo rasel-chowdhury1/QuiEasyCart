@@ -11,13 +11,13 @@ const TopNavbar = () => {
     const { user, loading, logout } = useContext(AuthContext)
     const isAdmin = true;
 
-    
 
-    
-    
+
+
+
 
     return (
-        <div className='shadow-xl py-2 my-2'>
+        <div className='shadow-xl py-2 '>
 
             {/* Top Navbar */}
             <div className="navbar text-lg  bg-black bg-opacity-10 px-10 lg:px-20 ">
@@ -27,17 +27,17 @@ const TopNavbar = () => {
                     <p className='hidden sm:inline-block'> CALL US: 123-456-7890</p>
                 </div>
 
-                
+
 
                 <div className="navbar-end ">
                     <a href="/" ><p className='me-3'>❤️Wishlist</p></a>
 
-                    
+
                 </div>
             </div>
 
 
-                {/* Main Navbar */}
+            {/* Main Navbar */}
             <div className="navbar bg-base-100 text-lg  lg:px-20 ">
 
 
@@ -73,17 +73,9 @@ const TopNavbar = () => {
                                     <li><a>Women Items</a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a>Pages</a>
-                                <ul className="p-2">
-                                    <li><a>About Us</a></li>
-                                    <Link to='/contact'>Contact Us</Link>
-                                    <li><a>FAQ</a></li>
-                                    <li><a>Portfolio</a></li>
-                                    <li><a>Wishlist</a></li>
-                                    <li><a>LookBook</a></li>
-                                </ul>
-                            </li>
+                            <li><Link to="/about">About Us</Link></li>
+                            <li><Link to="/contact">Contact Us</Link></li>
+                            <li><Link to="/faq">FAQ</Link></li>
                             <li ><a href="/blog" >Blog</a></li>
                             <li><a href="/help">Help</a></li>
                         </ul>
@@ -94,18 +86,10 @@ const TopNavbar = () => {
                     </a>
                 </div>
 
-                <div className="navbar-center hidden lg:flex">
+                <div className="navbar-center hidden lg:flex ml-52">
                     <ul className="menu menu-horizontal px-1">
                         <li><a href="/">Home</a></li>
-                        <li>
-                            <details>
-                                <summary>Shop</summary>
-                                <ul className="p-2">
-                                    <li><a>Men Items</a></li>
-                                    <li><a>Women Items</a></li>
-                                </ul>
-                            </details>
-                        </li>
+
                         <li>
                             {/* <details>
                                 <summary>Product</summary>
@@ -128,39 +112,19 @@ const TopNavbar = () => {
                                 </ul>
                             </details>
                         </li>
-                        <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>About Us</a></li>
-                                    <li><a>Contact Us</a></li>
-                                    <li><a>FAQ</a></li>
-                                    <li><a>Portfolio</a></li>
-                                    <li><a>Wishlist</a></li>
-                                    <li><a>LookBook</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li>
-                            <details>
-                                <summary>Page</summary>
-                                <ul className="p-2">
-                                    <li><a>About Us</a></li>
-                                    <Link to='contact'>Contact Us </Link>
-                                    <li><a>FAQ</a></li>
-                                    <li><a>Portfolio</a></li>
-                                    <li><a>Wishlist</a></li>
-                                    <li><a>LookBook</a></li>
-                                </ul>
-                            </details>
-                        </li>
+
+                        <li><Link to="/about">About Us</Link></li>
+                        <li><Link to="/contact">Contact Us</Link></li>
+                        <li><Link to="/faq">FAQ</Link></li>
+                        <li><a href="/blog">Wishlist</a></li>
                         <li><a href="/blog">Blog</a></li>
                         <li><a href="/help">Help</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end mx-2 px-4">
 
-                
+
+
                     <Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='px-3' /></Link>
 
                     {/* Profile section on main navbar */}
@@ -181,7 +145,7 @@ const TopNavbar = () => {
                                             <span className="badge">New</span>
                                         </Link>
                                     </li>
-                                    <li>{isAdmin ? <><Link to='/admin'>Admin</Link></>:<><Link>Setting</Link></>}</li>
+                                    <li>{isAdmin ? <><Link to='/admin'>Admin</Link></> : <><Link>Setting</Link></>}</li>
                                     <li><Link to='/cart'>Order</Link></li>
 
                                     <li onClick={logout}><a>Log Out</a></li>
