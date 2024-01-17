@@ -4,17 +4,14 @@ import { faPhone, faCog, faSearch, faShoppingCart } from '@fortawesome/free-soli
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
+import { TiShoppingCart } from "react-icons/ti";
+import useCart from '../../CustomHook/useCart';
 
 
 const TopNavbar = () => {
     const { user, loading, logout } = useContext(AuthContext)
     const isAdmin = true;
-
-    
-
-    
-    
+    const [cart] = useCart();
 
     return (
         <div className='shadow-xl py-2 my-2'>
@@ -159,9 +156,19 @@ const TopNavbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end mx-2 px-4">
+                    
+                    {/* <Link to='/cart'>
+                        <button className="btn">
+                            <TiShoppingCart/>
+                            <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                        </button>
+                    </Link> */}
 
-                
-                    <Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} className='px-3' /></Link>
+                    <Link to='/cart'  className="indicator mr-4">
+                        <span className="indicator-item badge badge-secondary">+{cart?.length || 0}</span> 
+                        <button className="btn"><TiShoppingCart className='text-2xl'/></button>
+                    </Link>
+           
 
                     {/* Profile section on main navbar */}
                     <div className="dropdown dropdown-end">

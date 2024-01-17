@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from "react-slick";
 import avatar from '../../../assets/images/profile_avatar.jpg'
 import { AiFillStar, AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useCart from '../../../CustomHook/useCart';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 
 const ProductDetails = () => {
   
   
   const location = useLocation();
+  console.log('this data from location state - ',location.state)
   const {_id,brand,category,details,images,name,price,quantity,size,subCategory} = location.state;
+  const {user} = useContext(AuthContext);
+  const [,refetch] = useCart();
+  const navigate = useNavigate();
   let [productQuantity, setProductQuantity] = useState(1)
   const [relativeProducts,setRelativeProducts] = useState([])
  
@@ -30,11 +37,54 @@ const ProductDetails = () => {
        if(type === 'increase'){
         productQuantity++;
         setProductQuantity(productQuantity)
-       }else if(type === 'decrease' && productQuantity >= 1){
+       }else if(type === 'decrease' && productQuantity > 1){
         productQuantity--;
         setProductQuantity(productQuantity)
        } 
   }
+
+
+  const handleAddToCart = data =>{
+    console.log(data);
+    if(user && user.email){
+       const cartItem = {menuItemId: _id, name,category,subCategory,images,price,quantity: productQuantity,brand, email: user.email}
+       console.log('this is cartItem data before fetch - ',cartItem)
+       fetch('http://localhost:3000/carts',{
+           method: 'POST',
+           headers: {
+               'content-type': "application/json"
+           },
+           body: JSON.stringify(cartItem)
+       })
+       .then(res => res.json())
+       .then(data => {
+           refetch() //refetch cart to update the nuber of items in the cart
+           if(data.insertedId){
+            Swal.fire({
+              title: "Good job!",
+              text: "You clicked the button!",
+              icon: "success"
+            });
+           }
+       })
+    }
+    else{
+       Swal.fire({
+           title: "Please Login",
+           text: "if add to cart of product",
+           icon: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#3085d6",
+           cancelButtonColor: "#d33",
+           cancelButtonText: "No",
+           confirmButtonText: "Yes"
+         }).then((result) => {
+           if (result.isConfirmed) {
+             navigate('/login', {state: {from: location}} )
+           }
+         });
+    }
+}
 
   const settings = {
     autoplay: true,
@@ -54,6 +104,8 @@ const ProductDetails = () => {
     slidesToScroll: 1,
     autoplaySpeed: 3000,
   };
+
+
   return (
     <div className="container mx-auto mt-12">
       <div className="flex justify-center px-24">
@@ -111,7 +163,7 @@ const ProductDetails = () => {
             </div>
 
             <div className="flex mt-9">
-              <button type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">ADD TO CART</button>
+              <button onClick={() => handleAddToCart(location.state)} type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">ADD TO CART</button>
               <button type="button" className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">BUY IT NOW</button>
             </div>
 
