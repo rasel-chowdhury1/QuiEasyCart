@@ -1,12 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
+    const [products, setProducts] = useState([]);
+
+    const [currentPage, setCurrentPage] = useState(0);
+      const [itemsPerPage, setItemPerPage] = useState(8);
+      const [totalProducts, setTotalProducts] = useState(0)
+    //   const [totalProducts] = useTotalProuduct()
+
+        const [totalProuduct, setTotalProduct] = useState(0)
+  
+      //const itemsPerPage = 10; //TODO: make it dynamic
+      const totalPages = Math.ceil(totalProuduct/itemsPerPage)
+    
+      
+      const pageNumbers = [];
+      for(let i=1; i<=totalPages; i++){git 
+          pageNumbers.push(i);
+      }
+
+      useEffect( ()=>{
+        async function fetchData() {
+            const response = await fetch(`http://localhost:3000/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
+  
+            const data = await response.json();
+            // console.log(data)
+            // console.log(data.productlen)
+            setProducts(data.result);
+            setTotalProducts(data.productlen)
+            console.log(totalProducts)
+        }
+        fetchData();
+    },[currentPage,totalPages])
+    // console.log(products)
+    // console.log("current page - ",currentPage);
+    // console.log("total page - ",totalPages);
+
     return (
         <div>
 
             {/* Dashboard Top Card */}
             <div>
                 <div className='flex flex-col md:flex-row  lg:flex-row gap-4 shadow-xl rounded-md '>
+
                     <div className="card md:basis-1/4 bg-secondary shadow-xl image-full m-4 ">
                         {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
                         <div className="card-body">
@@ -15,6 +52,18 @@ const Dashboard = () => {
                             <p className=" text-5xl text-center">260600</p>
                             <div className="card-actions justify-center py-4 m-2">
                                 <button className="btn btn-primary ">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="card md:basis-1/4 bg-secondary shadow-xl image-full m-4 ">
+                        {/* <figure><img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" alt="Shoes" /></figure> */}
+                        <div className="card-body">
+                            <h2 className=" text-3xl text-center">Total Product</h2>
+                            <hr className='' />
+                            <p className=" text-5xl text-center">{totalProducts}</p>
+                            <div className="card-actions justify-center py-4 m-2">
+                                <Link to="/admin/admin/product" className="btn btn-primary ">View Details </Link>
                             </div>
                         </div>
                     </div>
@@ -308,17 +357,17 @@ const Dashboard = () => {
                             </tfoot>
                         </table>
                     </div>
-                </div>   
+                </div>
 
-                
-            <div className='flex-grow'>
+
+                <div className='flex-grow'>
                     <h2 className="overflow-x-auto m-4 shadow-xl text-3xl p-2 text-center">New User</h2>
                     <div className="overflow-x-auto shadow-xl rounded w-full m-4">
                         <table className="table">
                             {/* head */}
                             <thead className='bg-black text-white text-2xl'>
                                 <tr>
-                                    
+
                                     <th>Name</th>
                                     <th>Addess</th>
                                     <th>Type</th>
@@ -328,7 +377,7 @@ const Dashboard = () => {
                             <tbody>
                                 {/* row 1 */}
                                 <tr>
-                                    
+
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -356,7 +405,7 @@ const Dashboard = () => {
                                 </tr>
                                 {/* row 2 */}
                                 <tr>
-                                    
+
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -384,7 +433,7 @@ const Dashboard = () => {
                                 </tr>
                                 {/* row 3 */}
                                 <tr>
-                                    
+
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -412,7 +461,7 @@ const Dashboard = () => {
                                 </tr>
                                 {/* row 4 */}
                                 <tr>
-                                    
+
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -439,7 +488,7 @@ const Dashboard = () => {
                                     </th>
                                 </tr>
                                 <tr>
-                                    
+
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -479,7 +528,7 @@ const Dashboard = () => {
 
                         </table>
                     </div>
-                </div>             
+                </div>
 
             </div>
             <div></div>
