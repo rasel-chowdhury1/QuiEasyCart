@@ -1,8 +1,53 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillStar,AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
-
+import Swal from 'sweetalert2';
+import axios from 'axios';
 const SingleProduct = ({product}) => {
+  const [reacts, setReacts] = useState([])
+  const userId = localStorage.getItem('userId')
+  console.log(reacts)
+  const getReact =async () =>{
+         await fetch('http://localhost:3000/allReact')
+               .then(res => res.json())
+               .then(result => setReacts(result))
+  }
+  useEffect(()=>{
+    getReact();
+  },[])
+
+
+
+  const handleReact = () =>{
+     const wishContent = {
+      userId: userId,
+      productId: product._id,
+      product : product,
+     }
+     fetch('http://localhost:3000/addReact',{
+      method:'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(wishContent)
+     })
+     .then(res => res.json())
+     .then(result =>{
+         getReact();
+         console.log(result)
+     })
+  }
+
+  const deleteReact =async (id) =>{
+    await axios.delete(`http://localhost:3000/deleteReact/${id}`)
+        .then(res => {
+          getReact()
+        });
+  }
+
+  const productWiseReact = reacts && reacts.filter((react)=> react.product._id === product._id);
+  const userWiseReact = productWiseReact.filter((productReact) => productReact.userId === userId);
+  
     return (
         <div key={product._id} className='relative cart-body mx-2 shadow-xl gap-4 m-2 rounded-xl p-2'>
                 <Link to='/products/productDetails' state={product} className='img-body relative'>
@@ -31,7 +76,10 @@ const SingleProduct = ({product}) => {
                     <AiOutlineShopping className="text-2xl hover:text-orange-400" />
                   </div>
                   <div className='bg-white ml-2 rounded-full p-2 '>
-                    <AiFillHeart className="text-2xl hover:text-orange-400" />
+                  {
+                    userWiseReact && userWiseReact.length > 0 ? <AiFillHeart onClick={()=>deleteReact(userWiseReact[0]._id)} className="text-2xl text-red-400 hover:text-orange-400" /> :
+                    <AiFillHeart onClick={handleReact} className="text-2xl hover:text-orange-600" />
+                  }
                   </div>
                   <div className='bg-white rounded-full p-2 ml-2'>
                     <AiOutlineSync className="text-2xl hover:text-orange-400" />

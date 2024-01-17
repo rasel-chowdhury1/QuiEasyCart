@@ -77,7 +77,7 @@ const TopNavbar = () => {
                                 <a>Pages</a>
                                 <ul className="p-2">
                                     <li><a>About Us</a></li>
-                                    <li><a>Contact Us</a></li>
+                                    <Link to='/contact'>Contact Us</Link>
                                     <li><a>FAQ</a></li>
                                     <li><a>Portfolio</a></li>
                                     <li><a>Wishlist</a></li>
@@ -143,10 +143,10 @@ const TopNavbar = () => {
                         </li>
                         <li>
                             <details>
-                                <summary>Pages</summary>
+                                <summary>Page</summary>
                                 <ul className="p-2">
                                     <li><a>About Us</a></li>
-                                    <li><a>Contact Us</a></li>
+                                    <Link to='contact'>Contact Us </Link>
                                     <li><a>FAQ</a></li>
                                     <li><a>Portfolio</a></li>
                                     <li><a>Wishlist</a></li>

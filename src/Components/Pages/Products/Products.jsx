@@ -114,9 +114,7 @@ const Products = () => {
       setError('Error fetching data.');
     }
   };
-
-
-
+  
   return (
     <div className='container mx-auto pro'>
       <div className="flex justify-center w-screen px-16 mt-6">
