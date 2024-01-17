@@ -113,9 +113,9 @@ const TopNavbar = () => {
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/contact">Contact Us</Link></li>
                         <li><Link to="/faq">FAQ</Link></li>
-                        <li><a href="/blog">Wishlist</a></li>
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/help">Help</a></li>
+                        <li><Link to="/wishlist">Wishlist</Link></li>
+                        <li><Link to="/blog">Blog</Link></li>
+                        <li><Link to="/help">Help</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end mx-2 px-4">

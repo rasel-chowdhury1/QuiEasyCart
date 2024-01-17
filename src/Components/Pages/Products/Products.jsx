@@ -86,7 +86,7 @@ const Products = () => {
           console.log("loaded data",data)
           console.log('loaded data length is ', data.len)
           console.log('loaded data result is ', data.result)
-          setTotalProducts(data.len)
+          setTotalProducts(data.len);
           setProducts(data.result);
       }
       fetchData();
@@ -114,9 +114,7 @@ const Products = () => {
       setError('Error fetching data.');
     }
   };
-
-
-
+  
   return (
     <div className='container mx-auto pro'>
       <div className="flex justify-center w-screen px-16 mt-6">
@@ -315,7 +313,6 @@ const Products = () => {
                     ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
                     : <Link onClick={() => setCurrentPage(currentPage-1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
                   }
-                  
                 </li>
                   {
                     pageNumbers.map(page => <li key={page}>
