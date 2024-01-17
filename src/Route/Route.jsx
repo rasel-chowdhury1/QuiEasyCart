@@ -36,6 +36,7 @@ import About_US from "../Components/Pages/About/About_US";
 import Contact_US from "../Components/Pages/Contact/Contact_US";
 import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
 import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
+import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
 
 
 
@@ -149,6 +150,10 @@ import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
         {
           path: 'admin/user',
           element: <User></User>
+        },
+        {
+          path: 'admin/userDetails',
+          element: <UserDetails></UserDetails>
         },
         {
           path: 'admin/reviews',

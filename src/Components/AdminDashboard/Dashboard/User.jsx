@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const User = () => {
 
@@ -148,7 +149,7 @@ return (
                         </td>
                         <td>Admin</td>
                         <th>
-                            <button className="btn btn-accent  p-2 m-2">details</button>
+                            <Link to= {`/admin/admin/userDetails`} state={user} className="btn btn-accent  p-2 m-2">details</Link>
                             <button className="btn btn-neutral px-4  py-2">Edit</button>
                             <button className="btn btn-secondary  p2 m-2">Delete</button>
                         </th>
