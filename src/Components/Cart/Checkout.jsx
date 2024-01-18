@@ -1,13 +1,41 @@
 import React from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { useLocation } from 'react-router-dom';
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 const Checkout = () => {
     
   const data = useLocation()
     console.log(data)
     console.log('this data of checkout ',data.state.cart)
     console.log('this totalPrice of checkout ',data.state.total)
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
+    const navigate = useNavigate()
+    const onSubmit =(formData) => {
+      const order = {
+        firstName: formData.firstName,
+        lsatName: formData.lastName,
+        address: formData.address,
+        currency: formData.currency,
+        mobile: formData.mobile,
+        amount: formData.amount,
+        products: data.state.cart
+      }  
+
+         fetch(`http://localhost:3000/order`, {
+                     method: "POST",
+                     headers: {
+                        "content-type": 'application/json'
+                     },
+                     body: JSON.stringify(order)
+            })
+            .then(res => res.json())
+            .then(result => {
+                window.location.replace(result.url)
+            })
+
+    }
+    
+    
     return (
         <div>
              <div className="max-w-3xl mx-auto mt-8 p-4 flex">
@@ -15,7 +43,7 @@ const Checkout = () => {
             <div className="w-2/3 pr-4">
             <div className="max-w-md mx-auto mt-8 p-4 border rounded shadow-md">
       <h2 className="text-2xl font-bold mb-4">Checkout</h2>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/* Shipping Information */}
         <div className="mb-4">
           <h3 className="text-xl font-semibold mb-2">Shipping Information</h3>
@@ -29,7 +57,7 @@ const Checkout = () => {
                 id="firstName"
                 name="firstName"
                 className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-                required
+                {...register("firstName", { required: true })}
               />
             </div>
             <div>
@@ -41,7 +69,7 @@ const Checkout = () => {
                 id="lastName"
                 name="lastName"
                 className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-                required
+                {...register("lastName", { required: true })}
               />
             </div>
           </div>
@@ -54,7 +82,7 @@ const Checkout = () => {
               id="address"
               name="address"
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-              required
+              {...register("address", { required: true })}
             />
           </div>
           {/* Add more shipping fields as needed */}
@@ -65,50 +93,50 @@ const Checkout = () => {
           <h3 className="text-xl font-semibold mb-2">Payment Information</h3>
           <div>
             <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">
-              Card Number
+            Currency
             </label>
-            <input
-              type="text"
-              id="cardNumber"
-              name="cardNumber"
-              className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-              required
-            />
+            <select {...register("currency", { required: true })}
+            className="select select-bordered mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500">
+            <option  value="BDT">BDT</option>
+            <option  value="USD">USD</option>
+            <option  value="RMB">RMB</option>
+            <option  value="EURO">EURO</option>
+            </select>
           </div>
           <div className="mt-4">
             <label htmlFor="expiryDate" className="block text-sm font-medium text-gray-700">
-              Expiry Date
+              Mobile
             </label>
             <input
               type="text"
-              id="expiryDate"
-              name="expiryDate"
+              id="mobile"
+              name="mobile"
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-              required
+              {...register("mobile", { required: true })}
             />
           </div>
           <div className="mt-4">
             <label htmlFor="cvv" className="block text-sm font-medium text-gray-700">
-              CVV
+              Amount
             </label>
             <input
               type="text"
-              id="cvv"
-              name="cvv"
+              id="amount"
+              name="amount"
+              value={data.state.total}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
-              required
+              {...register("amount", { required: true })}
             />
           </div>
         </div>
 
         {/* Place Order Button */}
         <div className="mt-6">
-          <button
+          <input
             type="submit"
+            value='Place Order'
             className="w-full bg-blue-500 text-white p-2 rounded focus:outline-none hover:bg-blue-700"
-          >
-            Place Order
-          </button>
+          />
         </div>
       </form>
     </div>
@@ -132,7 +160,7 @@ const Checkout = () => {
                   {/* row 1 */}
                   
                   {
-                    data.state.cart.map(dt => <tr>
+                    data.state.cart.map(dt => <tr key={dt}>
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">

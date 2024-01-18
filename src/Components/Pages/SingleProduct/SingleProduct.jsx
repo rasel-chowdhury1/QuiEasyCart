@@ -6,7 +6,6 @@ import axios from 'axios';
 const SingleProduct = ({product}) => {
   const [reacts, setReacts] = useState([])
   const userId = localStorage.getItem('userId')
-  console.log(reacts)
   const getReact =async () =>{
          await fetch('http://localhost:3000/allReact')
                .then(res => res.json())
