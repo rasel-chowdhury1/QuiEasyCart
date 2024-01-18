@@ -17,10 +17,10 @@ const Blog = () => {
       <div className="container mx-auto mt-20 ">
         <h2 className=" text-center	text-4xl">Latest Blogs</h2>
         <p className="text-center	pb-6">Check our latest blog here.....</p>
-        <div className="flex  ">
+        <div className="flex flex-wrap md:flex-nowrap flex-row m-4 p-2 justify-center ">
           {
             blogs.map(blog => 
-              < div key={blog._id} className="card w-100 bg-base-100 shadow-xl mr-8 flex ">
+              < div key={blog._id} className="card w-100 bg-base-100 shadow-xl mr-8 flex justify-center ">
           <figure><img className="w-full max-h-80 shadow-lg bg-blue-600" src={blog.image} alt="Shoes" /></figure>
           <div className="card-body">
             <h2 className="card-title">
