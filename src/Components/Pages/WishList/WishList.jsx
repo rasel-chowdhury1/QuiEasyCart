@@ -41,6 +41,10 @@ const WishList = () => {
   useEffect( ()=>{
     getReact();
   },[currentPage,itemsPerPage])
+   
+  const userId = localStorage.getItem('userId')
+  const userWiseReacts = reacts.filter((user) => user.userId === userId)
+  console.log(userWiseReacts)
     return (
       <div className="container mx-auto mb-6">
       <div className="overflow-x-auto m-4 shadow-xl">
