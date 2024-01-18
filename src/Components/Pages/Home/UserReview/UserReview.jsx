@@ -11,7 +11,7 @@ const UserReview = () => {
     const [reviews, setReviews] = useState([])
     console.log(reviews)
     const getReviews = () =>{
-        fetch('http://localhost:3000/getReview')
+        fetch('https://quieasycarts.onrender.com/getReview')
         .then(res => res.json())
         .then(result => {
             setReviews(result)

@@ -52,7 +52,7 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
 
   
       const handleCategory = () =>{
-        fetch(`http://localhost:3000/addCategory/${data.category}`, {
+        fetch(`https://quieasycarts.onrender.com/addCategory/${data.category}`, {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       }
 
       const handleSubCategory = () =>{
-        fetch(`http://localhost:3000/addSubCategory/${data.subCategory}`, {
+        fetch(`https://quieasycarts.onrender.com/addSubCategory/${data.subCategory}`, {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       }
 
       const handleBrand = () =>{
-        fetch(`http://localhost:3000/addBrand/${data.brand}`, {
+        fetch(`https://quieasycarts.onrender.com/addBrand/${data.brand}`, {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const AddRequirements = ({getRequirement,handleRequirement,getSubCategories,
       }
 
       const handleSize = () =>{
-        fetch(`http://localhost:3000/addSize/${data.size}`, {
+        fetch(`https://quieasycarts.onrender.com/addSize/${data.size}`, {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

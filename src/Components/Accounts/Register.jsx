@@ -37,7 +37,7 @@ const Register = () => {
         image: null,
         address: null
       }
-      fetch("http://localhost:3000/addUser", {
+      fetch("https://quieasycarts.onrender.com/addUser", {
                  method: "POST",
                  headers: {
                     "content-type": 'application/json'
