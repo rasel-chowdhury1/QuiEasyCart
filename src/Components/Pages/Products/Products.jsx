@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {AiOutlineCaretDown } from "react-icons/ai";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import productBanner from '../../../assets/images/product-banner.jpg'
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Products.css';
 import SingleProduct from '../SingleProduct/SingleProduct';
 
@@ -17,21 +17,21 @@ const Products = () => {
   const [categoryList, setCategoryList] = useState([])
   // const [totalProducts,loading] = useTotalProuduct();
   const [searchInput, setSearchInput] = useState('');
-    const [results, setResults] = useState([]);
-    const [error, setError] = useState(null);
-  const [totalProducts,setTotalProducts] = useState(0);
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
-    //const itemsPerPage = 10; //TODO: make it dynamic
-    const totalPages = Math.ceil(totalProducts/itemsPerPage)
-    
-    console.log(currentPage)
-    console.log(totalPages)
-    const pageNumbers = [];
-    for(let i=1; i<=totalPages; i++){
-        pageNumbers.push(i);
-    }
+  //const itemsPerPage = 10; //TODO: make it dynamic
+  const totalPages = Math.ceil(totalProducts / itemsPerPage)
+
+  console.log(currentPage)
+  console.log(totalPages)
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
 
   const handleCategoryList = () => {
@@ -78,27 +78,27 @@ const Products = () => {
     }
   }
 
-    useEffect( ()=>{
-      async function fetchData() {
-          const response = await fetch(`http://localhost:3000/products?&category=${category}&min=${minPrice}&max=${maxPrice}&page=${currentPage}&limit=${itemsPerPage}`)
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`http://localhost:3000/products?&category=${category}&min=${minPrice}&max=${maxPrice}&page=${currentPage}&limit=${itemsPerPage}`)
 
-          const data = await response.json();
-          console.log("loaded data",data)
-          console.log('loaded data length is ', data.len)
-          console.log('loaded data result is ', data.result)
-          setTotalProducts(data.len);
-          setProducts(data.result);
-      }
-      fetchData();
-  },[category,minPrice,maxPrice,currentPage,itemsPerPage])
+      const data = await response.json();
+      console.log("loaded data", data)
+      console.log('loaded data length is ', data.len)
+      console.log('loaded data result is ', data.result)
+      setTotalProducts(data.len);
+      setProducts(data.result);
+    }
+    fetchData();
+  }, [category, minPrice, maxPrice, currentPage, itemsPerPage])
 
-  useEffect(() =>{
+  useEffect(() => {
     fetch('http://localhost:3000/allCategories')
-    .then(res => res.json())
-    .then(data => setCategoryList(data))
-  },[])
+      .then(res => res.json())
+      .then(data => setCategoryList(data))
+  }, [])
 
-  console.log('category list is - ',categoryList)
+  console.log('category list is - ', categoryList)
 
   const search = async () => {
     try {
@@ -114,13 +114,13 @@ const Products = () => {
       setError('Error fetching data.');
     }
   };
-  
+
   return (
     <div className='container mx-auto pro'>
       <div className="flex justify-center w-screen px-16 mt-6">
 
-        <aside className="w-1/5 ...">
-          
+        <aside className="w-1/5 hidden sm:block ...">
+
           <div className="category-card w-full px-6 py-9 max-w-sm bg-white border border-gray-200 rounded shadow">
             <div className="flex justify-between">
               <h1 className='font-semibold'>CATEGORY</h1>
@@ -128,9 +128,9 @@ const Products = () => {
             </div>
 
             <div className="mt-6" id="category-list">
-              
+
               <ul>
-                <li onClick={() => {setCategory('');setMinPrice(0);setMaxPrice(Infinity);}} className='mt-2'>All Products</li>
+                <li onClick={() => { setCategory(''); setMinPrice(0); setMaxPrice(Infinity); }} className='mt-2'>All Products</li>
                 {
                   categoryList.map(cat => <li onClick={() => setCategory(cat.category)} className='mt-2'>{cat.category}</li>)
                 }
@@ -150,31 +150,31 @@ const Products = () => {
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p onClick={() => {setMinPrice(0);setMaxPrice(500)}} className='ml-3'>Below $500</p>
+                      <p onClick={() => { setMinPrice(0); setMaxPrice(500) }} className='ml-3'>Below $500</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p onClick={() => {setMinPrice(500);setMaxPrice(2000)}} className='ml-3'>$500 - $2000</p>
+                      <p onClick={() => { setMinPrice(500); setMaxPrice(2000) }} className='ml-3'>$500 - $2000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p onClick={() => {setMinPrice(2001);setMaxPrice(5000)}} className='ml-3'>$2001 - $5000</p>
+                      <p onClick={() => { setMinPrice(2001); setMaxPrice(5000) }} className='ml-3'>$2001 - $5000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p onClick={() => {setMinPrice(5001);setMaxPrice(10000)}} className='ml-3'>$5001 - $10000</p>
+                      <p onClick={() => { setMinPrice(5001); setMaxPrice(10000) }} className='ml-3'>$5001 - $10000</p>
                     </div>
                   </li>
                   <li className='mt-2'>
                     <div className="flex">
                       <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p onClick={() => {setMinPrice(10001);setMaxPrice(Infinity)}}className='ml-3'>Above $10001</p>
+                      <p onClick={() => { setMinPrice(10001); setMaxPrice(Infinity) }} className='ml-3'>Above $10001</p>
                     </div>
                   </li>
                 </ul>
@@ -266,38 +266,54 @@ const Products = () => {
 
 
 
-        
+
         {/* Main product section  */}
         <div className="w-4/5 ...">
-          {/** searchbar section */}
-          <div className="flex w-3/4 my-4 mx-auto">
-                      <div>
-                          <div>
-                          <input type='text' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} className="input input-bordered  w-[600px]" placeholder="Search product "/>
-          
-                          </div>
-                      </div>
-                      <div>
-                          <button onClick={search} className="btn w-[200px] ">Search</button>
-                      </div>
-          </div>
-          
-          
+
+
+
+
+
           {/* Product banner section  */}
-          <div className="product-banner px-16 ">
-            <img src={productBanner} className='w-' alt="" />
+          <div className="product-banner px-16  hidden sm:block">
+            <img src={productBanner} className='' alt="" />
           </div>
+
+
+
+          {/** searchbar section */}
+          <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row items-center md:mx-20 md:my-10 lg:mx-20 lg:my-10 xl:mx-20 xl:my-10">
+            <div className="w-full md:w-1/2 lg:w-full xl:w-1/2 mb-4 md:mb-0">
+              <input
+                type='text'
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="input input-bordered w-full py-2 px-4"
+                placeholder="Search product"
+              />
+            </div>
+            <div className="w-full md:w-1/5 lg:w-1/5 xl:w-1/5">
+              <button onClick={search} className="btn w-full py-2 px-4">
+                Search
+              </button>
+            </div>
+          </div>
+
+
+
+
 
           <div className="all-product mt-9">
-            <h1 className='text-center text-3xl p-2 m-2 mt-4 font-semibold shadow'>Showing Products {(currentPage*itemsPerPage)+1} to {(currentPage*itemsPerPage) + itemsPerPage} from {totalProducts} Results</h1>
+            <h1 className='text-center  sm:text-1xl md:text-2xl lg:text-4xl p-2 m-2 mt-4 font-semibold shadow'>Showing Products {(currentPage * itemsPerPage) + 1} to {(currentPage * itemsPerPage) + itemsPerPage} from {totalProducts} Results</h1>
 
 
 
-            <div className="flex flex-wrap mt-12 px-12 ">
-              
-              {products.map(pro=> <SingleProduct key={pro._id} product={pro}></SingleProduct>)}
+            <div className="flex flex-wrap ">
+
+              {products.map(pro => <SingleProduct key={pro._id} product={pro}></SingleProduct>)}
 
             </div>
+
 
 
 
@@ -309,21 +325,21 @@ const Products = () => {
               <ul className="inline-flex mt-6 ml-9 -space-x-px text-sm">
                 <li>
                   {
-                    currentPage === 0 
-                    ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
-                    : <Link onClick={() => setCurrentPage(currentPage-1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
+                    currentPage === 0
+                      ? <Link className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
+                      : <Link onClick={() => setCurrentPage(currentPage - 1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
                   }
                 </li>
-                  {
-                    pageNumbers.map(page => <li key={page}>
-                      <Link onClick={() => setCurrentPage(page-1)} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{page}</Link>
-                    </li>)
-                  }
-                <li>
                 {
-                    currentPage+1 === totalPages 
-                    ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
-                    : <Link onClick={() => setCurrentPage(currentPage+1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+                  pageNumbers.map(page => <li key={page}>
+                    <Link onClick={() => setCurrentPage(page - 1)} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{page}</Link>
+                  </li>)
+                }
+                <li>
+                  {
+                    currentPage + 1 === totalPages
+                      ? <Link className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+                      : <Link onClick={() => setCurrentPage(currentPage + 1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
                   }
                 </li>
               </ul>
