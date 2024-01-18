@@ -6,7 +6,7 @@ const User = () => {
 
     const [users, setUsers] = useState([])
     const getUser = () => {
-        fetch("http://localhost:3000/allUsers")
+        fetch("https://quieasycarts.onrender.com/allUsers")
             .then(res => res.json())
             .then(data => setUsers(data))
     }

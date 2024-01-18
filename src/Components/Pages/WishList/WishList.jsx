@@ -17,7 +17,7 @@ const WishList = () => {
   console.log('pageNumber',pageNumber,totalPages)
 
   const getReact =async () =>{
-    const response = await fetch(`http://localhost:3000/reacts?&page=${currentPage}&limit=${itemsPerPage}`)
+    const response = await fetch(`https://quieasycarts.onrender.com/reacts?&page=${currentPage}&limit=${itemsPerPage}`)
       const data = await response.json();
       console.log("loaded data",data)
       console.log('loaded data length is ', data.len)
@@ -27,7 +27,7 @@ const WishList = () => {
   }
 
   const deleteReact =async (id) =>{
-    await axios.delete(`http://localhost:3000/deleteReact/${id}`)
+    await axios.delete(`https://quieasycarts.onrender.com/deleteReact/${id}`)
         .then(res => {
           getReact();
           Swal.fire({

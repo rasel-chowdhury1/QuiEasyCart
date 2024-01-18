@@ -19,7 +19,7 @@ const Blogpage = () => {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3000/allBlogs")
+        fetch("https://quieasycarts.onrender.com/allBlogs")
             .then(res => res.json())
             .then(data => setBlogs(data))
 

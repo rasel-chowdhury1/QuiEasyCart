@@ -11,7 +11,7 @@ const Contact_US = () => {
             message: data.message
         }
 
-        fetch('http://localhost:3000/addContact', {
+        fetch('https://quieasycarts.onrender.com/addContact', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

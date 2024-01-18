@@ -86,12 +86,12 @@ import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
         {
           path: "blogdetails/:id",
           element: <Blog_details></Blog_details>, 
-          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
         },
         {
           path: "updateblog/:id",
           element: <EditBlog></EditBlog>, 
-          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
         },
         {
           path: "help",

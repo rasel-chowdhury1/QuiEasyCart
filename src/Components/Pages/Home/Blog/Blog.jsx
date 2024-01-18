@@ -5,7 +5,7 @@ const Blog = () => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:3000/allBlogs")
+    fetch("https://quieasycarts.onrender.com/allBlogs")
       .then(res => res.json())
       .then(data => setBlogs(data))
   }, []);
@@ -14,13 +14,13 @@ const Blog = () => {
 
   return (
     <>
-      <div className="container mx-auto mt-20">
+      <div className="container mx-auto mt-20 ">
         <h2 className=" text-center	text-4xl">Latest Blogs</h2>
         <p className="text-center	pb-6">Check our latest blog here.....</p>
-        <div className="flex">
+        <div className="flex  ">
           {
             blogs.map(blog => 
-              < div key={blog._id} className="card w-100 bg-base-100 shadow-xl mr-8">
+              < div key={blog._id} className="card w-100 bg-base-100 shadow-xl mr-8 flex ">
           <figure><img className="w-full max-h-80 shadow-lg bg-blue-600" src={blog.image} alt="Shoes" /></figure>
           <div className="card-body">
             <h2 className="card-title">

@@ -22,7 +22,7 @@ const Dashboard = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`http://localhost:3000/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
+            const response = await fetch(`https://quieasycarts.onrender.com/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
   
             const data = await response.json();
             // console.log(data)
@@ -39,7 +39,7 @@ const Dashboard = () => {
 
     const [users, setUsers] = useState([])
     const getUser = () => {
-        fetch("http://localhost:3000/allUsers")
+        fetch("https://quieasycarts.onrender.com/allUsers")
             .then(res => res.json())
             .then(data => setUsers(data))
     }

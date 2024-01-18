@@ -10,7 +10,7 @@ const Profile = () => {
     const {firstName,lastName,phone,email,birthDate,image,gender,address,_id} = userProfile;
     const userId = localStorage.getItem('userId')
     const getUser = () =>{
-        fetch(`http://localhost:3000/user/${userId}`)
+        fetch(`https://quieasycarts.onrender.com/user/${userId}`)
         .then(res => res.json())
         .then(result => setUserProfile(result))
     }
@@ -54,7 +54,7 @@ const Profile = () => {
             address: data.address
           }
           console.log('from frontend',userProfile)
-          fetch(`http://localhost:3000/updateProfile/${_id}`, {
+          fetch(`https://quieasycarts.onrender.com/updateProfile/${_id}`, {
                      method: "PATCH",
                      headers: {
                         "content-type": 'application/json'

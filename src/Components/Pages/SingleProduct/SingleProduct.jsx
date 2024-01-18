@@ -8,7 +8,7 @@ const SingleProduct = ({product}) => {
   const userId = localStorage.getItem('userId')
   console.log(reacts)
   const getReact =async () =>{
-         await fetch('http://localhost:3000/allReact')
+         await fetch('https://quieasycarts.onrender.com/allReact')
                .then(res => res.json())
                .then(result => setReacts(result))
   }
@@ -24,7 +24,7 @@ const SingleProduct = ({product}) => {
       productId: product._id,
       product : product,
      }
-     fetch('http://localhost:3000/addReact',{
+     fetch('https://quieasycarts.onrender.com/addReact',{
       method:'POST',
       headers: {
         'content-type':'application/json'
@@ -39,7 +39,7 @@ const SingleProduct = ({product}) => {
   }
 
   const deleteReact =async (id) =>{
-    await axios.delete(`http://localhost:3000/deleteReact/${id}`)
+    await axios.delete(`https://quieasycarts.onrender.com/deleteReact/${id}`)
         .then(res => {
           getReact()
         });
