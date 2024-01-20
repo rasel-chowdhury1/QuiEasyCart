@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -8,7 +8,11 @@ const Login = () => {
     console.log(googleSignin)
     const [error,setError] = useState('');
     const navigate = useNavigate();
-
+    const location = useLocation()
+    console.log("login page location ", location)
+    // const from = location.state?.from?.pathname || "/";
+    // const product = location.state?.data
+    // console.log(product)
     const handleLoginButton = (event) =>{
         event.preventDefault();
         const form = event.target;
@@ -27,7 +31,9 @@ const Login = () => {
               });
             form.reset();
             localStorage.setItem('userId',result.user.uid)
-            navigate('/')
+            navigate("/products")
+            // navigate(from, {replace: true})
+            
         })
         .catch(error => {
             console.error("Firebase Authentication Error:", error.code, error.message);

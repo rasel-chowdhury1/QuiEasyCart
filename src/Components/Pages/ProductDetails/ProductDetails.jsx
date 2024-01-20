@@ -12,7 +12,7 @@ const ProductDetails = () => {
 
 
   const location = useLocation();
-  console.log('this data from location state - ', location.state)
+  console.log('this data from location state - ', location)
   const { _id, brand, category, details, images, name, price, quantity, size, subCategory } = location.state;
   const { user } = useContext(AuthContext);
   const [, refetch] = useCart();
@@ -48,6 +48,7 @@ const ProductDetails = () => {
     console.log(data);
     if (user && user.email) {
       const cartItem = { menuItemId: _id, name, category, subCategory, images, price, quantity: productQuantity, brand, email: user.email }
+
       console.log('this is cartItem data before fetch - ', cartItem)
       fetch('https://quieasycarts.onrender.com/carts', {
         method: 'POST',
@@ -58,7 +59,7 @@ const ProductDetails = () => {
       })
         .then(res => res.json())
         .then(data => {
-          refetch() //refetch cart to update the nuber of items in the cart
+          refetch() //refetch cart to update the number of items in the cart
           if (data.insertedId) {
             Swal.fire({
               title: "Good job!",
@@ -80,7 +81,7 @@ const ProductDetails = () => {
         confirmButtonText: "Yes"
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login', { state: { from: location } })
+          navigate('/login', { state: { from: location, data:location.state } })
         }
       });
     }
