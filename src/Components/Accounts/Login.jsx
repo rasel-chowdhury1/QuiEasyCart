@@ -1,16 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
+   
+    console.log("history", history)
     const {login,googleSignin} = useContext(AuthContext);
     console.log(googleSignin)
     const [error,setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation()
     console.log("login page location ", location)
-    // const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        console.log(location.pathname)
+
+    } ,[location])
+
+    const from = location.state?.from?.pathname || "/";
+    // console.log("current path", from)
     // const product = location.state?.data
     // console.log(product)
     const handleLoginButton = (event) =>{
