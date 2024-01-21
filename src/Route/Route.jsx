@@ -38,6 +38,7 @@ import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
 import WishList from "../Components/Pages/WishList/WishList";
 import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
 import OrderDetails from "../Components/Cart/OrderDetails";
+import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
 
 
 
@@ -90,12 +91,12 @@ import OrderDetails from "../Components/Cart/OrderDetails";
         {
           path: "blogdetails/:id",
           element: <Blog_details></Blog_details>, 
-          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
         },
         {
           path: "updateblog/:id",
           element: <EditBlog></EditBlog>, 
-          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
         },
         {
           path: "help",
@@ -159,6 +160,10 @@ import OrderDetails from "../Components/Cart/OrderDetails";
         {
           path: 'admin/user',
           element: <User></User>
+        },
+        {
+          path: 'admin/userDetails',
+          element: <UserDetails></UserDetails>
         },
         {
           path: 'admin/reviews',

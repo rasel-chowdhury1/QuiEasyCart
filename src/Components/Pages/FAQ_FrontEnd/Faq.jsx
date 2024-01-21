@@ -68,54 +68,53 @@ const Faq = () => {
         },
     ];
     return (
-        <div>
+      <div>
 
-<div className="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
-      <h1 className="text-4xl font-bold text-purple-700 mb-6">Frequently Asked Questions</h1>
-
-      <Accordion allowZeroExpanded>
-        {faqCategories.map((category, index) => (
-          <AccordionItem key={index} className="border-b pb-4">
-            <h2 className="text-xl font-semibold text-purple-700 mb-2">
-              <AccordionItemHeading>
-                <AccordionItemButton>{category.category}</AccordionItemButton>
-              </AccordionItemHeading>
-            </h2>
-            <AccordionItemPanel>
-              {category.questions.map((faq, faqIndex) => (
-                <div key={faqIndex} className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
-              ))}
-            </AccordionItemPanel>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
-
-
-
-        <div className="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
-            <h1 className="text-4xl font-bold text-purple-700 mb-6">Frequently Asked Questions</h1>
-
-            <Accordion allowZeroExpanded>
-                {faqData.map((faq, index) => (
-                    <AccordionItem key={index} className="border-b pb-4">
-                        <h2 className="text-xl font-semibold text-purple-700 mb-2">
-                            <AccordionItemHeading>
-                                <AccordionItemButton>{faq.question}</AccordionItemButton>
-                            </AccordionItemHeading>
-                        </h2>
-                        <AccordionItemPanel>
-                            <p className="text-gray-600">{faq.answer}</p>
-                        </AccordionItemPanel>
-                    </AccordionItem>
+      <div className="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
+        <h1 className="text-4xl font-bold text-purple-700 mb-6">Frequently Asked Questions Category wise</h1>
+    
+        <Accordion allowZeroExpanded>
+          {faqCategories.map((category, index) => (
+            <AccordionItem key={index} className="border-b pb-4">
+              <h2 className="text-xl font-semibold text-purple-700 mb-2">
+                <AccordionItemHeading>
+                  <AccordionItemButton>{category.category}</AccordionItemButton>
+                </AccordionItemHeading>
+              </h2>
+              <AccordionItemPanel>
+                {category.questions.map((faq, faqIndex) => (
+                  <div key={faqIndex} className="mb-4">
+                    <h3 className="text-lg font-semibold text-gray-800">{faq.question}</h3>
+                    <p className="text-gray-600">{faq.answer}</p>
+                  </div>
                 ))}
-            </Accordion>
-        </div>
-
-        </div>
+              </AccordionItemPanel>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    
+      <div className="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
+        <h1 className="text-4xl font-bold text-purple-700 mb-6">Frequently Asked Questions</h1>
+    
+        <Accordion allowZeroExpanded>
+          {faqData.map((faq, index) => (
+            <AccordionItem key={index} className="border-b pb-4">
+              <h2 className="text-xl font-semibold text-purple-700 mb-2">
+                <AccordionItemHeading>
+                  <AccordionItemButton>{faq.question}</AccordionItemButton>
+                </AccordionItemHeading>
+              </h2>
+              <AccordionItemPanel>
+                <p className="text-gray-600">{faq.answer}</p>
+              </AccordionItemPanel>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    
+    </div>
+    
     );
 };
 

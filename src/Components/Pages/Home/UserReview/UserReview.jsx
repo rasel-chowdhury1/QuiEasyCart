@@ -11,7 +11,7 @@ const UserReview = () => {
     const [reviews, setReviews] = useState([])
     console.log(reviews)
     const getReviews = () =>{
-        fetch('http://localhost:3000/getReview')
+        fetch('https://quieasycarts.onrender.com/getReview')
         .then(res => res.json())
         .then(result => {
             setReviews(result)
@@ -32,9 +32,9 @@ const UserReview = () => {
       };
     return (
         <div className="container mt-9 ml-12">
-            <h1 className="text-center exclusive-title text-2xl font-bold exclusive-sub-title">Customer Reviews</h1>
+            <h1 className="text-center exclusive-title text-2xl font-bold ">Customer Reviews</h1>
         <div>
-        <div className="flex justify-center px-6">
+        <div className="flex justify-center px-2">
         <Slider {...settings} className=" w-10/12  mt-8">
          {
             reviews.map((review) => (

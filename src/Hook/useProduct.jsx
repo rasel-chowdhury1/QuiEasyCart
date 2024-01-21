@@ -4,7 +4,7 @@ const useProduct = () => {
     const [products,setProduct] = useState([]);
     
     useEffect(()=>{
-        fetch("http://localhost:3000/allProducts")
+        fetch("https://quieasycarts.onrender.com/allProducts")
         .then(res => res.json())
         .then(data => {
             setProduct(data);

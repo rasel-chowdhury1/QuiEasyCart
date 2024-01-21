@@ -17,19 +17,19 @@ const Profile = () => {
     const pendingOrder = userWiseOrder && userWiseOrder.filter((order) => order.paidStatus === false)
     console.log('successful order',successfulOrder, 'pendingOrder',pendingOrder)
     const getUser = () =>{
-        fetch(`http://localhost:3000/user/${userId}`)
+        fetch(`https://quieasycarts.onrender.com/user/${userId}`)
         .then(res => res.json())
         .then(result => setUserProfile(result))
     }
 
     const getOrder = () =>{
-        fetch('http://localhost:3000/allOrder')
+        fetch('https://quieasycarts.onrender.com/allOrder')
         .then(res => res.json())
         .then(result => setAllOrder(result))
     }
 
     const handleDeleteOrder = id =>{
-        fetch(`http://localhost:3000/deleteOrder/${id}`,{
+        fetch(`https://quieasycarts.onrender.com/deleteOrder/${id}`,{
           method: "DELETE"
         })
         .then(res => res.json())
@@ -86,8 +86,8 @@ const Profile = () => {
             image: updatedImage ? updatedImage : image,
             address: data.address
           }
-          console.log('from frontend',userProfile)
-         await fetch(`http://localhost:3000/updateProfile/${_id}`, {
+        //   console.log('from frontend',userProfile)
+         await fetch(`https://quieasycarts.onrender.com/updateProfile/${_id}`, {
                      method: "PATCH",
                      headers: {
                         "content-type": 'application/json'
@@ -104,8 +104,9 @@ const Profile = () => {
       
     return (
         <div className='container  mb-20 mt-6'>
-            <div className="flex justify-center">
-              <div className="pl-20 w-1/3 justify-center drop-shadow-lg bg-white">
+
+            <div className="flex flex-col md:flex-row lg:flex-row items-center my-4 mx-auto">
+              <div className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 mb-4 md:mb-0">
                 <section className='ml-16'>
                     <div>
                     <img src={image !== null ? image : profile_avatar} className='rounded-full w-32' alt="" />
@@ -229,7 +230,7 @@ const Profile = () => {
                 
               </div>
 
-              <div className="order-part w-2/3 ml-9">
+              <div className="w-full md:w-2/3 lg:w-3/4 xl:w-4/5 ml-0 md:ml-4 lg:ml-8 xl:ml-12">
                 <div className="flex justify-center">
                 <h1 className="text-center text-2xl font-semibold">Orders</h1>
                 <div>
@@ -345,6 +346,8 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+
+
         </div>
     );
 };

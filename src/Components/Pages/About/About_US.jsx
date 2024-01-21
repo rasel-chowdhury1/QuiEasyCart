@@ -7,11 +7,11 @@ const About_US = () => {
 
 
                 <nav className="bg-white p-4 shadow-md">
-                    <div className="container mx-auto">
-                        <a href="#" className="text-2xl font-bold text-blue-500 ">Our Company</a>
-
+                    <div className="container mx-auto flex justify-center items-center">
+                        <a href="#" className="text-2xl font-bold text-blue-500">Our Company</a>
                     </div>
                 </nav>
+
 
 
                 <div className="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
@@ -25,7 +25,7 @@ const About_US = () => {
                     </p>
 
                     <h2 className="text-2xl font-bold text-purple-700 mb-4">Our Mission and Vision</h2>
-                    <div className="mt-12 flex gap-4">
+                    <div className="mt-12 flex flex-col md:flex-row gap-4">
                         <div className="bg-green-200 p-6 rounded-lg mb-4 relative" style={{ backgroundImage: 'url(https://source.unsplash.com/800x600/?portrait?1)' }}>
                             <div className="bg-black bg-opacity-40 rounded-lg absolute inset-0"></div>
                             <h3 className="text-lg font-semibold text-white relative z-10">Mission</h3>
@@ -42,6 +42,7 @@ const About_US = () => {
                             </p>
                         </div>
                     </div>
+
 
 
 

@@ -29,35 +29,35 @@ const AddProduct = () => {
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const getRequirement = () =>{
-        fetch(`http://localhost:3000/allRequirements`)
+        fetch(`https://quieasycarts.onrender.com/allRequirements`)
         .then((data)=>data.json())
         .then(data => setRequirements(data))
       }
 
       //getCategories
       const getCategories = () =>{
-        fetch(`http://localhost:3000/allCategories`)
+        fetch(`https://quieasycarts.onrender.com/allCategories`)
         .then((data)=>data.json())
         .then(data => setCategories(data))
       }
 
        //getSubCategories
        const getSubCategories = () =>{
-        fetch(`http://localhost:3000/allSubCategories`)
+        fetch(`https://quieasycarts.onrender.com/allSubCategories`)
         .then((data)=>data.json())
         .then(data => setSubCategories(data))
       }
 
        //getBrand
        const getBrands = () =>{
-        fetch(`http://localhost:3000/allBrands`)
+        fetch(`https://quieasycarts.onrender.com/allBrands`)
         .then((data)=>data.json())
         .then(data => setBrands(data))
       }
 
        //getSizes
        const getSizes = () =>{
-        fetch(`http://localhost:3000/allSizes`)
+        fetch(`https://quieasycarts.onrender.com/allSizes`)
         .then((data)=>data.json())
         .then(data => setSizes(data))
       }
@@ -121,7 +121,7 @@ const AddProduct = () => {
               const newItem = {name,category,subCategory,size,price: parseFloat(price),brand,details,quantity: parseInt(quantity),images:uploadedImages}
 
               console.log(newItem)
-              fetch("http://localhost:3000/addProduct", {
+              fetch("https://quieasycarts.onrender.com/addProduct", {
                  method: "POST",
                  headers: {
                     "content-type": 'application/json'

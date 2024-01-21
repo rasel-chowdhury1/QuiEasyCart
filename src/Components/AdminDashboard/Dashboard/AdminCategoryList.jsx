@@ -8,7 +8,7 @@ const [category, setCategory] = useState([])
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch('http://localhost:3000/allCategories')
+            const response = await fetch('https://quieasycarts.onrender.com/allCategories')
             
             const data = await response.json();
             setCategory(data)

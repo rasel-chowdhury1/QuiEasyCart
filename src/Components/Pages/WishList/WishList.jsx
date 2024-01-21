@@ -16,7 +16,7 @@ const WishList = () => {
   }
   console.log('pageNumber',pageNumber,totalPages)
   const getReact =async () =>{
-    const response = await fetch(`http://localhost:3000/reacts?&page=${currentPage}&limit=${itemsPerPage}`)
+    const response = await fetch(`https://quieasycarts.onrender.com/reacts?&page=${currentPage}&limit=${itemsPerPage}`)
       const data = await response.json();
       console.log("loaded data",data);
       console.log('loaded data length is ', data.len);
@@ -26,7 +26,7 @@ const WishList = () => {
   }
 
   const deleteReact =async (id) =>{
-    await axios.delete(`http://localhost:3000/deleteReact/${id}`)
+    await axios.delete(`https://quieasycarts.onrender.com/deleteReact/${id}`)
         .then(res => {
           getReact();
           Swal.fire({
@@ -44,20 +44,21 @@ const WishList = () => {
   const userId = localStorage.getItem('userId')
   const userWiseReacts = reacts.filter((user) => user.userId === userId)
     return (
-        <div className="container mx-auto mb-6">
-        <div className="overflow-x-auto m-4 shadow-xl">
-        <table className="table table-xs">
-          <thead>
-            <tr className='bg-gradient-to-r w-full h-9 from-cyan-500 to-blue-500'>
-              <th className='text-white text-center'>SN.</th>
-              <th className='text-white text-center'>Product Name</th>
-              <th className='text-white text-center'>Stocks</th>
-              <th className='text-white text-center'>Brand</th>
-              <th className='text-white text-center'>Category</th>
-              <th className='text-white text-center'>Price</th>
-              <th className='text-white text-center'>Action</th>
-            </tr>
-          </thead>
+      <div className="container mx-auto mb-6">
+      <div className="overflow-x-auto m-4 shadow-xl">
+      <table className="table table-xs w-full">
+    <thead>
+        <tr className='bg-gradient-to-r w-full h-9 from-cyan-500 to-blue-500'>
+            <th className='text-white text-center'>SN.</th>
+            <th className='text-white text-center'>Product Name</th>
+            <th className='text-white text-center'>Stocks</th>
+            <th className='text-white text-center'>Brand</th>
+            <th className='text-white text-center'>Category</th>
+            <th className='text-white text-center'>Price</th>
+            <th className='text-white text-center'>Action</th>
+        </tr>
+    </thead>
+   
           <tbody>
            {
             userWiseReacts.map((react,index) =>(
@@ -81,31 +82,34 @@ const WishList = () => {
       </div>
 
 
+      
+  
       {/* Pagination */}
-      <nav aria-label="Page  navigation example mb-6">
-            <ul className="inline-flex mt-6 ml-9 -space-x-px text-sm">
+      <nav aria-label="Page navigation example mb-6">
+          <ul className="flex flex-wrap mt-6 mx-2 -space-x-2 text-sm justify-center">
               <li>
-                {
-                  currentPage === 0 
-                  ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
-                  : <Link onClick={() => setCurrentPage(currentPage-1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
-                }
+                  {currentPage === 0 ? (
+                      <span className="text-gray-500 px-3 h-8 leading-tight cursor-not-allowed bg-white border border-e-0 border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</span>
+                  ) : (
+                      <Link onClick={() => setCurrentPage(currentPage - 1)} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</Link>
+                  )}
               </li>
-                {
-                  pageNumber.map(page => <li key={page}>
-                    <Link onClick={() => setCurrentPage(page-1)} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{page}</Link>
-                  </li>)
-                }
+              {pageNumber.map(page => (
+                  <li key={page}>
+                      <Link onClick={() => setCurrentPage(page - 1)} className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${page === currentPage + 1 ? 'bg-gray-200 text-gray-800' : ''}`}>{page}</Link>
+                  </li>
+              ))}
               <li>
-              {
-                  currentPage+1 === totalReacts 
-                  ? <Link  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
-                  : <Link onClick={() => setCurrentPage(currentPage+1)} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
-                }
+                  {currentPage + 1 === totalReacts ? (
+                      <span className="text-gray-500 px-3 h-8 leading-tight cursor-not-allowed bg-white border border-e-0 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</span>
+                  ) : (
+                      <Link onClick={() => setCurrentPage(currentPage + 1)} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+                  )}
               </li>
-            </ul>
-          </nav>
-        </div>
+          </ul>
+      </nav>
+  </div>
+  
     );
 };
 

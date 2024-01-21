@@ -17,7 +17,7 @@ const AdminContact = () => {
 
   useEffect( ()=>{
     async function fetchData() {
-      const response = await fetch(`http://localhost:3000/allContact?&page=${currentPage}&limit=${itemsPerPage}`)
+      const response = await fetch(`https://quieasycarts.onrender.com/allContact?&page=${currentPage}&limit=${itemsPerPage}`)
 
       const data = await response.json();
       console.log("loaded data",data)

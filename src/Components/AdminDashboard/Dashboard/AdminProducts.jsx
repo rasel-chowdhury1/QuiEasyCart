@@ -29,7 +29,7 @@ const AdminProducts = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`http://localhost:3000/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
+            const response = await fetch(`https://quieasycarts.onrender.com/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
   
             const data = await response.json();
             console.log(data)

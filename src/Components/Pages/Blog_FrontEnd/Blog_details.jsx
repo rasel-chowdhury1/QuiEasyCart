@@ -40,7 +40,7 @@ const Blog_details = () => {
         <div className="blog-page mx-20 flex p-2 gap-4">
 
 
-            <div className="blog-sidebar m-2 shadow-xl p-6 w-1/5">
+            <div className="blog-sidebar hidden sm:block m-2 shadow-xl p-6 w-1/5">
 
 
                 <ul className="menu menu-horizontal bg-base-200 rounded-box mt-6 w-full mb-4 align-center">
@@ -195,11 +195,11 @@ const Blog_details = () => {
                     {/* Display each blog post */}
 
 
-                    <div className="hero h-30vh rounded" style={{ backgroundImage: `url(${blogdetailsdata.image})` }}>
+                    <div className="hero h-60vh sm:h-50vh md:h-40vh lg:h-30vh xl:h-25vh rounded" style={{ backgroundImage: `url(${blogdetailsdata.image})` }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-center text-neutral-content">
                             <div className="max-w-full">
-                                <h1 className="mb-5 p-20 text-5xl font-bold">{blogdetailsdata.title}</h1>
+                                <h1 className="mb-5 p-8 sm:p-12 md:p-16 lg:p-20 xl:p-24 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">{blogdetailsdata.title}</h1>
 
                             </div>
                         </div>
@@ -209,7 +209,7 @@ const Blog_details = () => {
                     </div>
 
 
-                    <div className="stats shadow">
+                    {/* <div className="stats shadow">
 
                         <div className="stat">
                             <div className="stat-figure text-primary">
@@ -242,7 +242,7 @@ const Blog_details = () => {
                             <div className="stat-desc text-secondary">31 tasks remaining</div>
                         </div>
 
-                    </div>
+                    </div> */}
 
 
                 </div>
