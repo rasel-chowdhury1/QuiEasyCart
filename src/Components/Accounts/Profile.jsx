@@ -4,17 +4,26 @@ import { useForm } from 'react-hook-form';
 import AddReview from './AddReview';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+
+
+
 const Profile = () => {
     // console.log(profile_avatar)
     const { register,reset, handleSubmit, formState: { errors } } = useForm();
     const [userProfile, setUserProfile] = useState({})
     const [updatedImage, setUpdatedImage] = useState('')
+    const [allOrder, setAllOrder] = useState([]);
     const {firstName,lastName,phone,email,birthDate,image,gender,address,_id} = userProfile;
     
     const userId = localStorage.getItem('userId')
 
     const navigate = useNavigate();
 
+    const userWiseOrder = allOrder.filter((order) => order.product.userId === userId)
+    const successfulOrder = userWiseOrder && userWiseOrder.filter((order) => order.paidStatus === true)
+    const pendingOrder = userWiseOrder && userWiseOrder.filter((order) => order.paidStatus === false)
+    console.log('successful order',successfulOrder, 'pendingOrder',pendingOrder)
     const getUser = () =>{
         fetch(`https://quieasycarts.onrender.com/user/${userId}`)
         .then(res => res.json())
@@ -23,8 +32,34 @@ const Profile = () => {
             setUserProfile(result)
         })
     }
+
+    const getOrder = () =>{
+        fetch('https://quieasycarts.onrender.com/allOrder')
+        .then(res => res.json())
+        .then(result => setAllOrder(result))
+    }
+
+    const handleDeleteOrder = id =>{
+        fetch(`https://quieasycarts.onrender.com/deleteOrder/${id}`,{
+          method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data.deletedCount === 1){
+            getOrder();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your item deleted",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        })
+       }
     useEffect(()=>{
-        getUser()
+        getUser();
+        getOrder();
     },[])
 
     console.log('user data is ',userProfile)
@@ -51,7 +86,7 @@ const Profile = () => {
         })
     }
 }
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log('hello')
         const userProfile = {
             userId: userId,
@@ -64,8 +99,8 @@ const Profile = () => {
             image: updatedImage ? updatedImage : image,
             address: data.address
           }
-          console.log('from frontend',userProfile)
-          fetch(`https://quieasycarts.onrender.com/updateProfile/${_id}`, {
+        //   console.log('from frontend',userProfile)
+         await fetch(`https://quieasycarts.onrender.com/updateProfile/${_id}`, {
                      method: "PATCH",
                      headers: {
                         "content-type": 'application/json'
@@ -122,7 +157,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">First Name*</span>
                                         </div>
                                         <input type="text" placeholder="First name" defaultValue={firstName}
-                                        {...register("firstName", { maxLength: 120})}
+                                        {...register("firstName")}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -131,7 +166,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">Last Name*</span>
                                         </div>
                                         <input type="text" placeholder="Last name" defaultValue={lastName}
-                                        {...register("lastName", { maxLength: 120})}
+                                        {...register("lastName")}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -140,7 +175,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">Email</span>
                                         </div>
                                         <input type="email" placeholder="Email" defaultValue={email}
-                                        {...register("email", { maxLength: 120})}
+                                        {...register("email")}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -149,7 +184,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">Phone*</span>
                                         </div>
                                         <input type="text" placeholder="phone" defaultValue={phone}
-                                        {...register("phone", { maxLength: 120})}
+                                        {...register("phone")}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -159,7 +194,7 @@ const Profile = () => {
                                                 <span className="label-text font-semibold">Gender*</span>
                                             </div>
 
-                                            <select defaultValue="Pick One"{...register("gender", { required: true })}
+                                            <select defaultValue="Pick One"{...register("gender")}
                                             className="select select-bordered">
                                                 <option disabled >Pick One</option>
                                                 <option>Male</option>
@@ -173,7 +208,7 @@ const Profile = () => {
                                             </div>
 
                                             <input type="date" placeholder="Birth Date" defaultValue={birthDate}
-                                            {...register("birthDate", { maxLength: 120})}
+                                            {...register("birthDate")}
                                             className="input input-bordered w-full " />
                                         </label>
 
@@ -193,8 +228,8 @@ const Profile = () => {
                                         <div className="label">
                                             <span className="label-text">Item Image</span>
                                         </div>
-                                        <input {...register('image', { required: 'At least one image is required.' })}
-                                        type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                                        <input {...register('image')}
+                                        type="file" className="file-input file-input-bordered" />
                                         {errors.image && <p>{errors.image.message}</p>}
                                     </label>
 
@@ -245,55 +280,33 @@ const Profile = () => {
         P. Amount
     </th>
     <th scope="col" className="px-2 text-center py-3">
-        User ID
-    </th>
-    <th scope="col" className="px-2 text-center py-3">
-        Tran ID
+        Action
     </th>
 </tr>
     </thead>
     <tbody>
-    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        Apple MacBook Pro 17"
-    </th>
-    <td className="px-6 py-4">
-        Silver
-    </td>
-    <td className="px-6 py-4">
-        Laptop
-    </td>
-    <td className="px-6 py-4">
-        $2999
-    </td>
-    <td className="px-6 py-4">
-        $2999
-    </td>
-    <td className=" py-4">
-    87654789
-    </td>
-</tr>
-<tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        Apple MacBook Pro 17"
-    </th>
-    <td className="px-6 py-4">
-        Silver
-    </td>
-    <td className="px-6 py-4">
-        Laptop
-    </td>
-    <td className="px-6 py-4">
-        $2999
-    </td>
-    <td className="px-6 py-4">
-        $2999
-    </td>
-    <td className="">
-    6986753345
-    </td>
-</tr>
-        
+    {
+        successfulOrder && successfulOrder.map((order) =>(
+            <tr key={order._id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {order._id}
+            </th>
+            <td className="px-6 py-4">
+                Paid
+            </td>
+            <td className="px-6 py-4">
+               {order.date}
+            </td>
+            <td className="px-6 py-4">
+                ${parseInt(order.product.amount).toFixed(2)}
+            </td>
+            <td className="px-6 flex py-4">
+            <Link to='/orderDetails' state={order} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">view Order</Link>
+            <button onClick={()=>handleDeleteOrder(order._id)} type="button" className="text-white ml-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">Delete Order</button>
+            </td>
+            </tr>
+        ))
+    }  
     </tbody>
 </table>
 </div>
@@ -318,57 +331,36 @@ const Profile = () => {
             <th scope="col" className=" text-center py-3">
                 T. Amount
             </th>
-            <th scope="col" className="px-3 text-center py-3">
-                User ID
-            </th>
+            
             <th scope="col" className="px-3 text-center py-3">
                 Action
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">
-                Silver
-            </td>
-            <td className="px-6 py-4">
-                Laptop
-            </td>
-            <td className="px-6 py-4">
-                $2999
-            </td>
-            <td className="px-6 py-4">
-                $2999
-            </td>
-            <td className="flex py-4">
-            <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">Cancel booking</button>
-            <button type="button" className="text-white ml-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2">Go to Payment</button>
-            </td>
-        </tr>
-        <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">
-                Silver
-            </td>
-            <td className="px-6 py-4">
-                Laptop
-            </td>
-            <td className="px-6 py-4">
-                $2999
-            </td>
-            <td className="px-6 py-4">
-                $2999
-            </td>
-            <td className="flex">
-            <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">Cancel Booking</button>
-            <button type="button" className="text-white ml-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2">Go To Payment</button>
-            </td>
-        </tr>
+        {
+            pendingOrder && pendingOrder.map((order) =>(
+                <tr key={order._id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {order._id}
+                </th>
+                <td className="px-6 py-4">
+                    Pending
+                </td>
+                <td className="px-6 py-4">
+                    {order.date}
+                </td>
+                <td className="px-6 py-4">
+                    ${parseInt(order.product.amount).toFixed(2)}
+                </td>
+                
+                <td className="flex py-4">
+                <button onClick={()=>handleDeleteOrder(order._id)} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">Cancel booking</button>
+                <Link to='/checkout' state={{cart:order.product.products, total: parseInt(order.product.amount)}} type="button" className="text-white ml-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2">Go to Payment</Link>
+                </td>
+            </tr>
+            ))
+        }
         
     </tbody>
 </table>

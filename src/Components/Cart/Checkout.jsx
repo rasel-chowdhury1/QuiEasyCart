@@ -5,13 +5,15 @@ import { useForm } from 'react-hook-form';
 const Checkout = () => {
     
   const data = useLocation()
-    console.log(data)
-    console.log('this data of checkout ',data.state.cart)
-    console.log('this totalPrice of checkout ',data.state.total)
+   
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const navigate = useNavigate()
+    const userId = localStorage.getItem('userId')
+    const today = new Date()
+    console.log(today.toLocaleDateString("en-US"))
     const onSubmit =(formData) => {
       const order = {
+        userId: userId,
         firstName: formData.firstName,
         lsatName: formData.lastName,
         address: formData.address,
@@ -21,7 +23,7 @@ const Checkout = () => {
         products: data.state.cart
       }  
 
-         fetch(`http://localhost:3000/order`, {
+         fetch(`https://quieasycarts.onrender.com/order`, {
                      method: "POST",
                      headers: {
                         "content-type": 'application/json'
@@ -30,9 +32,9 @@ const Checkout = () => {
             })
             .then(res => res.json())
             .then(result => {
+                console.log('result',result)
                 window.location.replace(result.url)
             })
-
     }
     
     
@@ -123,7 +125,7 @@ const Checkout = () => {
               type="text"
               id="amount"
               name="amount"
-              value={data.state.total}
+              value={data.state && parseInt(data.state.total).toFixed(2)}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
               {...register("amount", { required: true })}
             />
@@ -160,7 +162,7 @@ const Checkout = () => {
                   {/* row 1 */}
                   
                   {
-                    data.state.cart.map(dt => <tr key={dt}>
+                    data.state && data.state.cart.map(dt => <tr key={dt}>
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
@@ -186,7 +188,7 @@ const Checkout = () => {
               </table>
               <div>
               <div className="divider divider-accent w-[400px]"></div>
-              <h4 className='py-3 text-xl font-bold'>Grand Total: ${data.state.total.toFixed(2)}</h4>
+              <h4 className='py-3 text-xl font-bold'>Grand Total: ${data.state && data.state.total.toFixed(2)}</h4>
               </div>
               
             </div>
