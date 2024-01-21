@@ -19,10 +19,10 @@ const Blogpage = () => {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3000/allBlogs") 
+        fetch("https://quieasycarts.onrender.com/allBlogs")
             .then(res => res.json())
             .then(data => setBlogs(data))
-           
+
     }, []);
 
 
@@ -38,7 +38,7 @@ const Blogpage = () => {
         <div className="blog-page mx-20 flex p-2 gap-4">
 
 
-            <div className="blog-sidebar m-2 shadow-xl p-6 w-1/5">
+            <div className="blog-sidebar hidden sm:block m-2 shadow-xl p-6 w-1/5">
 
 
                 <ul className="menu menu-horizontal bg-base-200 rounded-box mt-6 w-full mb-4 align-center">
@@ -187,30 +187,25 @@ const Blogpage = () => {
             </div>
 
             {/* main blog section  */}
-            <div className="blog-main  w-4/5 m-2">
+            <div className="blog-main w-full m-1">
                 <h1 className='text-3xl p-2'>Blog Page</h1>
-                <div className="blog-posts ">
+                <div className="blog-posts  ">
                     {/* Display each blog post */}
-                    {
-                        blogs.map(blog => 
-                        <div key={blog._id} className="card card-side bg-base-100 shadow-xl m-4 p-4">
-                        <figure ><img className='rounded-xl' src={blog.image} alt="Movie" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{blog.title}</h2>
-                            <p>{blog.content}</p>
-                            <div className="card-actions justify-end">
-                            <Link to={`/blogdetails/${blog._id}`} className="btn btn-accent  p-2 m-2" >View Blog</Link>
+                    {blogs.map(blog => (
+                        <div key={blog._id} className="card card-side w-full bg-base-100 shadow-xl  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 m-4 p-4 gap-4">
+                            <figure>
+                                <img className='rounded-xl' src={blog.image} alt="Movie" />
+                            </figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{blog.title}</h2>
+                                <p>{blog.content}</p>
+                                <div className="card-actions justify-end">
+                                    <Link to={`/blogdetails/${blog._id}`} className="btn btn-accent p-2 m-2">View Blog</Link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    )
-                    }
-
-                    
+                    ))}
                 </div>
-
-
-
 
                 {/* Pagination */}
                 <div className="pagination p-2 m-2">
@@ -221,6 +216,7 @@ const Blogpage = () => {
                     ))}
                 </div>
             </div>
+
         </div>
     );
 };

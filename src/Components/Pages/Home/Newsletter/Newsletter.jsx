@@ -1,7 +1,7 @@
 
 const Newsletter = () => {
   return (
-    <div className="flex h-[400px]  ">
+    <div className="flex flex-wrap md:flex-nowrap flex-row h-[400px] justify-center ">
         <img className='w-2/5' src="//ps-beautyshop.myshopify.com/cdn/shop/files/eyes_image_1.png?v=1613681484" alt="" />
         <div className="my-auto ">
           <p className="text-2xl text-center text-red-400 italic">Sale Up To 20% Off For</p>

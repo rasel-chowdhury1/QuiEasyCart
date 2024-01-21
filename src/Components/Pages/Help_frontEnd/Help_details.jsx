@@ -35,10 +35,10 @@ const relatedSettings = {
 
 const Help_details = () => {
     return (
-        <div className="blog-page mx-20 flex p-2 gap-4">
+        <div className="blog-page mx-20 flex p-2 gap-4 flex ">
 
 
-            <div className="blog-sidebar m-2 shadow-xl p-6 w-1/5">
+            <div className="blog-sidebar hidden sm:block m-2 shadow-xl p-6 w-1/5">
 
 
                 <ul className="menu menu-horizontal bg-base-200 rounded-box mt-6 w-full mb-4 align-center">
@@ -95,35 +95,6 @@ const Help_details = () => {
 
 
                 <div className="blog-sidebar">
-
-
-
-                    <div className="grid grid-flow-col gap-2 my-6 text-center auto-cols-max">
-                        <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                            <span className="countdown font-mono text-3xl">
-                                <span style={{ "--value": 15 }}></span>
-                            </span>
-                            days
-                        </div>
-                        <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                            <span className="countdown font-mono text-3xl">
-                                <span style={{ "--value": 10 }}></span>
-                            </span>
-                            hours
-                        </div>
-                        <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                            <span className="countdown font-mono text-3xl">
-                                <span style={{ "--value": 24 }}></span>
-                            </span>
-                            min
-                        </div>
-                        <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                            <span className="countdown font-mono text-3xl">
-                                <span style={{ "--value": 54 }}></span>
-                            </span>
-                            sec
-                        </div>
-                    </div>
 
 
                     <div className="sidebar-section">
@@ -187,22 +158,22 @@ const Help_details = () => {
             </div>
 
             {/* main blog section  */}
-            <div className="blog-main  w-4/5 m-2">
+            <div className="blog-main w-full m-2">
                 {/* <h1 className='text-3xl p-2'>Blog Page</h1> */}
                 <div className="blog-posts ">
                     {/* Display each blog post */}
 
 
-                    <div className="hero h-30vh rounded" style={{ backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)' }}>
+                    <div className="hero h-60vh sm:h-50vh md:h-40vh lg:h-30vh xl:h-25vh rounded " style={{ backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)' }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-center text-neutral-content">
-                            <div className="max-w-md">
-                                <h1 className="mb-5 p-20 text-5xl font-bold">Hello there</h1>
-
+                            <div className="">
+                                <h1 className="mb-5 p-8 sm:p-12 md:p-16 lg:p-20 xl:p-24 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">Hello there</h1>
                             </div>
                         </div>
                     </div>
-                    <div>
+
+                    <div className='w-full'>
                         <h1>10 Healthy Snacks for Busy Developers</h1>
                         <p>
                             In the fast-paced world of coding, it's essential to stay energized and focused.
@@ -255,46 +226,13 @@ const Help_details = () => {
                     </div>
 
 
-                    <div className="stats shadow">
 
-                        <div className="stat">
-                            <div className="stat-figure text-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                            </div>
-                            <div className="stat-title">Total Likes</div>
-                            <div className="stat-value text-primary">25.6K</div>
-                            <div className="stat-desc">21% more than last month</div>
-                        </div>
-
-                        <div className="stat">
-                            <div className="stat-figure text-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <div className="stat-title">Page Views</div>
-                            <div className="stat-value text-secondary">2.6M</div>
-                            <div className="stat-desc">21% more than last month</div>
-                        </div>
-
-                        <div className="stat">
-                            <div className="stat-figure text-secondary">
-                                <div className="avatar online">
-                                    <div className="w-16 rounded-full">
-                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="stat-value">86%</div>
-                            <div className="stat-title">Tasks done</div>
-                            <div className="stat-desc text-secondary">31 tasks remaining</div>
-                        </div>
-
-                    </div>
 
 
                 </div>
                 {/* Releted blog post here */}
-                <section className='relative-product h-auto px-12 mb-12'>
-                    <h2 className="text-center font-semibold text-2xl">Relative Blogs</h2>
+                <section className='relative-product h-auto px-4 sm:px-2 md:px-2 lg:px-2 xl:px-8 my-12 hidden sm:block w-4/5'>
+                    <h2 className="text-center font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Relative Blogs</h2>
                     <div className="flex justify-center">
                         <Slider {...relatedSettings} className=" w-10/12  mt-8">
                             <div className='relative cart-body ml-6'>

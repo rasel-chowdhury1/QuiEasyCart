@@ -35,7 +35,11 @@ import AdminCategoryList from "../Components/AdminDashboard/Dashboard/AdminCateg
 import About_US from "../Components/Pages/About/About_US";
 import Contact_US from "../Components/Pages/Contact/Contact_US";
 import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
+import WishList from "../Components/Pages/WishList/WishList";
 import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
+import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
+import PrivateRoute from './../PrivateRoute/PrivateRoute';
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -59,7 +63,7 @@ import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
         },
         {
           path: "profile",
-          element: <Profile></Profile>
+          element: <PrivateRoute><Profile></Profile></PrivateRoute>
         },
         {
             path: "login",
@@ -84,12 +88,12 @@ import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
         {
           path: "blogdetails/:id",
           element: <Blog_details></Blog_details>, 
-          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
         },
         {
           path: "updateblog/:id",
           element: <EditBlog></EditBlog>, 
-          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
+          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
         },
         {
           path: "help",
@@ -114,13 +118,17 @@ import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
           path: "faq",
           element: <Faq></Faq>
         },
+        {
+          path: "wishlist",
+          element:<WishList></WishList>
+        },
         
        
       ]
     },
     {
       path: 'admin',
-      element: <Admin></Admin>,
+      element: <AdminRoute><Admin></Admin></AdminRoute>,
       children: [
         {
           path: '',
@@ -149,6 +157,10 @@ import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
         {
           path: 'admin/user',
           element: <User></User>
+        },
+        {
+          path: 'admin/userDetails',
+          element: <UserDetails></UserDetails>
         },
         {
           path: 'admin/reviews',

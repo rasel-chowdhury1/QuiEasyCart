@@ -9,82 +9,83 @@ import Swal from 'sweetalert2';
 
 
 const ProductDetails = () => {
-  
-  
+
+
   const location = useLocation();
-  console.log('this data from location state - ',location.state)
-  const {_id,brand,category,details,images,name,price,quantity,size,subCategory} = location.state;
-  const {user} = useContext(AuthContext);
-  const [,refetch] = useCart();
+  console.log('this data from location state - ', location)
+  const { _id, brand, category, details, images, name, price, quantity, size, subCategory } = location.state;
+  const { user } = useContext(AuthContext);
+  const [, refetch] = useCart();
   const navigate = useNavigate();
   let [productQuantity, setProductQuantity] = useState(1)
-  const [relativeProducts,setRelativeProducts] = useState([])
- 
+  const [relativeProducts, setRelativeProducts] = useState([])
 
 
-  const getRelativeProducts =async ()=> {
-     await fetch(`http://localhost:3000/products/${subCategory}`)
-     .then(res => res.json())
-     .then(result => setRelativeProducts(result))
+
+  const getRelativeProducts = async () => {
+    await fetch(`https://quieasycarts.onrender.com/products/${subCategory}`)
+      .then(res => res.json())
+      .then(result => setRelativeProducts(result))
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getRelativeProducts()
-  },[])
+  }, [])
 
-  const handleProductQuantity = (type) =>{
+  const handleProductQuantity = (type) => {
     console.log('hello')
-       if(type === 'increase'){
-        productQuantity++;
-        setProductQuantity(productQuantity)
-       }else if(type === 'decrease' && productQuantity > 1){
-        productQuantity--;
-        setProductQuantity(productQuantity)
-       } 
+    if (type === 'increase') {
+      productQuantity++;
+      setProductQuantity(productQuantity)
+    } else if (type === 'decrease' && productQuantity > 1) {
+      productQuantity--;
+      setProductQuantity(productQuantity)
+    }
   }
 
 
-  const handleAddToCart = data =>{
+  const handleAddToCart = data => {
     console.log(data);
-    if(user && user.email){
-       const cartItem = {menuItemId: _id, name,category,subCategory,images,price,quantity: productQuantity,brand, email: user.email}
-       console.log('this is cartItem data before fetch - ',cartItem)
-       fetch('http://localhost:3000/carts',{
-           method: 'POST',
-           headers: {
-               'content-type': "application/json"
-           },
-           body: JSON.stringify(cartItem)
-       })
-       .then(res => res.json())
-       .then(data => {
-           refetch() //refetch cart to update the nuber of items in the cart
-           if(data.insertedId){
+    if (user && user.email) {
+      const cartItem = { menuItemId: _id, name, category, subCategory, images, price, quantity: productQuantity, brand, email: user.email }
+
+      console.log('this is cartItem data before fetch - ', cartItem)
+      fetch('https://quieasycarts.onrender.com/carts', {
+        method: 'POST',
+        headers: {
+          'content-type': "application/json"
+        },
+        body: JSON.stringify(cartItem)
+      })
+        .then(res => res.json())
+        .then(data => {
+          refetch() //refetch cart to update the number of items in the cart
+          if (data.insertedId) {
             Swal.fire({
               title: "Good job!",
               text: "You clicked the button!",
               icon: "success"
             });
-           }
-       })
+          }
+        })
     }
-    else{
-       Swal.fire({
-           title: "Please Login",
-           text: "if add to cart of product",
-           icon: "warning",
-           showCancelButton: true,
-           confirmButtonColor: "#3085d6",
-           cancelButtonColor: "#d33",
-           cancelButtonText: "No",
-           confirmButtonText: "Yes"
-         }).then((result) => {
-           if (result.isConfirmed) {
-             navigate('/login', {state: {from: location}} )
-           }
-         });
+    else {
+      Swal.fire({
+        title: "Please Login",
+        text: "if add to cart of product",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+        confirmButtonText: "Yes"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login', { state: { from: location, data:location.state } })
+        }
+      });
     }
-}
+  }
 
   const settings = {
     autoplay: true,
@@ -108,39 +109,38 @@ const ProductDetails = () => {
 
   return (
     <div className="container mx-auto mt-12">
-      <div className="flex justify-center px-24">
-        <section className="w-1/2 mt-12">
-          <div className="mb-3 ">
-            <img src={images[0]} className="w-2/3 border border-gray-200 shadow ml-12" style={{ height: '400px' }} alt="" />
+
+
+      <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row justify-center px-4 md:px-8 lg:px-12 mt-12">
+
+        <section className="w-full md:w-1/2">
+          <div className="mb-3">
+            <img src={images[0]} className="w-full border border-gray-200 shadow-md" style={{ height: '400px' }} alt="" />
           </div>
 
           <Slider {...settings}>
-          
-          {
-            images.map(img =><div key={_id} className='p-2'>
-            <img src={img} className='h-36 mt-6' alt="" />
-          </div>)
-          }
-      
-          
-          
-
+            {images.map((img, index) => (
+              <div key={index} className='p-2'>
+                <img src={img} className='h-36 mt-6' alt="" />
+              </div>
+            ))}
           </Slider>
         </section>
-        <section className="w-1/2 ml-9 mt-9">
+
+        <section className="w-full md:w-1/2 mt-4 md:mt-0 md:ml-8">
           <div>
-            <h1 className='text-2xl font-semibold'>{name}</h1>
-            <div className="flex mt-6">
+            <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold'>{name}</h1>
+            <div className="flex mt-4">
               <span className='line-through text-gray-400 '>${price + 499}</span>
-              <p className='text-red-400 ml-4 font-semibold'>-5% off</p>
+              <p className='text-red-400 ml-2 font-semibold'>-5% off</p>
             </div>
-            <h4 className='text-2xl mt-1'>${price}</h4>
+            <h4 className='text-xl mt-1'>${price}</h4>
             <div className="flex mt-2">
               <div className="flex">
                 <h1 className="text-bold text-2xl">Brand: </h1> <h3 className="ml-2 text-bold text-xl">{brand}</h3>
               </div>
               <div className="flex ml-6">
-              <h1 className="text-bold text-2xl">Stock: </h1> <h3 className="ml-2 text-bold mt-1 text-xl">{quantity}</h3>
+                <h1 className="text-bold text-2xl">Stock: </h1> <h3 className="ml-2 text-bold mt-1 text-xl">{quantity}</h3>
               </div>
             </div>
             <div className='mt-9'>
@@ -156,9 +156,9 @@ const ProductDetails = () => {
             <div>
               <h4 className=' font-semibold mt-2'>Quantity</h4>
               <div className="flex mt-1">
-                <button onClick={()=>handleProductQuantity('decrease')} className='border border-gray-400 px-4 py-1'>-</button>
+                <button onClick={() => handleProductQuantity('decrease')} className='border border-gray-400 px-4 py-1'>-</button>
                 <button className='border border-gray-400 px-6 py-1'>{productQuantity}</button>
-                <button onClick={()=>handleProductQuantity('increase')} className='border border-gray-400 px-4 py-1'>+</button>
+                <button onClick={() => handleProductQuantity('increase')} className='border border-gray-400 px-4 py-1'>+</button>
               </div>
             </div>
 
@@ -175,56 +175,60 @@ const ProductDetails = () => {
             </div>
           </div>
         </section>
+
       </div>
 
-      <section className='relative-product mt-12 ml-12 h-auto px-12 mb-20'>
+
+
+      {/* relative products slider */}
+      <section className='relative-product mt-12 mx-4 md:mx-12 lg:mx-24 h-auto'>
         <h2 className="text-center font-semibold text-2xl">Relative Products</h2>
         <div className="flex justify-center">
-          <Slider {...relatedSettings} className=" w-10/12  mt-8">
-            {
-              relativeProducts.map((product) => (
-                <div key={product._id} className='relative mt-6 cart-body ml-6'>
-              <div className='img-body relative'>
-                <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
-                <img src={product.images[0]} className='w-60 h-56' alt="" />
-              </div>
+          <Slider {...relatedSettings} className="w-full md:w-10/12 lg:w-10/12 xl:w-10/12 mt-8">
+            {relativeProducts.map((product) => (
+              <div key={product._id} className='relative mt-6 cart-body mx-2 md:ml-6'>
+                <div className='img-body relative'>
+                  <p className='uppercase absolute ml-52 font-semibold mt-9'>sale</p>
+                  <img src={product.images[0]} className='w-60 h-56' alt="" />
+                </div>
 
-              <div className='mt-5'>
-                <div className='flex justify-center'>
-                  <AiFillStar className="text-yellow-400 text-xl" />
-                  <AiFillStar className="text-yellow-400 text-xl" />
-                  <AiFillStar className="text-yellow-400 text-xl" />
-                  <AiFillStar className="text-yellow-400 text-xl" />
-                  <AiFillStar className="text-gray-400 text-xl" />
+                <div className='mt-5'>
+                  <div className='flex justify-center'>
+                    <AiFillStar className="text-yellow-400 text-xl" />
+                    <AiFillStar className="text-yellow-400 text-xl" />
+                    <AiFillStar className="text-yellow-400 text-xl" />
+                    <AiFillStar className="text-yellow-400 text-xl" />
+                    <AiFillStar className="text-gray-400 text-xl" />
+                  </div>
+                  <h4 className='text-center text-gray-400 text-lg font-semibold'>{product.name}</h4>
+                  <div className="flex justify-center">
+                    <p className='text-2xl font-semibold leading-10'>${product.price}</p>
+                    <span className='line-through ml-2 text-gray-400 mt-3'>${product.price + 490}</span>
+                  </div>
                 </div>
-                <h4 className='text-center text-gray-400 text-lg font-semibold'>{product.name}</h4>
-                <div className="flex justify-center">
-                  <p className='text-2xl font-semibold leading-10'>${product.price}</p>
-                  <span className='line-through ml-2 text-gray-400 mt-3'>${product.price + 490}</span>
-                </div>
-              </div>
 
-              <div className='flex overlay absolute top-0 left-0 w-60 min-h-60 justify-center items-center bg-transparent' style={{ backgroundColor: "rgba(0,0,0,.2)" }}>
-                <div className='bg-white rounded-full p-3 '>
-                  <AiOutlineShopping className="text-2xl hover:text-orange-400" />
-                </div>
-                <div className='bg-white ml-2 rounded-full p-3 '>
-                  <AiFillHeart className="text-2xl hover:text-orange-400" />
-                </div>
-                <div className='bg-white rounded-full p-3 ml-2'>
-                  <AiOutlineSync className="text-2xl hover:text-orange-400" />
-                </div>
-                <div className='bg-white rounded-full p-3 ml-2'>
-                  <AiOutlineSearch className="text-2xl hover:text-orange-400" />
+                <div className='flex overlay absolute top-0 left-0 w-60 min-h-60 justify-center items-center bg-transparent' style={{ backgroundColor: "rgba(0,0,0,.2)" }}>
+                  <div className='bg-white rounded-full p-3 '>
+                    <AiOutlineShopping className="text-2xl hover:text-orange-400" />
+                  </div>
+                  <div className='bg-white ml-2 rounded-full p-3 '>
+                    <AiFillHeart className="text-2xl hover:text-orange-400" />
+                  </div>
+                  <div className='bg-white rounded-full p-3 ml-2'>
+                    <AiOutlineSync className="text-2xl hover:text-orange-400" />
+                  </div>
+                  <div className='bg-white rounded-full p-3 ml-2'>
+                    <AiOutlineSearch className="text-2xl hover:text-orange-400" />
+                  </div>
                 </div>
               </div>
-             </div>
-              ))
+            ))
             }
-            
+
           </Slider>
         </div>
       </section>
+
     </div>
   );
 };

@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { TiShoppingCart } from "react-icons/ti";
 import useCart from '../../CustomHook/useCart';
+import logo from '../../assets/logo/QuiEasyCart2.png'
+import useAdmin from '../../CustomHook/useAdmin';
 
 
 const TopNavbar = () => {
     const { user, loading, logout } = useContext(AuthContext)
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+    console.log('this is admin data from navbar - ',isAdmin)
     const [cart] = useCart();
 
     return (
@@ -27,7 +30,7 @@ const TopNavbar = () => {
 
 
                 <div className="navbar-end ">
-                    <a href="/" ><p className='me-3'>❤️Wishlist</p></a>
+                    <Link to="/" ><p className='me-3'><Link to="/wishlist">Wishlist</Link></p></Link>
 
 
                 </div>
@@ -45,54 +48,54 @@ const TopNavbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="/">Home</a></li>
+                            <li><Link to="/">Home</Link></li>
                             <li>
-                                <a>Shop</a>
+                                <Link to="#">Shop</Link>
                                 <ul className="p-2">
-                                    <li><a>Men Items</a></li>
-                                    <li><a>Women Items</a></li>
+                                    <li><Link to="#">Men Items</Link></li>
+                                    <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </li>
                             <li>
                                 <Link to='/products'>Product</Link>
                                 <ul className="p-2">
-                                    <li><a>Men Items</a></li>
-                                    <li><a>Women Items</a></li>
+                                    <li><Link to="#">Men Items</Link></li>
+                                    <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </li>
                             <li>
-                                <a>Features</a>
+                                <Link to="#">Features</Link>
                                 <ul className="p-2">
-                                    <li><a>Exclusive Features</a></li>
-                                    <li><a>New Features</a></li>
-                                    <li><a>Product Features</a></li>
-                                    <li><a>Advance Features</a></li>
-                                    <li><a>Women Items</a></li>
+                                    <li><Link to="#">Exclusive Features</Link></li>
+                                    <li><Link to="#">New Features</Link></li>
+                                    <li><Link to="#">Product Features</Link></li>
+                                    <li><Link to="#">Advance Features</Link></li>
+                                    <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </li>
                             <li><Link to="/about">About Us</Link></li>
                             <li><Link to="/contact">Contact Us</Link></li>
                             <li><Link to="/faq">FAQ</Link></li>
-                            <li ><a href="/blog" >Blog</a></li>
-                            <li><a href="/help">Help</a></li>
+                            <li ><Link to="/blog" >Blog</Link></li>
+                            <li><Link to="/help">Help</Link></li>
                         </ul>
                     </div>
 
-                    <a href="/">
-                        <img className="h-20 w-100 hidden sm:inline-block" src="/src/assets/logo/QuiEasyCart2.png" alt="Logo" />
-                    </a>
+                    <Link to="/">
+                        <img className="h-20 w-100 hidden sm:inline-block" src={logo} alt="Logo" />
+                    </Link>
                 </div>
 
                 <div className="navbar-center hidden lg:flex ml-52">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a href="/">Home</a></li>
+                        <li><Link to="/">Home</Link></li>
 
                         <li>
                             {/* <details>
                                 <summary>Product</summary>
                                 <ul className="p-2">
-                                    <li><a>Men Items</a></li>
-                                    <li><a>Women Items</a></li>
+                                    <li><Link to="#">Men Items</Link></li>
+                                    <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </details> */}
                             <Link to="/products"><summary>Product</summary></Link>
@@ -101,11 +104,11 @@ const TopNavbar = () => {
                             <details>
                                 <summary>Features</summary>
                                 <ul className="p-2">
-                                    <li><a>Exclusive Features</a></li>
-                                    <li><a>New Features</a></li>
-                                    <li><a>Product Features</a></li>
-                                    <li><a>Advance Features</a></li>
-                                    <li><a>Women Items</a></li>
+                                    <li><Link to="#">Exclusive Features</Link></li>
+                                    <li><Link to="#">New Features</Link></li>
+                                    <li><Link to="#">Product Features</Link></li>
+                                    <li><Link to="#">Advance Features</Link></li>
+                                    <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </details>
                         </li>
@@ -113,9 +116,9 @@ const TopNavbar = () => {
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/contact">Contact Us</Link></li>
                         <li><Link to="/faq">FAQ</Link></li>
-                        <li><a href="/blog">Wishlist</a></li>
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/help">Help</a></li>
+                        <li><Link to="/wishlist">Wishlist</Link></li>
+                        <li><Link to="/blog">Blog</Link></li>
+                        <li><Link to="/help">Help</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end mx-2 px-4">
@@ -154,12 +157,12 @@ const TopNavbar = () => {
                                     <li>{isAdmin ? <><Link to='/admin'>Admin</Link></> : <><Link>Setting</Link></>}</li>
                                     <li><Link to='/cart'>Order</Link></li>
 
-                                    <li onClick={logout}><a>Log Out</a></li>
+                                    <li onClick={logout}><Link to="#">Log Out</Link></li>
                                 </>
                             ) : (
                                 <>
-                                    <li><a href="/login">Login</a></li>
-                                    <li><a href="/register">Register</a></li>
+                                    <li><Link to="/login">Login</Link></li>
+                                    <li><Link to="/register">Register</Link></li>
                                 </>
                             )}
 

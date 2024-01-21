@@ -14,7 +14,7 @@ const Cart = () => {
    const handleDeleteCartItem = id =>{
     console.log('clicked delete button.id is - ',id)
    
-    fetch(`http://localhost:3000/carts/${id}`,{
+    fetch(`https://quieasycarts.onrender.com/carts/${id}`,{
       method: "DELETE"
     })
     .then(res => res.json())
