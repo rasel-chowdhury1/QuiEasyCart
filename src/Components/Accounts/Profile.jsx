@@ -2,21 +2,32 @@ import React, { useEffect,useState } from 'react';
 import profile_avatar from '../../assets/images/profile_avatar.jpg'
 import { useForm } from 'react-hook-form';
 import AddReview from './AddReview';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 const Profile = () => {
     // console.log(profile_avatar)
     const { register,reset, handleSubmit, formState: { errors } } = useForm();
     const [userProfile, setUserProfile] = useState({})
     const [updatedImage, setUpdatedImage] = useState('')
     const {firstName,lastName,phone,email,birthDate,image,gender,address,_id} = userProfile;
+    
     const userId = localStorage.getItem('userId')
+
+    const navigate = useNavigate();
+
     const getUser = () =>{
         fetch(`https://quieasycarts.onrender.com/user/${userId}`)
         .then(res => res.json())
-        .then(result => setUserProfile(result))
+        .then(result => {
+            console.log(result);
+            setUserProfile(result)
+        })
     }
     useEffect(()=>{
         getUser()
     },[])
+
+    console.log('user data is ',userProfile)
     
     const handleImage = () =>{
         const fileInput = document.querySelector('.file-input')
@@ -64,7 +75,16 @@ const Profile = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result)
-                getUser()
+                if(result.modifiedCount){
+                    Swal.fire({
+                        title: "Successfully Update!",
+                        text: "Your data successfully added!",
+                        icon: "success"
+                      });
+                      getUser()
+                      navigate('/profile')
+                }
+                
             })
       };
 
@@ -102,7 +122,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">First Name*</span>
                                         </div>
                                         <input type="text" placeholder="First name" defaultValue={firstName}
-                                        {...register("firstName", {required: true, maxLength: 120})}
+                                        {...register("firstName", { maxLength: 120})}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -111,7 +131,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">Last Name*</span>
                                         </div>
                                         <input type="text" placeholder="Last name" defaultValue={lastName}
-                                        {...register("lastName", {required: true, maxLength: 120})}
+                                        {...register("lastName", { maxLength: 120})}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -120,7 +140,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">Email</span>
                                         </div>
                                         <input type="email" placeholder="Email" defaultValue={email}
-                                        {...register("email", {required: true, maxLength: 120})}
+                                        {...register("email", { maxLength: 120})}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -129,7 +149,7 @@ const Profile = () => {
                                             <span className="label-text font-semibold">Phone*</span>
                                         </div>
                                         <input type="text" placeholder="phone" defaultValue={phone}
-                                        {...register("phone", {required: true, maxLength: 120})}
+                                        {...register("phone", { maxLength: 120})}
                                         className="input input-bordered w-full " />
                                     </label>
 
@@ -153,7 +173,7 @@ const Profile = () => {
                                             </div>
 
                                             <input type="date" placeholder="Birth Date" defaultValue={birthDate}
-                                            {...register("birthDate", {required: true, maxLength: 120})}
+                                            {...register("birthDate", { maxLength: 120})}
                                             className="input input-bordered w-full " />
                                         </label>
 
@@ -165,7 +185,7 @@ const Profile = () => {
                                             <span className="label-text">Address*</span>
                                         </div>
                                         <input type="text" placeholder="Address" defaultValue={address}
-                                            {...register("address", {required: true, maxLength: 120})}
+                                            {...register("address", { maxLength: 120})}
                                             className="input input-bordered w-full " />
                                     </label>
 
