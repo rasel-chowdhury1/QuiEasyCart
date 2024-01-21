@@ -38,6 +38,8 @@ import Faq from "../Components/Pages/FAQ_FrontEnd/Faq";
 import WishList from "../Components/Pages/WishList/WishList";
 import AdminContact from "../Components/AdminDashboard/Dashboard/AdminContact";
 import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
+import PrivateRoute from './../PrivateRoute/PrivateRoute';
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -61,7 +63,7 @@ import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
         },
         {
           path: "profile",
-          element: <Profile></Profile>
+          element: <PrivateRoute><Profile></Profile></PrivateRoute>
         },
         {
             path: "login",
@@ -126,7 +128,7 @@ import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
     },
     {
       path: 'admin',
-      element: <Admin></Admin>,
+      element: <AdminRoute><Admin></Admin></AdminRoute>,
       children: [
         {
           path: '',

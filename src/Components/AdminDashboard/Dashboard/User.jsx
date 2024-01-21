@@ -1,22 +1,106 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaTrashAlt, FaUserShield } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 
 const User = () => {
+    // const [users, setUsers] = useState([])\
+    // const getUser = () => {
+    //     fetch("http://localhost:3000/allUsers")
+    //         .then(res => res.json())
+    //         .then(data => setUsers(data))
+    // }
+    const token = localStorage.getItem('access-token');
 
+    const {data: users=[],refetch} = useQuery({
+        queryFn: async () =>{
+            const response = await fetch("http://localhost:3000/allUsers", {
+              headers: {
+                authorization: `bearer ${token}`
+              }
+            })
+            return response.json();
+        }
+       })
 
-    const [users, setUsers] = useState([])
-    const getUser = () => {
-        fetch("https://quieasycarts.onrender.com/allUsers")
-            .then(res => res.json())
-            .then(data => setUsers(data))
+    // console.log(users)
+
+    const handleMakeAdmin = user => {
+        console.log(user)
+        console.log(user._id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to admin access this user!!!,",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes,I want"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/users/admin/${user._id}`, {
+                    method: 'PATCH'
+                  })
+                  .then(res => res.json())
+                  .then(data =>{
+                      console.log('this data from user admin',data)
+                    if(data.modifiedCount){
+                      refetch()
+                      Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.firstName} is an admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                    }
+                  })
+            }
+          });
+        
     }
-    console.log(users)
+
+    const handleMakeUser = user => {
+        console.log(user)
+        console.log(user._id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to admin access deleted this user!!!,",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes,I want"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/users/user/${user._id}`, {
+                    method: 'PATCH'
+                  })
+                  .then(res => res.json())
+                  .then(data =>{
+                      console.log('this data from user admin',data)
+                    if(data.modifiedCount){
+                      refetch()
+                      Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.firstName} is an user Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                    }
+                  })
+            }
+          });
+        
+    }
 
 
 
-useEffect(() => {
-    getUser()
-}, []);
+// useEffect(() => {
+//     getUser()
+// }, []);
 
 
 
@@ -147,7 +231,8 @@ return (
                             <span className="badge badge-ghost badge-sm">{user.phone}</span>
                             <span className="badge badge-ghost badge-sm">{user.email}</span>
                         </td>
-                        <td>Admin</td>
+                        <td>{user.roll === 'admin' ? <button onClick={() => handleMakeUser(user)} className="btn btn-ghost bg-red-600 text-white ">Admin</button> 
+                                : <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-red-600 text-white ">User</button>}</td>
                         <th>
                             <Link to= {`/admin/admin/userDetails`} state={user} className="btn btn-accent  p-2 m-2">details</Link>
                             <button className="btn btn-neutral px-4  py-2">Edit</button>

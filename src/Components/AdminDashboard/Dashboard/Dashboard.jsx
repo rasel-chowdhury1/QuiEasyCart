@@ -39,7 +39,7 @@ const Dashboard = () => {
 
     const [users, setUsers] = useState([])
     const getUser = () => {
-        fetch("https://quieasycarts.onrender.com/allUsers")
+        fetch("http://localhost:3000/allUsers")
             .then(res => res.json())
             .then(data => setUsers(data))
     }
