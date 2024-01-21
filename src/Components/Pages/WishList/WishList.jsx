@@ -4,9 +4,9 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 const WishList = () => {
   const [reacts, setReacts] = useState([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const [itemsPerPage,setItemsPerPage] = useState(20)
-  const [totalReacts, setTotalReacts] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage,setItemsPerPage] = useState(20);
+  const [totalReacts, setTotalReacts] = useState(0);
 
   const totalPages = Math.ceil(totalReacts/itemsPerPage); 
   const pageNumber = [];
@@ -15,13 +15,12 @@ const WishList = () => {
     pageNumber.push(i)
   }
   console.log('pageNumber',pageNumber,totalPages)
-
   const getReact =async () =>{
     const response = await fetch(`http://localhost:3000/reacts?&page=${currentPage}&limit=${itemsPerPage}`)
       const data = await response.json();
-      console.log("loaded data",data)
-      console.log('loaded data length is ', data.len)
-      console.log('loaded data result is ', data.result)
+      console.log("loaded data",data);
+      console.log('loaded data length is ', data.len);
+      console.log('loaded data result is ', data.result);
       setTotalReacts(data.len);
       setReacts(data.result);
   }
@@ -44,7 +43,6 @@ const WishList = () => {
    
   const userId = localStorage.getItem('userId')
   const userWiseReacts = reacts.filter((user) => user.userId === userId)
-  console.log(userWiseReacts)
     return (
         <div className="container mx-auto mb-6">
         <div className="overflow-x-auto m-4 shadow-xl">
@@ -76,8 +74,8 @@ const WishList = () => {
               </td>
             </tr>
             ))
-           }
-          </tbody>
+           }  
+           </tbody>
         
         </table>
       </div>

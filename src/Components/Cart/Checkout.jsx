@@ -10,8 +10,12 @@ const Checkout = () => {
     console.log('this totalPrice of checkout ',data.state.total)
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const navigate = useNavigate()
+    const userId = localStorage.getItem('userId')
+    const today = new Date()
+    console.log(today.toLocaleDateString("en-US"))
     const onSubmit =(formData) => {
       const order = {
+        userId: userId,
         firstName: formData.firstName,
         lsatName: formData.lastName,
         address: formData.address,
@@ -32,7 +36,6 @@ const Checkout = () => {
             .then(result => {
                 window.location.replace(result.url)
             })
-
     }
     
     
