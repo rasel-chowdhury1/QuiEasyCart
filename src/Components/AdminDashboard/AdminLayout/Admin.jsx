@@ -30,7 +30,7 @@ const Admin = () => {
                     <ul className="menu ">
                         <div className=' flex justify-left items-center  '>
                             <a href="/admin">
-                                <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" className="w-40 h-40 rounded-tr-full shadow-2xl p-2" />
+                                <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" className="w-40 h-40 rounded-tr-full shadow-2xl p-2 animate-pulse" />
                             </a>
                         </div>
 
