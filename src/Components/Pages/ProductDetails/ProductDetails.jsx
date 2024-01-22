@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useCart from '../../../CustomHook/useCart';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import swal from 'sweetalert';
 
 
 const ProductDetails = () => {
@@ -35,8 +36,19 @@ const ProductDetails = () => {
   const handleProductQuantity = (type) => {
     console.log('hello')
     if (type === 'increase') {
-      productQuantity++;
-      setProductQuantity(productQuantity)
+      
+      if (productQuantity+1 > quantity){
+        Swal.fire({
+          title: "Out Of Stock",
+          text: "You can't add quantity over from stock quantity",
+          icon: "error"
+        });
+      }
+      else{
+        productQuantity++;
+        setProductQuantity(productQuantity)
+      }
+      
     } else if (type === 'decrease' && productQuantity > 1) {
       productQuantity--;
       setProductQuantity(productQuantity)
@@ -140,7 +152,10 @@ const ProductDetails = () => {
                 <h1 className="text-bold text-2xl">Brand: </h1> <h3 className="ml-2 text-bold text-xl">{brand}</h3>
               </div>
               <div className="flex ml-6">
-                <h1 className="text-bold text-2xl">Stock: </h1> <h3 className="ml-2 text-bold mt-1 text-xl">{quantity}</h3>
+                {
+                  quantity?<span className='flex'><h1 className="text-bold text-2xl">Stock: </h1> <h3 className="ml-2 text-bold mt-1 text-xl">{quantity}</h3></span>
+                  : <div className="text-bold text-2xl bg-red-400 text-white p-2 rounded-t-lg">Sold Out</div>
+                }
               </div>
             </div>
             <div className='mt-9'>
@@ -162,10 +177,14 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <div className="flex mt-9">
+            {
+              quantity
+              ?<div className="flex mt-9">
               <button onClick={() => handleAddToCart(location.state)} type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">ADD TO CART</button>
               <button type="button" className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">BUY IT NOW</button>
-            </div>
+              </div>
+              : <h1 className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2 mt-4">Producut is out of stock</h1>
+            }
 
             <div className='mt-3'>
               <p className='font-bold'>Product Details</p>
