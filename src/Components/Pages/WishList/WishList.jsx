@@ -4,9 +4,9 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 const WishList = () => {
   const [reacts, setReacts] = useState([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const [itemsPerPage,setItemsPerPage] = useState(20)
-  const [totalReacts, setTotalReacts] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage,setItemsPerPage] = useState(20);
+  const [totalReacts, setTotalReacts] = useState(0);
 
   const totalPages = Math.ceil(totalReacts/itemsPerPage); 
   const pageNumber = [];
@@ -15,13 +15,12 @@ const WishList = () => {
     pageNumber.push(i)
   }
   console.log('pageNumber',pageNumber,totalPages)
-
   const getReact =async () =>{
     const response = await fetch(`https://quieasycarts.onrender.com/reacts?&page=${currentPage}&limit=${itemsPerPage}`)
       const data = await response.json();
-      console.log("loaded data",data)
-      console.log('loaded data length is ', data.len)
-      console.log('loaded data result is ', data.result)
+      console.log("loaded data",data);
+      console.log('loaded data length is ', data.len);
+      console.log('loaded data result is ', data.result);
       setTotalReacts(data.len);
       setReacts(data.result);
   }
@@ -44,7 +43,6 @@ const WishList = () => {
    
   const userId = localStorage.getItem('userId')
   const userWiseReacts = reacts.filter((user) => user.userId === userId)
-  console.log(userWiseReacts)
     return (
       <div className="container mx-auto mb-6">
       <div className="overflow-x-auto m-4 shadow-xl">
@@ -60,38 +58,31 @@ const WishList = () => {
             <th className='text-white text-center'>Action</th>
         </tr>
     </thead>
-    <tbody>
-        {reacts.map((react, index) => (
-            <tr key={react._id}>
-                <th className='text-center'>{index + 1}</th>
-                <td className='text-center'>{react.product.name}</td>
-                <td className='text-center'>{react.product.quantity}</td>
-                <td className='text-center'>{react.product.brand}</td>
-                <td className='text-center'>{react.product.category}</td>
-                <td className='text-center'>{react.product.price}</td>
-                <td className='text-center'>
-                    {/* Show icons on small devices */}
-                    <div className="flex justify-center items-center sm:hidden">
-                        <Link to='/products/productDetails' state={react.product} type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-1 m-1">
-                            <i className="fas fa-eye"></i> 👁️
-                        </Link>
-                        <button onClick={() => deleteReact(react._id)} type="button" className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-2 py-1 m-1">
-                            <i className="fas fa-trash text-red-800"></i> 🗑️
-                        </button>
-                    </div>
-                    
-                    {/* Show buttons on medium, large, and x-large devices */}
-                    <div className="hidden sm:flex justify-center items-center">
-                        <Link to='/products/productDetails' state={react.product} type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-6 py-2 mb-2">View Product</Link>
-                        <button onClick={() => deleteReact(react._id)} type="button" className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-6 py-2 mb-2">Delete Product</button>
-                    </div>
-                </td>
+   
+          <tbody>
+           {
+            userWiseReacts.map((react,index) =>(
+              <tr key={react._id}>
+              <th className='text-center'>{index+1}</th>
+              <td className=' text-center'>{react.product.name}</td>
+              <td className=' text-center'>{react.product.quantity}</td>
+              <td className=' text-center'>{react.product.brand}</td>
+              <td className=' text-center'>{react.product.category}</td>
+              <td className=' text-center'>{react.product.price}</td>
+              <td className=' text-center ml-40'>
+              <Link to='/products/productDetails' state={react.product} type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-6 py-2 text-center me-2 mb-2">View Product</Link>
+              <button onClick={()=> deleteReact(react._id)} type="button" className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-6 py-2 text-center me-2 mb-2">Delete Product</button>
+              </td>
             </tr>
-        ))}
-    </tbody>
-</table>
-
+            ))
+           }  
+           </tbody>
+        
+        </table>
       </div>
+
+
+      
   
       {/* Pagination */}
       <nav aria-label="Page navigation example mb-6">

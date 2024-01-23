@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../Providers/AuthProvider';
 const Checkout = () => {
+  const {user,loading} = useContext(AuthContext);
     
   const data = useLocation()
-    console.log(data)
-    console.log('this data of checkout ',data.state.cart)
-    console.log('this totalPrice of checkout ',data.state.total)
+   
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const navigate = useNavigate()
+    const userId = localStorage.getItem('userId')
+    const today = new Date()
+    console.log(today.toLocaleDateString("en-US"))
     const onSubmit =(formData) => {
+      console.log('this is form data ',formData)
       const order = {
+        user_email: user?.email,
+        userId: userId,
         firstName: formData.firstName,
         lsatName: formData.lastName,
         address: formData.address,
@@ -20,8 +26,9 @@ const Checkout = () => {
         amount: formData.amount,
         products: data.state.cart
       }  
+      console.log('order data',order)
 
-         fetch(`http://localhost:3000/order`, {
+         fetch(`https://quieasycarts.onrender.com/order`, {
                      method: "POST",
                      headers: {
                         "content-type": 'application/json'
@@ -30,9 +37,9 @@ const Checkout = () => {
             })
             .then(res => res.json())
             .then(result => {
+                console.log('result',result)
                 window.location.replace(result.url)
             })
-
     }
     
     
@@ -123,7 +130,7 @@ const Checkout = () => {
               type="text"
               id="amount"
               name="amount"
-              value={data.state.total}
+              value={data.state && parseInt(data.state.total).toFixed(2)}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
               {...register("amount", { required: true })}
             />
@@ -160,7 +167,7 @@ const Checkout = () => {
                   {/* row 1 */}
                   
                   {
-                    data.state.cart.map(dt => <tr key={dt}>
+                    data.state && data.state.cart.map(dt => <tr key={dt}>
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
@@ -186,7 +193,7 @@ const Checkout = () => {
               </table>
               <div>
               <div className="divider divider-accent w-[400px]"></div>
-              <h4 className='py-3 text-xl font-bold'>Grand Total: ${data.state.total.toFixed(2)}</h4>
+              <h4 className='py-3 text-xl font-bold'>Grand Total: ${data.state && data.state.total.toFixed(2)}</h4>
               </div>
               
             </div>
