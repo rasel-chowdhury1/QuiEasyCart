@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../Providers/AuthProvider';
 const Checkout = () => {
+  const {user,loading} = useContext(AuthContext);
     
   const data = useLocation()
    
@@ -12,7 +14,9 @@ const Checkout = () => {
     const today = new Date()
     console.log(today.toLocaleDateString("en-US"))
     const onSubmit =(formData) => {
+      console.log('this is form data ',formData)
       const order = {
+        user_email: user?.email,
         userId: userId,
         firstName: formData.firstName,
         lsatName: formData.lastName,
@@ -22,6 +26,7 @@ const Checkout = () => {
         amount: formData.amount,
         products: data.state.cart
       }  
+      console.log('order data',order)
 
          fetch(`https://quieasycarts.onrender.com/order`, {
                      method: "POST",
