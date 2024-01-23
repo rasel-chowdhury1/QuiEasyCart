@@ -11,6 +11,8 @@ const Cart = () => {
    let tax = 0;
 
 
+
+
    const handleDeleteCartItem = id =>{
     console.log('clicked delete button.id is - ',id)
    
