@@ -3,8 +3,10 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Providers/AuthProvider';
+import useCart from '../../CustomHook/useCart';
 const Checkout = () => {
   const {user,loading} = useContext(AuthContext);
+  const [cart,refetch,total,tax,Shipping,grandTotal] = useCart();
     
   const data = useLocation()
    
@@ -167,7 +169,7 @@ const Checkout = () => {
                   {/* row 1 */}
                   
                   {
-                    data.state && data.state.cart.map(dt => <tr key={dt}>
+                    cart.map(dt => <tr key={dt._id}>
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
@@ -193,7 +195,7 @@ const Checkout = () => {
               </table>
               <div>
               <div className="divider divider-accent w-[400px]"></div>
-              <h4 className='py-3 text-xl font-bold'>Grand Total: ${data.state && data.state.total.toFixed(2)}</h4>
+              <h4 className='py-3 text-xl font-bold'>Grand Total: ${grandTotal.toFixed(2)}</h4>
               </div>
               
             </div>

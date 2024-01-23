@@ -1,19 +1,48 @@
 import React from 'react';
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import useCart from '../../CustomHook/useCart';
 import Swal from 'sweetalert2';
+import SingleCartItem from './SingleCartItem';
+import axios from 'axios';
 
 const Cart = () => {
-   const [cart,refetch] = useCart();
-   console.log(cart)
-   let total = 0;
-   let tax = 0;
+   const [cart,refetch,total,tax,Shipping,grandTotal] = useCart();
+  //  console.log('this data from cart component - ',cart)
+  //  console.log('this total from cart component - ',total)
+  //  console.log('this tax from cart component - ',tax)
+  //  console.log('this shipping from cart component ', Shipping)
+  //  console.log('this grandTotal from cart component ', grandTotal)
+  //  let total = 0;
+  //  let tax = 0;
+  //  let Shipping = 0;
 
 
+   const updateCartQuantity = async (cartItemId, ItemId, newQuantity) => {
+    try {
+      await fetch(`http://localhost:3000/carts/${cartItemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quantity: newQuantity,menuItemId: ItemId  }),
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.error){
+          Swal.fire({
+            title: "Out Of Stock!!!",
+            text: "not available this quantity! please click decrese button",
+            icon: "error"
+          });
+        }
+      })
+    } catch (error) {
+      console.error('Error updating cart quantity:', error);
+      // Handle error as needed
+    }
+  };
 
-
-   const handleDeleteCartItem = id =>{
+  const handleDeleteCartItem = id =>{
     console.log('clicked delete button.id is - ',id)
    
     fetch(`https://quieasycarts.onrender.com/carts/${id}`,{
@@ -35,17 +64,21 @@ const Cart = () => {
     })
    }
 
-   const calculateTotalPrice = (cart) => {
-    let totalPrice = 0;
+  //  const calculateTotalPrice = (cart) => {
+  //   console.log('calculateTotalPrice data - ', cart)
+  //   let totalPrice = 0;
+  //   let totalShipping = 0
   
-    cart.forEach((item) => {
-      totalPrice += item.price * item.quantity;
-    });
-    total= totalPrice
-    tax = totalPrice*(5/100)
+  //   cart.forEach((item) => {
+  //     totalPrice += item.price * item.quantity;
+  //     totalShipping += item.quantity;
+  //   });
+  //   total= totalPrice
+  //   tax = totalPrice*(5/100)
+  //   Shipping = totalShipping
   
-    return totalPrice;
-  };
+  //   return totalPrice;
+  // };
 
   // const obj = {cart,total}
 
@@ -73,45 +106,15 @@ const Cart = () => {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  {cart.map(ct => <tr key={ct._id}>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src={ct.images[0]} alt="Avatar Tailwind CSS Component" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">{ct.name}</div>
-                          <div className="text-sm opacity-50">{ct.category}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      ${ct.price}
-                    </td>
-                    <td>
-                    <div className="flex items-center md:w-1/4">
-                      <button
-                        className="text-gray-500 mr-2 focus:outline-none"
-                      >
-                        -
-                      </button>
-                      <span className="text-lg">{ct.quantity}</span>
-                      <button
-                        className="text-gray-500 ml-2 focus:outline-none"
-                      >
-                        +
-                      </button>
-                      </div>
-                    </td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">${ct.price * ct.quantity}</button>
-                    </th>
-                    <th>
-                      <button onClick={()=>handleDeleteCartItem(ct._id)} className="btn btn-ghost btn-xs"><RiDeleteBin6Line className='text-2xl text-red-400' /></button>
-                    </th>
-                  </tr>)}
+                  {cart.map(singleCart => <SingleCartItem 
+                     key={singleCart._id} 
+                     ct={singleCart}
+                     re={refetch}
+                     cart={cart}
+                     updateCart={updateCartQuantity}
+                    //  calculateTotal={calculateTotalPrice}
+                     deleteCart = {handleDeleteCartItem}
+                     ></SingleCartItem>)}
 
                   
                 </tbody>
@@ -123,10 +126,10 @@ const Cart = () => {
           <div className='flex flex-col mx-auto bg-red-400 px-5'>
             <h4 className='text-center text-2xl py-3'>Order Summary</h4>
             <p className='py-1 flex flex-row justify-between'><span className='text-black'>Selected Items:</span> {cart.length}</p>
-            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Total Price:</span> ${calculateTotalPrice(cart)}</p>
-            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Total Shipping:</span> 4</p>
+            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Total Price:</span> ${total}</p>
+            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Total Shipping:</span> {Shipping}</p>
             <p className='py-1 pb-5 flex flex-row justify-between'><span className='text-black'>Tax:</span> ${tax.toFixed(2)} </p>            
-            <h4 className='py-5 text-xl border-t-4 border-gray-500 font-bold'>Grand Total: ${(total+tax).toFixed(2)}</h4>
+            <h4 className='py-5 text-xl border-t-4 border-gray-500 font-bold'>Grand Total: ${(grandTotal).toFixed(2)}</h4>
             <Link to='/checkout ' state={{cart,total:total+tax}} className='mx-auto'><button className="btn btn-success text-white">CheckOut</button></Link>
           </div>
         </div>

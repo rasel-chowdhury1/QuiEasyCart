@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Slider from "react-slick";
 import avatar from '../../../assets/images/profile_avatar.jpg'
 import { AiFillStar, AiFillHeart, AiOutlineSync, AiOutlineSearch, AiOutlineShopping, AiFillShop } from "react-icons/ai";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useCart from '../../../CustomHook/useCart';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ const ProductDetails = () => {
   console.log('this data from location state - ', location)
   const { _id, brand, category, details, images, name, price, quantity, size, subCategory } = location.state;
   const { user } = useContext(AuthContext);
-  const [, refetch] = useCart();
+  const [cart, refetch] = useCart();
   const navigate = useNavigate();
   let [productQuantity, setProductQuantity] = useState(1)
   const [relativeProducts, setRelativeProducts] = useState([])
@@ -62,7 +62,7 @@ const ProductDetails = () => {
       const cartItem = { menuItemId: _id, name, category, subCategory, images, price, quantity: productQuantity, brand, email: user.email }
 
       console.log('this is cartItem data before fetch - ', cartItem)
-      fetch('https://quieasycarts.onrender.com/carts', {
+      fetch('http://localhost:3000/carts', {
         method: 'POST',
         headers: {
           'content-type': "application/json"
@@ -72,7 +72,7 @@ const ProductDetails = () => {
         .then(res => res.json())
         .then(data => {
           refetch() //refetch cart to update the number of items in the cart
-          if (data.insertedId) {
+          if (data.acknowledged) {
             Swal.fire({
               title: "Good job!",
               text: "You clicked the button!",
@@ -97,6 +97,10 @@ const ProductDetails = () => {
         }
       });
     }
+  }
+
+  const handleBuyNow = data =>{
+    handleAddToCart(data)
   }
 
   const settings = {
@@ -181,7 +185,7 @@ const ProductDetails = () => {
               quantity
               ?<div className="flex mt-9">
               <button onClick={() => handleAddToCart(location.state)} type="button" className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">ADD TO CART</button>
-              <button type="button" className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">BUY IT NOW</button>
+              <Link to='/checkout' onClick={() => handleBuyNow(location.state)} className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2">BUY IT NOW</Link>
               </div>
               : <h1 className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-semibold text-sm px-5 py-2.5 text-center me-2 mb-2 mt-4">Producut is out of stock</h1>
             }
