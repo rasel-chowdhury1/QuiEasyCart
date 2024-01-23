@@ -7,6 +7,7 @@ import useCart from '../../../CustomHook/useCart';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import swal from 'sweetalert';
+import UserReview from '../Home/UserReview/UserReview';
 
 
 const ProductDetails = () => {
@@ -197,7 +198,14 @@ const ProductDetails = () => {
 
       </div>
 
-
+    <section className="reviews px-12 py-9">
+    <div className="container mx-auto">
+       <h1 className="font-bold text-2xl">Customer Reviews</h1>
+      <div className="reviewCard">
+       <UserReview id={_id}></UserReview>
+      </div>
+    </div>
+    </section>
 
       {/* relative products slider */}
       <section className='relative-product mt-12 mx-4 md:mx-12 lg:mx-24 h-auto'>

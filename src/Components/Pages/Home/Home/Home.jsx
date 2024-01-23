@@ -19,7 +19,6 @@ const Home = () => {
             <BestOffer></BestOffer>
             <ParallexSection></ParallexSection>
             <SpecialProduct ></SpecialProduct>
-            <UserReview></UserReview>
             <Blog />
             <Newsletter />
         </div>
