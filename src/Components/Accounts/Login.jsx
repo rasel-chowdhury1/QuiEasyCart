@@ -21,7 +21,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
     // console.log("current path", from)
     // const product = location.state?.data
-    // console.log(product)
+    console.log(product)
     const handleLoginButton = (event) =>{
         event.preventDefault();
         const form = event.target;
