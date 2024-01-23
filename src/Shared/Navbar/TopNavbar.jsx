@@ -82,7 +82,7 @@ const TopNavbar = () => {
                     </div>
 
                     <Link to="/">
-                        <img className="h-20 w-100 hidden sm:inline-block" src={logo} alt="Logo" />
+                        <img className="h-20 w-100 hidden sm:inline-block md:w-auto"  src={logo} alt="Logo" />
                     </Link>
                 </div>
 
