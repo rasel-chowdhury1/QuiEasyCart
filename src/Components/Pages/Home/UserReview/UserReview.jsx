@@ -6,10 +6,10 @@ import { AiOutlineLeft, AiOutlineRight, AiFillStar,
 from "react-icons/ai";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-const UserReview = () => {
+const UserReview = ({id}) => {
     const [reviews, setReviews] = useState([])
-    console.log(reviews)
+    // console.log(reviews)
+    // console.log('only id',id)
     const getReviews = () =>{
         fetch('https://quieasycarts.onrender.com/getReview')
         .then(res => res.json())
@@ -18,6 +18,8 @@ const UserReview = () => {
         })
     }
 
+    const productWiseReviews = reviews && reviews.filter((review) =>review.product.menuItemId === id)
+    console.log(productWiseReviews)
     useEffect(() =>{
         getReviews();
     })
@@ -31,26 +33,26 @@ const UserReview = () => {
         autoplaySpeed: 3000,
       };
     return (
-        <div className="container mt-9 ml-12">
-            <h1 className="text-center exclusive-title text-2xl font-bold ">Customer Reviews</h1>
+        <div className="container mt-3">    
         <div>
-        <div className="flex justify-center px-2">
-        <Slider {...settings} className=" w-10/12  mt-8">
+        <div className="justify-center px-2">
+  
          {
-            reviews.map((review) => (
+          productWiseReviews.length > 0 ? productWiseReviews.map((review) => (
             <div key={review._id} className="p-2">
-            <div  className="w-full mt-3 h-56 p-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div className="flex flex-col items-center pb-10">
-                <img className="w-16 h-16 mb-3 rounded-full shadow-lg" src={review.image !== null ? review.image : profileAvatar} alt="Bonnie image"/>
+            <div  className="w-full mt-3 h-24 p-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="flex items-center pb-10">
+                <img className="w-16 h-16 mb-3 rounded-full shadow-lg" src={review.userProfile !== null ? review.userProfile : profileAvatar} alt="Bonnie image"/>
+                <div className="ml-6">
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{review.userName}</h5>
                 <span className="text-sm text-center text-gray-500 dark:text-gray-400">{review.content}</span>
-                
+                </div>  
             </div>
             </div>
             </div>   
-            ))
+            )) : 'There are not any review'
          }
-       </Slider>
+ 
    
         </div>
       </div>
