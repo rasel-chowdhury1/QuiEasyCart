@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { TiShoppingCart } from "react-icons/ti";
 import useCart from '../../CustomHook/useCart';
+import logo from '../../assets/logo/QuiEasyCart2.png'
+import useAdmin from '../../CustomHook/useAdmin';
 
 
 const TopNavbar = () => {
     const { user, loading, logout } = useContext(AuthContext)
-    const isAdmin = false;
+    const [isAdmin] = useAdmin();
+    console.log('this is admin data from navbar - ',isAdmin)
     const [cart] = useCart();
 
     return (
@@ -79,7 +82,7 @@ const TopNavbar = () => {
                     </div>
 
                     <Link to="/">
-                        <img className="h-20 w-100 hidden sm:inline-block" src="/src/assets/logo/QuiEasyCart2.png" alt="Logo" />
+                        <img className="h-20 w-100 hidden sm:inline-block" src={logo} alt="Logo" />
                     </Link>
                 </div>
 
