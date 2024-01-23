@@ -1,0 +1,13 @@
+hridoy : 
+check page user default data and responsive table
+logo responsive
+requirement page, dependency req page
+
+nazrul vai : 
+order list page need a review button
+homepage
+top rate, top sale, recent order
+
+rasel vai
+cart page product increase and decrease button 
+buy now button to direct checkout
