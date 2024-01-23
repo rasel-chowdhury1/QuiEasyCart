@@ -1,3 +1,264 @@
+User CS
+-----------------------
+AP--
+add user
+update user
+view user
+delete user
+Switch user role between admin to user and user to admin
+
+UP--
+create account
+-with sign up form
+-with 0Auth
+update profile
+
+User SS
+-----------------
+add user api
+get all user api
+get single user api
+edit user api
+delete user api
+switch user api
+firebase authentication
+jwt authorization
+
+
+
+
+Product CS
+-----------------------
+AP--
+add Category and sub category
+add product with quantity
+view all product
+edit product
+view single product
+delete product
+
+
+UP--
+view all product 
+view signle product/product details
+show related product
+search product
+filter product
+views hot offers
+view best sale product
+view best rated product
+add product to wishlist
+view wishlist
+remove product from withlist
+add product to cart
+increate and decrease product quantity
+validate/alert if increase amount greater than stock
+view cart page alogn with product list, quantity, price and tax
+remove product from cart
+cart page to checkout page
+checkout page user data auto fill up if user has relevant data on their profile
+here also a sum of order information like product list and total amount
+user can checkout with card or MFS
+
+
+Product SS
+-----------------
+add category api
+add sub category api
+add product api
+get all product api
+get single product api
+update product api
+delete product api
+search product api
+filter product api
+show related product api
+wishlist api
+delete wishlist api
+add cart item api
+delete cart item api
+checkout api
+after checkout remove cart item api
+after checkout decrease stock api
+
+
+
+Order CS
+-----------------------
+AP--
+check order list
+
+
+
+UP--
+check order list
+cancel order
+
+User SS
+-----------------
+add order api
+get all order api
+complete order api
+cancel order api
+
+
+review CS
+-----------------------
+AP--
+check review
+get all revies on home page
+
+
+
+UP--
+give review
+
+
+
+User SS
+-----------------
+add review api
+get reviews api
+
+
+
+Blog CS
+---------------
+AP--
+Add blog post
+Update blog post
+View all blog posts
+Delete blog post
+
+
+UP--
+View blog posts
+View single blog post
+Comment on blog posts
+show related blog post
+
+SS--
+Add blog post API
+Get all blog posts API
+Get single blog post API
+Comment on blog post API
+show related blog post api
+Delete blog post API
+
+
+Help CS
+---------------------------
+AP--
+Manage help articles
+Update help articles
+View all help articles
+Delete help articles
+
+UP--
+View help articles
+Search for help articles
+show related help
+
+SS--
+Add help article API
+Get all help articles API
+Get single help article API
+show related help api
+
+
+FAQ CS
+-----------------
+AP--
+Add FAQ
+Update FAQ
+View all FAQs
+Delete FAQ
+
+UP--
+View FAQs
+Search for FAQs
+show related Faqs
+
+SS--
+Add FAQ API
+Get all FAQs API
+Get single FAQ API
+show related Faqs Api
+
+Contact CS
+
+AP--
+Manage contact inquiries
+View all contact inquiries
+Respond to contact inquiries
+
+UP--
+Submit contact form
+
+SS--
+Add contact inquiry API
+Get all contact inquiries API
+Respond to contact inquiry API
+
+
+About CS
+
+AP--
+Manage about page content
+
+UP--
+View about page content
+
+SS--
+Get about page content API
+Team CS
+
+AP--
+Manage team members
+View all team members
+Update team members
+Delete team members
+
+UP--
+View team members
+
+SS--
+Add team member API
+Get all team members API
+Update team member API
+Delete team member API
+Subscription CS
+
+AP--
+Manage newsletter subscriptions
+View all subscriptions
+Delete subscriptions
+
+UP--
+Subscribe to newsletter
+
+SS--
+Add subscription API
+Get all subscriptions API
+Unsubscribe API
+
+
+
+front
+admin
+server
+
+
+
+
+Terms :
+CS => Server side
+AP => Admin Panel
+UP => User Panel
+SS => Server Side
+
+
+
 hridoy : 
 check page user default data and responsive table
 logo responsive
