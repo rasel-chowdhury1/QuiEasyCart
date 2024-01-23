@@ -8,7 +8,7 @@ const Checkout = () => {
   const {user,loading} = useContext(AuthContext);
   const [cart,refetch,total,tax,Shipping,grandTotal] = useCart();
     
-  const data = useLocation()
+  // const data = useLocation()
    
     const { register, handleSubmit, formState: { errors },reset } = useForm();
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ const Checkout = () => {
         currency: formData.currency,
         mobile: formData.mobile,
         amount: formData.amount,
-        products: data.state.cart
+        products: cart
       }  
       console.log('order data',order)
 
@@ -132,7 +132,7 @@ const Checkout = () => {
               type="text"
               id="amount"
               name="amount"
-              value={data.state && parseInt(data.state.total).toFixed(2)}
+              value={grandTotal.toFixed(2)}
               className="mt-1 p-2 w-full border rounded focus:outline-none focus:border-blue-500"
               {...register("amount", { required: true })}
             />
