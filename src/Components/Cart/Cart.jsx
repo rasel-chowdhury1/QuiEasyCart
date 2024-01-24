@@ -123,14 +123,14 @@ const Cart = () => {
             </div>
             
           {/*Order Summery Section */}
-          <div className='flex flex-col mx-auto bg-red-400 px-5'>
+          <div className='flex flex-col mx-auto text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl px-5'>
             <h4 className='text-center text-2xl py-3'>Order Summary</h4>
-            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Selected Items:</span> {cart.length}</p>
-            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Total Price:</span> ${total}</p>
-            <p className='py-1 flex flex-row justify-between'><span className='text-black'>Total Shipping:</span> {Shipping}</p>
-            <p className='py-1 pb-5 flex flex-row justify-between'><span className='text-black'>Tax:</span> ${tax.toFixed(2)} </p>            
-            <h4 className='py-5 text-xl border-t-4 border-gray-500 font-bold'>Grand Total: ${(grandTotal).toFixed(2)}</h4>
-            <Link to='/checkout ' state={{cart,total:total+tax}} className='mx-auto'><button className="btn btn-success text-white">CheckOut</button></Link>
+            <p className='py-1 flex flex-row justify-between'><span >Selected Items:</span> <span className='font-bold'>{cart.length}</span></p>
+            <p className='py-1 flex flex-row justify-between'><span>Total Price:</span> <span className='font-bold'>${total}</span> </p>
+            <p className='py-1 flex flex-row justify-between'><span>Total Shipping:</span> <span className='font-bold'>{Shipping}</span></p>
+            <p className='py-1 pb-5 flex flex-row justify-between'><span >Tax:</span> <span className='font-bold'>${tax.toFixed(2)}</span> </p>            
+            <h4 className='py-5 text-xl border-t-4 border-white-500 font-bold'><div className='flex justify-between'><p>Grand Total: </p><p>${(grandTotal).toFixed(2)}</p></div></h4>
+            <Link to='/checkout '  className='mx-auto'><button className="btn  px-20 text-white font-bold bg-gradient-to-b from-purple-500 to-cyan-500 hover:bg-gradient-to-bl">CheckOut</button></Link>
           </div>
         </div>
     </div>

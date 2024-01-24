@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FcGoogle } from "react-icons/fc";
+
 
 const Login = () => {
    
@@ -147,27 +149,19 @@ const Login = () => {
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <input type="submit" value="Login" className="btn btn-primary"/>
+                            <input type="submit" value="Login" className="btn btn-primary text-xl" />
                             {
                                 error && <p  className='py-3 text-red-500 text-center'>Provide Valid Email or Password</p>
                             }
                             <h2 className='text-center p-4 text text-1xl font-bold'>Sign In With</h2>
-                            <div className="flex justify-center lg:justify-start space-x-4">
-                                <a href="#" className="flex items-center bg-blue-600 text-white rounded-lg px-4 py-2">
-                                    <i className="fab fa-facebook-square mr-2"></i>
-                                    <span>Facebook</span>
-                                </a>
-                                <a onClick={handleGoogleButton} className="flex items-center bg-red-600 text-white rounded-lg px-4 py-2">
-                                    <i className="fab fa-google mr-2"></i>
-                                    <span>Google</span>
-                                </a>
-                            </div>
+                            <button onClick={handleGoogleButton} className="btn btn-outline btn-secondary"><FcGoogle className='text-2xl'/> Continue With Google</button>
+                            
                             <p className="mt-4">
-                                Do not have an account? <a href="/register" className="text-blue-500">Sign UP</a>
+                                Do not have an account? <Link to="/register" className="text-blue-500">Sign UP</Link>
                             </p>
                         </div>
                     </form>

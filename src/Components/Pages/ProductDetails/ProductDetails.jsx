@@ -74,8 +74,8 @@ const ProductDetails = () => {
           refetch() //refetch cart to update the number of items in the cart
           if (data.acknowledged) {
             Swal.fire({
-              title: "Good job!",
-              text: "You clicked the button!",
+              title: `${productQuantity} product added`,
+              text: `${name} added in cart`,
               icon: "success"
             });
           }

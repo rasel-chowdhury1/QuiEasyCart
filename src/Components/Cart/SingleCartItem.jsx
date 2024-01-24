@@ -44,26 +44,26 @@ const SingleCartItem = ({ct,re,cart,updateCart,deleteCart,calculateTotal}) => {
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td className='text-lg font-semibold'>
                       ${ct.price}
                     </td>
                     <td>
                     <div className="flex items-center md:w-1/4">
                       <button onClick={handleDecrease}
-                        className="text-gray-500 mr-2 focus:outline-none"
+                        className="btn btn-ghost font-bold text-red-500 mr-2 focus:outline-none"
                       >
                         -
                       </button>
                       <span className="text-lg">{quantity}</span>
                       <button onClick={handleIncrease}
-                        className="text-gray-500 ml-2 focus:outline-none"
+                        className="font-bold btn btn-ghost text-orange-500 ml-2 focus:outline-none"
                       >
                         +
                       </button>
                       </div>
                     </td>
                     <th>
-                      <button className="btn btn-ghost btn-xs">${ct.price * quantity}</button>
+                      <button className="texl-xl">${ct.price * quantity}</button>
                     </th>
                     <th>
                       <button onClick={()=>deleteCart(ct._id)} className="btn btn-ghost btn-xs"><RiDeleteBin6Line className='text-2xl text-red-400' /></button>
