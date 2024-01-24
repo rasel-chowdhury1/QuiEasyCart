@@ -82,7 +82,7 @@ const TopNavbar = () => {
                     </div>
 
                     <Link to="/">
-                        <img className="h-20 w-100 hidden sm:inline-block" src={logo} alt="Logo" />
+                        <img className="h-20 w-100 hidden sm:inline-block md:w-auto"  src={logo} alt="Logo" />
                     </Link>
                 </div>
 
@@ -130,8 +130,8 @@ const TopNavbar = () => {
                         </button>
                     </Link> */}
 
-                    <Link to='/cart'  className="indicator mr-4">
-                        <span className="indicator-item badge badge-secondary">+{cart?.length || 0}</span> 
+                    <Link to='/cart'  className="indicator mr-4 animate-bounce">
+                        <span className="indicator-item badge badge-secondary ">+{cart?.length || 0}</span> 
                         <button className="btn"><TiShoppingCart className='text-2xl'/></button>
                     </Link>
            

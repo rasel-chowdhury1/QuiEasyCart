@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { useForm } from 'react-hook-form';
-const AddReview = ({firstName, lastName, image}) => {
+const AddReview = ({firstName, lastName, userProfile, product}) => {
     const [showingReviewForm, setShowingReviewForm] = useState(false)
     const { register,reset, handleSubmit, formState: { errors } } = useForm();
     const handleShowingReviewForm = () => {
@@ -15,9 +15,11 @@ const AddReview = ({firstName, lastName, image}) => {
       const onSubmit = (data) =>{
         const review = {
             userName: firstName+" "+lastName,
-            image: image,
+            product: product,
+            userProfile: userProfile,
             content: data.review
         }
+        console.log(review)
         fetch(`https://quieasycarts.onrender.com/addReview`, {
             method: "POST",
             headers: {
@@ -34,7 +36,7 @@ const AddReview = ({firstName, lastName, image}) => {
       }
     return (
         <div>
-        <button onClick={handleShowingReviewForm} className='font-semibold ml-16 border p-2 '>Provide Review</button>
+        <button onClick={handleShowingReviewForm} className='font-semibold border p-2 '>Provide Review</button>
     
         {
           showingReviewForm === true ? <div className='mt-6' id="review-form">

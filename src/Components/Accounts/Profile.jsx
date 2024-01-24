@@ -248,16 +248,11 @@ const Profile = () => {
                     </dialog>
                       </div>
                 </section>
-
-                
               </div>
 
               <div className="w-full md:w-2/3 lg:w-3/4 xl:w-4/5 ml-0 md:ml-4 lg:ml-8 xl:ml-12">
                 <div className="flex justify-center">
                 <h1 className="text-center text-2xl font-semibold">Orders</h1>
-                <div>
-                 <AddReview firstName={firstName} lastName={lastName} image={image}></AddReview>
-                </div>
                 </div>
                 <div className="">
                    <h2 className='text-3xl font-bold text-blue-600 mt-5 mb-4'>Successful Payments</h2>
@@ -301,7 +296,7 @@ const Profile = () => {
                 ${parseInt(order.product.amount).toFixed(2)}
             </td>
             <td className="px-6 flex py-4">
-            <Link to='/orderDetails' state={order} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">view Order</Link>
+            <Link to='/orderDetails' state={{order,user:{userProfile:image,firstName,lastName}}} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">view Order</Link>
             <button onClick={()=>handleDeleteOrder(order._id)} type="button" className="text-white ml-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2">Delete Order</button>
             </td>
             </tr>
