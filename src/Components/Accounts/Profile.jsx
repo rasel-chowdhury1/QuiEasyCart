@@ -5,6 +5,7 @@ import AddReview from './AddReview';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import userProfile from '../../CustomHook/userProfile';
 
 
 
@@ -15,7 +16,8 @@ const Profile = () => {
     const [updatedImage, setUpdatedImage] = useState('')
     const [allOrder, setAllOrder] = useState([]);
     const {firstName,lastName,phone,email,birthDate,image,gender,address,_id} = userProfile;
-    
+    // const [userProfilee,refetch] = userProfile();
+    // console.log('this data from userProfile custom hook - ',userProfilee)
     const userId = localStorage.getItem('userId')
 
     const navigate = useNavigate();
@@ -87,7 +89,7 @@ const Profile = () => {
     }
 }
     const onSubmit = async (data) => {
-        console.log('hello')
+        console.log('hello', data)
         const userProfile = {
             userId: userId,
             firstName: data.firstName,
@@ -127,7 +129,7 @@ const Profile = () => {
     return (
         <div className='container  mb-20 mt-6'>
 
-            <div className="flex flex-col md:flex-row lg:flex-row items-center my-4 mx-auto">
+            <div className="flex flex-col md:flex-row lg:flex-row  my-4 mx-auto">
               <div className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 mb-4 md:mb-0">
                 <section className='ml-16'>
                     <div>

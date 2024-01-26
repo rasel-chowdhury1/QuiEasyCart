@@ -19,7 +19,7 @@ const Cart = () => {
 
    const updateCartQuantity = async (cartItemId, ItemId, newQuantity) => {
     try {
-      await fetch(`http://localhost:3000/carts/${cartItemId}`, {
+      await fetch(`https://quieasycarts.onrender.com/carts/${cartItemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

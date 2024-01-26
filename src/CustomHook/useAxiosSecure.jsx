@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://quieasycarts.onrender.com'
 })
 
 const useAxiosSecure = () => {

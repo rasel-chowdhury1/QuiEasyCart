@@ -63,7 +63,7 @@ const ProductDetails = () => {
       const cartItem = { menuItemId: _id, name, category, subCategory, images, price, quantity: productQuantity, brand, email: user.email }
 
       console.log('this is cartItem data before fetch - ', cartItem)
-      fetch('http://localhost:3000/carts', {
+      fetch('https://quieasycarts.onrender.com/carts', {
         method: 'POST',
         headers: {
           'content-type': "application/json"

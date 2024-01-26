@@ -30,7 +30,7 @@ const useCart = () => {
         queryKey: ['cart', user?.email],
         enabled: !loading,
         queryFn: async ()=>{
-            const response = await fetch(`http://localhost:3000/carts?email=${user.email}`)
+            const response = await fetch(`https://quieasycarts.onrender.com/carts?email=${user.email}`)
             return response.json()
         }
     })

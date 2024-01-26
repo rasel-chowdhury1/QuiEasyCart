@@ -63,7 +63,7 @@ const TopNavbar = () => {
                                     <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="#">Features</Link>
                                 <ul className="p-2">
                                     <li><Link to="#">Exclusive Features</Link></li>
@@ -72,7 +72,7 @@ const TopNavbar = () => {
                                     <li><Link to="#">Advance Features</Link></li>
                                     <li><Link to="#">Women Items</Link></li>
                                 </ul>
-                            </li>
+                            </li> */}
                             <li><Link to="/about">About Us</Link></li>
                             <li><Link to="/contact">Contact Us</Link></li>
                             <li><Link to="/faq">FAQ</Link></li>
@@ -100,7 +100,7 @@ const TopNavbar = () => {
                             </details> */}
                             <Link to="/products"><summary>Product</summary></Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <details>
                                 <summary>Features</summary>
                                 <ul className="p-2">
@@ -111,7 +111,7 @@ const TopNavbar = () => {
                                     <li><Link to="#">Women Items</Link></li>
                                 </ul>
                             </details>
-                        </li>
+                        </li> */}
 
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/contact">Contact Us</Link></li>
@@ -154,7 +154,7 @@ const TopNavbar = () => {
                                             <span className="badge">New</span>
                                         </Link>
                                     </li>
-                                    <li>{isAdmin ? <><Link to='/admin'>Admin</Link></> : <><Link>Setting</Link></>}</li>
+                                    <li>{isAdmin ? <><Link to='/admin'>Admin</Link></> : <><Link>User</Link></>}</li>
                                     <li><Link to='/cart'>Order</Link></li>
 
                                     <li onClick={logout}><Link to="#">Log Out</Link></li>

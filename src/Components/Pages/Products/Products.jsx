@@ -179,87 +179,8 @@ const Products = () => {
                   </li>
                 </ul>
               </div>
-              <hr className="h-0.5 mt-6 bg-gray-400"></hr>
             </div>
 
-            <div className="brand-card mt-6">
-              <div className="flex justify-between">
-                <h1 className='font-semibold'>Brand</h1>
-                <AiOutlineCaretDown onClick={handleBrandList} className="cursor-pointer" />
-              </div>
-
-              <div className="mt-6" id="brand-list">
-                <ul>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3 uppercase'>simule</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3 uppercase'>misule</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3 uppercase'>life style</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3 uppercase'>nill</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3 uppercase'>zara</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <hr className="h-0.5 mt-6 bg-gray-400"></hr>
-            </div>
-
-            <div className="size-card mt-6">
-              <div className="flex justify-between">
-                <h1 className='font-semibold'>Size</h1>
-                <AiOutlineCaretDown onClick={handleSizeList} className="cursor-pointer" />
-              </div>
-
-              <div className="mt-6" id="size-list">
-                <ul>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>S</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>M</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>L</p>
-                    </div>
-                  </li>
-                  <li className='mt-2'>
-                    <div className="flex">
-                      <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-50 mt-1" />
-                      <p className='ml-3'>XL</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </aside>
 
@@ -293,7 +214,7 @@ const Products = () => {
               />
             </div>
             <div className="w-full md:w-1/5 lg:w-1/5 xl:w-1/5">
-              <button onClick={search} className="btn w-full py-2 px-4">
+              <button onClick={search} className="btn bg-orange-400 w-full py-2 px-4">
                 Search
               </button>
             </div>

@@ -17,9 +17,7 @@ const SpecialProduct = () => {
             <h4 className='text-center exclusive-title'>Exclusive Products</h4>
             <h1 className="text-center text-2xl font-bold exclusive-sub-title">SPECIAL PRODUCTS </h1>
             <article className="text-sm text-center mt-6 text-gray-400">
-            Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry.<br/> Lorem Ipsum has been the industry's 
-            standard dummy text ever since the <br />1500s.
+            Special products is a Mathematical term in which factors are combined to form products.<br/> It is called "special" because they do not need long solutions. The Different types of <br/> Special Products.
             </article>
 
             <div className="flex justify-center mt-9">
