@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../Slider/Slider';
+import HeroSlider from '../HeroSlider/HeroSlider';
 import Brand from '../Brand/Brand';
 import TopRated from '../SpecialProducts/TopRated/TopRated';
 import ParallexSection from '../ParallexSection.jsx/ParallexSection';
@@ -13,7 +13,7 @@ import UserReview from '../UserReview/UserReview';
 const Home = () => {
     return (
         <div>
-            <Slider></Slider>
+            <HeroSlider></HeroSlider>
             <Brand></Brand>
             <CategoryLogo></CategoryLogo>
             <BestOffer></BestOffer>
