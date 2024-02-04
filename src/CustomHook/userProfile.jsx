@@ -11,7 +11,7 @@ const userProfile = () => {
         queryKey: ['userProfile', user?.email],
         enabled: !loading,
         queryFn: async ()=>{
-            const response = await fetch(`https://quieasycarts.onrender.com/user/${userId}`)
+            const response = await fetch(`http://localhost:3000/user/${userId}`)
             return response.json()
         }
     })

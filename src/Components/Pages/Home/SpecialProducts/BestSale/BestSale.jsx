@@ -8,7 +8,7 @@ const BestSale = () => {
     console.log('best',bestSaleProducts)
 
     const getOrder = () =>{
-      fetch('https://quieasycarts.onrender.com/allOrder')
+      fetch('http://localhost:3000/allOrder')
       .then(res => res.json())
       .then(result => setBestSaleProducts(result))
     }

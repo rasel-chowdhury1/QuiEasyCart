@@ -16,7 +16,7 @@ const BestOffer = () => {
   const [bestOfferProducts,setBestOfferProducts] = useState([]);
 
   const getOrder = () =>{
-    fetch('https://quieasycarts.onrender.com/allOrder')
+    fetch('http://localhost:3000/allOrder')
     .then(res => res.json())
     .then(result => setBestOfferProducts(result))
   }

@@ -4,7 +4,7 @@ const Reviews = () => {
     const [reviews,setReviews] = useState([])
 
       const getReview = () => {
-        fetch("https://quieasycarts.onrender.com/getReview")
+        fetch("http://localhost:3000/getReview")
             .then(res => res.json())
             .then(data => setReviews(data))
     }

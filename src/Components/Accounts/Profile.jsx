@@ -27,7 +27,7 @@ const Profile = () => {
     const pendingOrder = userWiseOrder && userWiseOrder.filter((order) => order.paidStatus === false)
     console.log('successful order',successfulOrder, 'pendingOrder',pendingOrder)
     const getUser = () =>{
-        fetch(`https://quieasycarts.onrender.com/user/${userId}`)
+        fetch(`http://localhost:3000/user/${userId}`)
         .then(res => res.json())
         .then(result => {
             console.log(result);
@@ -36,13 +36,13 @@ const Profile = () => {
     }
 
     const getOrder = () =>{
-        fetch('https://quieasycarts.onrender.com/allOrder')
+        fetch('http://localhost:3000/allOrder')
         .then(res => res.json())
         .then(result => setAllOrder(result))
     }
 
     const handleDeleteOrder = id =>{
-        fetch(`https://quieasycarts.onrender.com/deleteOrder/${id}`,{
+        fetch(`http://localhost:3000/deleteOrder/${id}`,{
           method: "DELETE"
         })
         .then(res => res.json())
@@ -102,7 +102,7 @@ const Profile = () => {
             address: data.address
           }
         //   console.log('from frontend',userProfile)
-         await fetch(`https://quieasycarts.onrender.com/updateProfile/${_id}`, {
+         await fetch(`http://localhost:3000/updateProfile/${_id}`, {
                      method: "PATCH",
                      headers: {
                         "content-type": 'application/json'

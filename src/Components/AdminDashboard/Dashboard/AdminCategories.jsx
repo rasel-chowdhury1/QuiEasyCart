@@ -7,9 +7,9 @@ import useTotalProuduct from './../../../CustomHook/useTotalProducts';
 
 
 
-const AdminProducts = () => {
+const AdminCategories = () => {
     
-    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(0);
       const [itemsPerPage, setItemPerPage] = useState(8);
@@ -29,16 +29,16 @@ const AdminProducts = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`http://localhost:3000/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
+            const response = await fetch(`http://localhost:3000/adminCategories?page=${currentPage}&limit=${itemsPerPage}`)
   
             const data = await response.json();
             console.log(data)
-            setProducts(data.result);
+            setCategories(data.result);
             setTotalProducts(data.productlen)
         }
         fetchData();
     },[currentPage,totalPages])
-    console.log(products)
+    // console.log(products)
     console.log("current page - ",currentPage);
     console.log("total page - ",totalPages);
 
@@ -75,7 +75,7 @@ const AdminProducts = () => {
 
             </div>
 
-            <h2 className='m-4 text-5xl text-center shadow-xl p-4 m-2'>Product List </h2>
+            <h2 className='m-4 text-5xl text-center shadow-xl p-4 m-2'>Catgory List </h2>
 
             <div className="navbar bg-base-100 shadow">
                 <div className="navbar-start">
@@ -114,38 +114,22 @@ const AdminProducts = () => {
                                     <input type="checkbox" className="checkbox" />
                                 </label>
                             </th>
-                            <th>Product</th>
                             <th>Category</th>
-                            <th>Price</th>
                             <th> <button className='btn-ghost'>Action</button></th>
                         </tr>
                     </thead>
                     <tbody className='mb-4'>
                         {/* row 1 */}
                         {
-                            products.map(product => <tr key={product._id}>
+                            categories.map(product => <tr key={product._id}>
                                 <th>
                                     <label>
                                         <input type="checkbox" className="checkbox" />
                                     </label>
                                 </th>
-                                <td>
-                                    <div className="flex items-center gap-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={product.images[0]} alt="Avatar Tailwind CSS Component" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-bold">{product.name}</div>
-                                            <div className="text-sm opacity-50">{product.brand}</div>
-                                        </div>
-                                    </div>
-                                </td>
                                 <td className="font-bold">
                                     {product.category}
                                 </td>
-                                <td>{product.price}</td>
                                 <th>
                                     <button className="btn btn-accent  p-2 m-2">details</button>
                                     <button className="btn btn-neutral px-4  py-2">Edit</button>
@@ -185,4 +169,4 @@ const AdminProducts = () => {
     );
 };
 
-export default AdminProducts;
+export default AdminCategories;

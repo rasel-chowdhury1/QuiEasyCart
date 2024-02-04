@@ -5,7 +5,7 @@ const TopRated = () => {
   const [reviews, setReviews] = useState([])
   console.log('reviews',reviews)
   const getReviews = () =>{
-    fetch('https://quieasycarts.onrender.com/getReview')
+    fetch('http://localhost:3000/getReview')
     .then(res => res.json())
     .then(result => {
         setReviews(result)

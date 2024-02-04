@@ -20,7 +20,7 @@ const AddReview = ({firstName, lastName, userProfile, product}) => {
             content: data.review
         }
         console.log(review)
-        fetch(`https://quieasycarts.onrender.com/addReview`, {
+        fetch(`http://localhost:3000/addReview`, {
             method: "POST",
             headers: {
                "content-type": 'application/json'

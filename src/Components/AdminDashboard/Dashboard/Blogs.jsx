@@ -36,7 +36,7 @@ const Blogs = () => {
                     const { title, content, keyword } = data
                     const newBlog = { title, content, image: blogImageUrl, keyword }
                     console.log(newBlog)
-                    fetch('https://quieasycarts.onrender.com/addBlog', {
+                    fetch('http://localhost:3000/addBlog', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ const Blogs = () => {
             confirmButtonText: "Yes, Delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://quieasycarts.onrender.com/deleteBlog/${id}`, {
+                fetch(`http://localhost:3000/deleteBlog/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -93,7 +93,7 @@ const Blogs = () => {
 
 
     useEffect(() => {
-        fetch("https://quieasycarts.onrender.com/allBlogs")
+        fetch("http://localhost:3000/allBlogs")
             .then(res => res.json())
             .then(data => setAllblog(data))
     }, [])

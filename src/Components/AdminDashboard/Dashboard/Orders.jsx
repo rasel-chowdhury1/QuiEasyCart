@@ -4,7 +4,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([])
 
       const getOrder = () => {
-        fetch("https://quieasycarts.onrender.com/allOrder")
+        fetch("http://localhost:3000/allOrder")
             .then(res => res.json())
             .then(data => setOrders(data))
     }

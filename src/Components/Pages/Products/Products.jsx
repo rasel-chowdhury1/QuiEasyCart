@@ -80,7 +80,7 @@ const Products = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`https://quieasycarts.onrender.com/products?&category=${category}&min=${minPrice}&max=${maxPrice}&page=${currentPage}&limit=${itemsPerPage}`)
+      const response = await fetch(`http://localhost:3000/products?&category=${category}&min=${minPrice}&max=${maxPrice}&page=${currentPage}&limit=${itemsPerPage}`)
 
       const data = await response.json();
       console.log("loaded data", data)
@@ -93,7 +93,7 @@ const Products = () => {
   }, [category, minPrice, maxPrice, currentPage, itemsPerPage])
 
   useEffect(() => {
-    fetch('https://quieasycarts.onrender.com/allCategories')
+    fetch('http://localhost:3000/allCategories')
       .then(res => res.json())
       .then(data => setCategoryList(data))
   }, [])
@@ -103,7 +103,7 @@ const Products = () => {
   const search = async () => {
     try {
       setProducts([])
-      const response = await fetch(`https://quieasycarts.onrender.com/api/search?query=${encodeURIComponent(searchInput)}`);
+      const response = await fetch(`http://localhost:3000/api/search?query=${encodeURIComponent(searchInput)}`);
       const data = await response.json();
 
       setProducts(data);

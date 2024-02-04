@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 const User = () => {
     // const [users, setUsers] = useState([])\
     // const getUser = () => {
-    //     fetch("https://quieasycarts.onrender.com/allUsers")
+    //     fetch("http://localhost:3000/allUsers")
     //         .then(res => res.json())
     //         .then(data => setUsers(data))
     // }
@@ -15,7 +15,7 @@ const User = () => {
 
     const {data: users=[],refetch} = useQuery({
         queryFn: async () =>{
-            const response = await fetch("https://quieasycarts.onrender.com/allUsers", {
+            const response = await fetch("http://localhost:3000/allUsers", {
               headers: {
                 authorization: `bearer ${token}`
               }
@@ -39,7 +39,7 @@ const User = () => {
             confirmButtonText: "Yes,I want"
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://quieasycarts.onrender.com/users/admin/${user._id}`, {
+                fetch(`http://localhost:3000/users/admin/${user._id}`, {
                     method: 'PATCH'
                   })
                   .then(res => res.json())
@@ -74,7 +74,7 @@ const User = () => {
             confirmButtonText: "Yes,I want"
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://quieasycarts.onrender.com/users/user/${user._id}`, {
+                fetch(`http://localhost:3000/users/user/${user._id}`, {
                     method: 'PATCH'
                   })
                   .then(res => res.json())

@@ -22,7 +22,7 @@ const Dashboard = () => {
 
       useEffect( ()=>{
         async function fetchData() {
-            const response = await fetch(`https://quieasycarts.onrender.com/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
+            const response = await fetch(`http://localhost:3000/adminproducts?page=${currentPage}&limit=${itemsPerPage}`)
   
             const data = await response.json();
             // console.log(data)
@@ -44,12 +44,12 @@ const Dashboard = () => {
 
     const [num,setnum] = useState(0)
     const getUser = () => {
-        fetch("https://quieasycarts.onrender.com/allUsers")
+        fetch("http://localhost:3000/allUsers")
             .then(res => res.json())
             .then(data => setUsers(data))
     }
     const getOrder = () => {
-        fetch("https://quieasycarts.onrender.com/allOrder")
+        fetch("http://localhost:3000/allOrder")
             .then(res => res.json())
             .then(data => setOrders(data))
     }

@@ -65,7 +65,7 @@ const Login = () => {
           image: null,
           address: null
         }
-        fetch("https://quieasycarts.onrender.com/addUser", {
+        fetch("http://localhost:3000/addUser", {
                    method: "POST",
                    headers: {
                       "content-type": 'application/json'
@@ -95,7 +95,7 @@ const Login = () => {
                     image: null,
                     address: null
                   }
-                  fetch("https://quieasycarts.onrender.com/addUser", {
+                  fetch("http://localhost:3000/addUser", {
                     method: "POST",
                     headers: {
                        "content-type": 'application/json'

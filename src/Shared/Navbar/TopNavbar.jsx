@@ -29,7 +29,7 @@ const TopNavbar = () => {
 
 
 
-                <div className="navbar-end ">
+                <div className="navbar-end">
                     <Link to="/" ><p className='me-3'><Link to="/wishlist">Wishlist</Link></p></Link>
 
 

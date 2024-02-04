@@ -23,7 +23,7 @@ const Help = () => {
         formData.append('category', data.helpCategory);
         formData.append('description', data.helpDescription);
 
-        fetch('https://quieasycarts.onrender.com/addHelp', {
+        fetch('http://localhost:3000/addHelp', {
             method: 'POST',
             body: formData,
         })
@@ -47,7 +47,7 @@ const Help = () => {
 
 
     useEffect(() => {
-        fetch("https://quieasycarts.onrender.com/allHelp")
+        fetch("http://localhost:3000/allHelp")
             .then(res => res.json())
             .then(data => setAllhelp(data))
     }, [])

@@ -19,7 +19,7 @@ const Cart = () => {
 
    const updateCartQuantity = async (cartItemId, ItemId, newQuantity) => {
     try {
-      await fetch(`https://quieasycarts.onrender.com/carts/${cartItemId}`, {
+      await fetch(`http://localhost:3000/carts/${cartItemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const Cart = () => {
   const handleDeleteCartItem = id =>{
     console.log('clicked delete button.id is - ',id)
    
-    fetch(`https://quieasycarts.onrender.com/carts/${id}`,{
+    fetch(`http://localhost:3000/carts/${id}`,{
       method: "DELETE"
     })
     .then(res => res.json())

@@ -1,24 +1,24 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import TopNavbar from '../../../Shared/Navbar/topNavbar';
+import TopNavbar from '../../../Shared/Navbar/TopNavbar';
 
 const Admin = () => {
 
     const menuItems = [
         { id: 1, label: '🏢 Dashboard', link: '' },
-        // { id: 2, label: '📊 Stats', link: 'admin/stats' },
-        { id: 3, label: '🚹 User', link: 'admin/user' },
-        { id: 4, label: '🛍️ Product', link: 'admin/product' },
-        { id: 5, label: '💹 Orders', link: 'admin/orders' },
-        { id: 6, label: '☮️ Reviews', link: 'admin/reviews' },
-        { id: 7, label: '💸 Payments', link: 'admin/payments' },
-        // { id: 8, label: '🔥 Hot Offers', link: 'admin/hotoffers' },
-        { id: 9, label: '📜 Blogs', link: 'admin/blogs' },
-        // { id: 10, label: '🏗️ Appearance', link: 'admin/appearance' },
-        // { id: 11, label: '⚙️ Settings', link: 'admin/settings' },
-        // { id: 12, label: '🎓 Help', link: 'admin/help' },
-        // { id: 13, label: '🛍️ FAQ', link: 'admin/faq' },
-        { id: 14, label: '🚹 Contact', link: 'admin/contact' },
+        // { id: 2, label: '📊 Stats', link: 'stats' },
+        { id: 3, label: '🚹 User', link: 'user' },
+        { id: 4, label: '🛍️ Product', link: 'product' },
+        { id: 5, label: '💹 Orders', link: 'orders' },
+        { id: 6, label: '☮️ Reviews', link: 'reviews' },
+        { id: 7, label: '💸 Payments', link: 'payments' },
+        // { id: 8, label: '🔥 Hot Offers', link: 'hotoffers' },
+        { id: 9, label: '📜 Blogs', link: 'blogs' },
+        // { id: 10, label: '🏗️ Appearance', link: 'appearance' },
+        // { id: 11, label: '⚙️ Settings', link: 'settings' },
+        // { id: 12, label: '🎓 Help', link: 'help' },
+        // { id: 13, label: '🛍️ FAQ', link: 'faq' },
+        { id: 14, label: '🚹 Contact', link: 'contact' },
         // Add more menu items as needed
     ];
     return (

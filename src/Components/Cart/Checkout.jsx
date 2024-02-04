@@ -34,7 +34,7 @@ const Checkout = () => {
     }  
     console.log('order data', order)
 
-    fetch(`https://quieasycarts.onrender.com/order`, {
+    fetch(`http://localhost:3000/order`, {
       method: "POST",
       headers: {
         "content-type": 'application/json'
@@ -55,7 +55,7 @@ const Checkout = () => {
   // console.log("User Data : ", userData)
 
   const getUser = () => {
-    fetch(`https://quieasycarts.onrender.com/user/${userId}`)
+    fetch(`http://localhost:3000/user/${userId}`)
         .then(res => res.json())
         .then(result => {
             console.log(result);

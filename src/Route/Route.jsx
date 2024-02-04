@@ -41,6 +41,7 @@ import OrderDetails from "../Components/Cart/OrderDetails";
 import UserDetails from "../Components/AdminDashboard/Dashboard/UserDetails";
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import AdminRoute from "./AdminRoute";
+import AdminCategories from "../Components/AdminDashboard/Dashboard/AdminCategories";
 
 
 
@@ -93,12 +94,12 @@ import AdminRoute from "./AdminRoute";
         {
           path: "blogdetails/:id",
           element: <Blog_details></Blog_details>, 
-          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
         },
         {
           path: "updateblog/:id",
           element: <EditBlog></EditBlog>, 
-          loader: ({params}) => fetch(`https://quieasycarts.onrender.com/blog/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:3000/blog/${params.id}`)
         },
         {
           path: "help",
@@ -144,8 +145,12 @@ import AdminRoute from "./AdminRoute";
           element: <Stats></Stats>
         },
         {
-          path: 'admin/product',
+          path: 'product',
           element: <AdminProducts></AdminProducts>
+        },
+        {
+          path: 'category',
+          element: <AdminCategories></AdminCategories>
         },
         {
           path: 'admin/product/admin/addProduct',
@@ -156,51 +161,51 @@ import AdminRoute from "./AdminRoute";
           element: <AdminCategoryList></AdminCategoryList>
         },
         {
-          path: 'admin/orders',
+          path: 'orders',
           element: <Orders></Orders>
         },
         {
-          path: 'admin/user',
+          path: 'user',
           element: <User></User>
         },
         {
-          path: 'admin/userDetails',
+          path: 'userDetails',
           element: <UserDetails></UserDetails>
         },
         {
-          path: 'admin/reviews',
+          path: 'reviews',
           element: <Reviews></Reviews>
         },
         {
-          path: 'admin/payments',
+          path: 'payments',
           element: <Payments></Payments>
         },
         {
-          path: 'admin/hotoffers',
+          path: 'hotoffers',
           element: <HotOffer></HotOffer>
         },
         {
-          path: 'admin/blogs',
+          path: 'blogs',
           element: <Blogs></Blogs>
         },
         {
-          path: 'admin/appearance',
+          path: 'appearance',
           element: <Appearance></Appearance>
         },
         {
-          path: 'admin/settings',
+          path: 'settings',
           element: <Settings></Settings>
         },
         {
-          path: 'admin/help',
+          path: 'help',
           element: <Help></Help>
         },
         {
-          path: 'admin/faq',
+          path: 'faq',
           element: <Help></Help>
         },
         {
-          path: 'admin/contact',
+          path: 'contact',
           element: <AdminContact></AdminContact>
         },
       ]

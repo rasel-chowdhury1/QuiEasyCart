@@ -25,7 +25,7 @@ const ProductDetails = () => {
 
 
   const getRelativeProducts = async () => {
-    await fetch(`https://quieasycarts.onrender.com/products/${subCategory}`)
+    await fetch(`http://localhost:3000/products/${subCategory}`)
       .then(res => res.json())
       .then(result => setRelativeProducts(result))
   }
@@ -63,7 +63,7 @@ const ProductDetails = () => {
       const cartItem = { menuItemId: _id, name, category, subCategory, images, price, quantity: productQuantity, brand, email: user.email }
 
       console.log('this is cartItem data before fetch - ', cartItem)
-      fetch('https://quieasycarts.onrender.com/carts', {
+      fetch('http://localhost:3000/carts', {
         method: 'POST',
         headers: {
           'content-type': "application/json"

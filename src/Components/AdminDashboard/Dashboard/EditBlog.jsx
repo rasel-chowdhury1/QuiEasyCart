@@ -30,7 +30,7 @@ const EditBlog = () => {
             const newBlog = { title, content, image: url, keyword }
             console.log(newBlog)
             console.log("blogId ", data._id)
-            fetch(`https://quieasycarts.onrender.com/editblog/${data._id}`, {
+            fetch(`http://localhost:3000/editblog/${data._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ const EditBlog = () => {
                         const newBlog = { title, content, image: blogImageUrl, keyword }
                         console.log(newBlog)
                         console.log("blogId ", data._id)
-                        fetch(`https://quieasycarts.onrender.com/editblog/${data._id}`, {
+                        fetch(`http://localhost:3000/editblog/${data._id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
